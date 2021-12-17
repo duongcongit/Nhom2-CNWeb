@@ -8,7 +8,7 @@
 - Lê Công Minh
 - Lê Đình Minh
 
-## Thông tin ôn học
+## Thông tin môn học
 **Môn:** Công nghệ Web
 
 **Giảng viên:** Kiều Tuấn Dũng
