@@ -1,0 +1,93 @@
+/* Style for login.html */
+.login-page{
+    background: url('assets/img/loginbg.gif') no-repeat center/cover;
+    height: 100vh;
+}
+
+.login-form-container{
+    align-items: center;
+    display: flex;
+    height: 100vh;
+}
+
+
+.form-signin{
+    padding: 20px;
+    background-color: #fff;
+    margin: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgb(0,0,0,0.3);
+}
+
+.form-signin{
+    width: 400px;
+    max-width: 400px;
+}
+
+.description-container{
+    display: flex;
+    height: 100vh;
+}
+
+.description{
+    margin: auto;
+}
+
+.description{
+    color: #fff;
+}
+
+/* Styling for index */
+.suggest{
+    background: url(https://serifinal.github.io/airbnb/assets/img/24535835-bd90-4c69-bfdb-cc968e5af4df.webp) no-repeat center;
+    background-size: cover;
+    height: 550px;
+    border-radius: 15px;
+    display: flex;
+    margin-bottom: 32px;
+    margin-top: 16px;
+    position: relative;
+    margin-top: 80px;
+}
+
+.suggest-content{
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+}
+
+.suggest-description {
+    margin-bottom: 76px;
+    font-size: 38px;
+    font-weight: 700;
+}
+
+.suggest-button a {
+    padding: 14px 32px;
+    background-color: #fff;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #a2018b;
+    font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+}
+
+.main-navbar{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+@media (max-width:767px){
+    .login-left{
+        display: none;
+    }
+}
