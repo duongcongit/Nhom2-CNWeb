@@ -1,0 +1,55 @@
+html body{
+  height: 100%;
+  overflow-x: hidden;
+}
+/* CSS for Header */
+.header{
+  color: aliceblue;
+}
+
+/* CSS for Sidebar */
+.sidebar{
+
+}
+
+.sidebar .nav-link{
+  height: 50px;
+}
+
+/* @media screen and (max-width: 800px){
+  .sidebar-text{
+    display: none;
+  } */
+
+.sidebar .nav-link:hover{
+    background-color: rgb(149, 180, 236);
+}
+
+/* CSS for main */
+.main{
+  height: 95vh;
+  padding-bottom: 20px;
+  overflow-y: auto;
+  /* background-color: #27303f; */
+  background-color: #f5f5f5;
+}
+
+/* CSS for Dashboard */
+
+.dashboard-card{
+  transition: transform 0.5s ease;
+  width: 15rem;
+  border-radius: 30px;
+  
+}
+.dashboard-card:hover{
+  transform: scale(1.1);
+}
+
+
+
+
+
+
+
+
