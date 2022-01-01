@@ -80,6 +80,42 @@
             //REdirect to Home Page
             header('location:'.SITEURL);
         }
+
+        $sql1 = "SELECT Gia FROM giatour WHERE MaTour='$maTour' and DoTuoi = 1";
+        //Execute the Query
+        $res1 = mysqli_query($conn, $sql1);
+        if(mysqli_num_rows($res1)>0){
+          while($row1 = mysqli_fetch_assoc($res1)){
+            $giaTuoi1 = $row1['Gia'];
+          }
+        }else{
+          $giaTuoi1 = "";
+        }
+
+        $sql2 = "SELECT Gia FROM giatour WHERE MaTour='$maTour'and DoTuoi = 2";
+        //Execute the Query
+        $res2 = mysqli_query($conn, $sql2);
+        if(mysqli_num_rows($res2)>0){
+          while($row2 = mysqli_fetch_assoc($res2)){
+            $giaTuoi2 = $row2['Gia'];
+          }
+        }else{
+          $giaTuoi2 = "";
+        }
+
+        $sql3 = "SELECT Gia FROM giatour WHERE MaTour='$maTour' and DoTuoi = 3";
+        //Execute the Query
+        $res3 = mysqli_query($conn, $sql3);
+        if(mysqli_num_rows($res3)>0){
+          //Count the rows
+          while($row3 = mysqli_fetch_assoc($res3)){
+            //CHeck whether the data is available or not
+            $giaTuoi3 = $row3['Gia'];
+          }
+        }else{
+          $giaTuoi3 = "";
+        }
+
     }
     else
     {
@@ -94,7 +130,7 @@
         
         <h2 class="text-center text-white">Fill this form to confirm your order.</h2>
 
-        <form action="" method="POST" class="order">
+        <form method="POST" class="order">
             <fieldset>
                 <legend>Selected Tour</legend>
 
@@ -111,7 +147,7 @@
                         {
                             //Image is Available
                             ?>
-                            <img src="<?php echo SITEURL; ?>assets/img/<?php echo $image_name.'.jpg'; ?>" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                            <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $image_name.'.jpg'; ?>" alt="Chicke Hawain Pizza" style="max-height: 500px;">
                             <?php
                         }
                     
@@ -131,19 +167,56 @@
                     
                     <div class="tour-num-people" style="display:flex">
                       <div class="order-label me-3">Trẻ em
-                        <input type="number" id="quantity" name="quantity" min="0" max="5" value ="0">
+                        <?php
+                          if($giaTuoi1==""){
+                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0' disabled>";
+                            echo '<br>';
+                            echo $giaTuoi1;
+                          }
+                          else{
+                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0'>";
+                            echo '<br>';
+                            echo $giaTuoi1;
+                          }
+                        ?>
                       </div>
 
                       <div class="order-label me-3">Người lớn
-                        <input type="number" id="quantity" name="quantity" min="0" max="5" value ="0">
+                        <?php
+                          if($giaTuoi2==""){
+                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0' disabled>";
+                            echo '<br>';
+                            echo $giaTuoi2;
+                          }
+                          else{
+                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0'>";
+                            echo '<br>';
+                            echo $giaTuoi2;
+                          }
+                        ?>
                       </div>
 
                       <div class="order-label me-3">Người già
-                        <input type="number" id="quantity" name="quantity" min="0" max="5" value ="0">
+                        <?php
+                          if($giaTuoi3==""){
+                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0' disabled>";
+                            echo '<br>';
+                            echo $giaTuoi3;
+                          }
+                          else{
+                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0'>";
+                            echo '<br>';
+                            echo $giaTuoi3;
+                          }
+                        ?>
                       </div>
                     </div>
 
-                    <p class="food-price mt-3">Tổng Tiền: <?php echo $price; ?></p>
+                    <?php 
+                      $tongtien = 0;
+                    ?>
+
+                    <p class="tour-price mt-3">Tổng Tiền: <?php echo $price; ?></p>
                     <input type="hidden" name="price" value="<?php echo $price; ?>">
                     
                 </div>
@@ -163,7 +236,7 @@
             {
                 // Get all the details from the form
 
-                $food = $_POST['food'];
+                $tongTien= $_POST[''];
                 $price = $_POST['price'];
                 $qty = $_POST['qty'];
 
@@ -171,36 +244,33 @@
 
                 $order_date = date("Y-m-d h:i:sa"); //Order DAte
 
-                $status = "Ordered";  // Ordered, On Delivery, Delivered, Cancelled
+                // $status = "Ordered";  // Ordered, On Delivery, Delivered, Cancelled
 
-                $customer_name = $_POST['full-name'];
-                $customer_contact = $_POST['contact'];
-                $customer_email = $_POST['email'];
-                $customer_address = $_POST['address'];
+                // $customer_name = $_POST['full-name'];
+                // $customer_contact = $_POST['contact'];
+                // $customer_email = $_POST['email'];
+                // $customer_address = $_POST['address'];
 
 
                 //Save the Order in Databaase
                 //Create SQL to save the data
-                $sql2 = "INSERT INTO tbl_order SET 
-                    food = '$food',
-                    price = $price,
-                    qty = $qty,
-                    total = $total,
+                $sql4 = "INSERT INTO phieudangkitour SET 
+                    makhachhang = '$food',
+                    soluong = $price,
+                    matour = $qty,
+                    hinhthucthanhtoan = $total,
                     order_date = '$order_date',
                     status = '$status',
-                    customer_name = '$customer_name',
-                    customer_contact = '$customer_contact',
-                    customer_email = '$customer_email',
-                    customer_address = '$customer_address'
+                    TongTien = 0;
                 ";
 
                 //echo $sql2; die();
 
                 //Execute the Query
-                $res2 = mysqli_query($conn, $sql2);
+                $res4 = mysqli_query($conn, $sql4);
 
                 //Check whether query executed successfully or not
-                if($res2==true)
+                if($res4==true)
                 {
                     //Query Executed and Order Saved
                     $_SESSION['order'] = "<div class='success text-center'>Food Ordered Successfully.</div>";
@@ -235,6 +305,20 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
+  <script>
+      // var giaTien1 = Document.querySelectorAll('#quantity').[0].value;
+      // var giaTien2 = Document.querySelectorAll('#quantity').[1].value;
+      // var giaTien3 = Document.querySelectorAll('#quantity').[2].value;
+      // var tongTien = ;
+
+    $(document).ready(function(){
+      //Luon dan bao chi thuc hien noi dung ben trong
+      //khi trang dc tai xong ..(DOM)
+      $("#btnClick").click(function(){
+          $("p:odd").css("color","red");
+      })
+    });
+  </script>
 </body>
 
 </html>

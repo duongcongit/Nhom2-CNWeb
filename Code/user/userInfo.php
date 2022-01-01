@@ -1,3 +1,4 @@
+<?php include('../constants.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -157,7 +158,7 @@
                             }
                         }
                         // Bước 04: Đóng kết nối Database Server
-                        mysqli_close($conn);
+                        // mysqli_close($conn);
                     ?>
                                   
                             </tbody>
@@ -174,7 +175,7 @@
 
     <!-- Booked Tour -->
     <div class="container mt-5">
-        <h3>Các Tour Bạn Đã Đặt</h3>
+        <!-- <h3>Các Tour Bạn Đã Đặt</h3>
         <div class="row mt-3">
             <div class="card">
                 <div class="row">
@@ -190,41 +191,94 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         
-        <div class="row mt-3">
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="../assets/img/Tour1.jpg" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Button</a>
+        <div class="container">
+                <h2 class="text-center pt-3">Các Tour Mà Bạn Đã Đặt</h2>
+                <div class="row">        
+                <?php 
+                
+                //Getting tours from Database that are active and featured
+                //SQL Query
+                $sql1 = "SELECT HinhAnh,MaPhieuTour,MaKhachHang,tour.MaTour,SoLuong,HinhThucThanhToan,TongTien,TinhTrang
+                 FROM phieudangkitour,tour where phieudangkitour.MaTour = tour.MaTour";
+                
+                //Execute the Query
+                $res1 = mysqli_query($conn, $sql1);
+                
+                //Count Rows
+                $count1 = mysqli_num_rows($res1);
+                
+                //CHeck whether tour available or not
+                if($count1>0)
+                {
+                    //tour Available
+                    while($row1=mysqli_fetch_assoc($res1))
+                    {
+                        //Get all the values
+                        $hinhAnh = $row1['HinhAnh'];
+                        $maPhieuTour = $row1['MaPhieuTour'];
+                        $maKH = $row1['MaKhachHang'];
+                        $maTour = $row1['MaTour'];
+                        $soLuong = $row1['SoLuong'];
+                        $hinhThucThanhToan = $row1['HinhThucThanhToan'];
+                        $TongTien = $row1['TongTien'];
+                        $TinhTrang = $row1['TinhTrang'];
+                        
+                ?>
+                        <div class="tour-menu-box p-3 border border-success m-2 rounded">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <?php 
+                                    //Check whether image available or not
+                                    if($hinhAnh=="")
+                                    {
+                                        //Image not Available
+                                        echo "<div class='error'>Image not available.</div>";
+                                    }
+                                    else
+                                    {
+                                        //Image Available
+                                        ?>
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="" class="img-fluid">
+                                        <?php
+                                    }
+                ?>
+                                
+                            </div>
+                            <div class="col-md-8">
+                                <h4>Mã Phiếu Tour: <?php echo $maPhieuTour; ?></h4>
+                                <p>Mã Tour: <?php echo $maTour; ?></p>
+                                <p>Tổng số lượng người: <?php echo $soLuong ?></p>
+                                <p>Hình thức thanh toán: <?php echo $hinhThucThanhToan ?></p>
+                                <p>Tổng tiền: <?php echo $TongTien ?></p>
+                                <br>
+                                
+                                <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Đặt Tour Ngay</a>
+                            </div>
                         </div>
                     </div>
+                    
+                    <?php
+                    }
+                }else
+                {
+                    //Tour Not Available 
+                    echo "<div class='error'>Tour not available.</div>";
+                }
+                
+                mysqli_close($conn);
+                
+                ?>
                 </div>
+                
             </div>
-        </div>
+            
+            <p class="text-center mt-3">
+                <a href="#boxnoidung" aria-expanded="false" data-toggle="collapse">Bấm vào đây</a>
+                <!-- <a href="#">Xem thêm</a> -->
+            </p>
         
-        <div class="row mt-3">
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="../assets/img/Tour1.jpg" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Button</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  
     </div>
       
 

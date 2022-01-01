@@ -35,9 +35,24 @@
     background: #f8f9fa;
 }
 
+
+/* Search */
+.search-tour{
+    background: url("../images/tours/search.jpg") center/cover no-repeat;
+    height: 440px;
+    display: flex;
+}
+
+.search-form {
+    display: flex;
+    margin: auto;
+    color: #fff;
+}
+
+
 .card-test{
     position: relative;
-    background: url('../img/ha-noi-mien-bac.jpg') top center/cover no-repeat;
+    background: url('../images/tours/ha-noi-mien-bac.jpg') top center/cover no-repeat;
     height: 350px;
 }
 

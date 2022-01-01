@@ -34,7 +34,7 @@
     if(!$ketqua){
         header("location: error.php"); //Chuyển hướng lỗi
     }else{
-        header("location: admin.php"); //Chuyển hướng lại Trang Quản trị
+        header("location: userInfo.php"); //Chuyển hướng lại Trang Quản trị
     }
 
     // Bước 03: Đóng kết nối

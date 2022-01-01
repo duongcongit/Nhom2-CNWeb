@@ -1,3 +1,4 @@
+<?php include('../constants.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +45,7 @@
 
   <main>
     <!-- Tour list -->
-    <section class = "container mt-5 tour-list">
+    <!-- <section class = "container mt-5 tour-list">
         <h3 class="text-center">Các Tour hiện có</h3>
         <select class="form-select" aria-label="Default select example">
             <option selected>...</option>
@@ -52,7 +53,6 @@
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
-        <!-- Tour item -->
         <div class="row mt-3">
             <div class="col-md-6">
                 <div class="card">
@@ -161,11 +161,121 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+
+    </section> -->
+    <section class="tour-search text-center mt-5">
+        <div class="container">
+        <?php 
+
+                //Get the Search Keyword
+                // $search = $_POST['search'];
+                $search = mysqli_real_escape_string($conn, $_POST['search']);
+            
+            ?>
+
+
+        <h2 class="text-center">Tour theo yêu cầu của bạn: <span>"
+            <?php echo $search; ?>"
+            </span></h2>
+
+        </div>
+    </section>
+    <!-- fOOD sEARCH Section Ends Here -->
+
+
+
+    <!-- fOOD MEnu Section Starts Here -->
+    <section class="food-menu container mt-3">
+        <h2 class="text-center">Tour Menu</h2>
+        <div class="row">
+
+            <?php 
+
+                //SQL Query to Get foods based on search keyword
+                //$search = burger '; DROP database name;
+                // "SELECT * FROM tbl_food WHERE title LIKE '%burger'%' OR description LIKE '%burger%'";
+                $sql = "SELECT * FROM tour WHERE DiemKhoiHanh LIKE '%$search%' OR DiemKetThuc LIKE '%search%' OR TenTour LIKE '%$search%' OR LoaiHinh like '%search%'";
+                //Execute the Query
+                $res = mysqli_query($conn, $sql);
+
+                //Count Rows
+                $count = mysqli_num_rows($res);
+
+                //Check whether food available of not
+                if($count>0)
+                {
+                    //Food Available
+                    while($row=mysqli_fetch_assoc($res))
+                    {
+                        //Get the details
+                        $maTour = $row['MaTour'];
+                        $tenTour = $row['TenTour'];
+                        $loaiHinh = $row['LoaiHinh'];
+                        $moTa = $row['MoTa'];
+                        $hinhAnh = $row['HinhAnh'];
+                        $ngayKhoiHanh = $row['NgayKhoiHanh'];
+                        $ngayKetThuc = $row['NgayKetThuc'];
+            ?>
+
+                        <div class="tour-menu-box p-3 border border-success m-2 rounded">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <?php 
+                                    //Check whether image available or not
+                                    if($hinhAnh=="")
+                                    {
+                                        //Image not Available
+                                        echo "<div class='error'>Image not available.</div>";
+                                    }
+                                    else
+                                    {
+                                        //Image Available
+                                        ?>
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="" class="img-fluid">
+                                        <?php
+                                    }
+                ?>
+                                
+                            </div>
+                            <div class="col-md-8">
+                                <h4>Tên Tour: <?php echo $tenTour; ?></h4>
+                                <p>Mã Tour: <?php echo $maTour?></p>
+                                <p>Loại Hình: <?php echo $loaiHinh?></p>
+                                <p>Ngày Khỏi Hành: <?php echo $ngayKhoiHanh ?></p>
+                                <p>Ngày Kết Thúc: <?php echo $ngayKetThuc ?></p>
+                                <p class="tour-detail">
+                                    Mô tả: 
+                                    <?php echo $moTa; ?>
+                                </p>
+                                <br>
+                                
+                                <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Đặt Tour Ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <?php
+                    }
+                }
+                else
+                {
+                    //Tour Not Available
+                    echo "<div class='error'>Hiện không có tour du lịch này.</div>";
+                }
+
+
+            
+                mysqli_close($conn);
+            ?>
 
         </div>
 
     </section>
-      
+    <!-- fOOD Menu Section Ends Here -->
+
+
 
   </main>
 

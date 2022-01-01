@@ -1,3 +1,4 @@
+<?php include('constants.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +10,7 @@
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/userStyle.css">
   <title>Document</title>
 </head>
 
@@ -28,7 +30,7 @@
               <a class="nav-link" href="logIn.php" tabindex="-1" aria-disabled="true">Đăng nhập</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="signup.php" tabindex="-1" aria-disabled="true">Đăng kí</a>
+              <a class="nav-link" href="register.php" tabindex="-1" aria-disabled="true">Đăng kí</a>
             </li>
           </ul>
         </div>
@@ -37,216 +39,225 @@
   </div>
 
   <main>
-    <!-- Slider -->
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="assets/img/slider.jpg" class="d-block w-100" alt="slider">
-            </div>
-        </div>
-    </div>
-
-    <!-- Hot tours -->
-    <section class="container mt-5">
-       <h3 style="color: red;">Các tour đang hot <i class="fas fa-fire-alt"></i></h3>
-        <div class="popular-post row">
-            <div class="col-md-4 mt-3">
-                <div class="card" style="width: 100%;">
-                    <img src="assets/img/du-lich-hoi-an.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Tour La Khê -Đống Đa</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Khám phá ngay</a>
-                    </div>
+        <!-- Slider -->
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/images/tours/main.jpg" class="d-block w-100" alt="slider" style="height: 600px;">
                 </div>
-            </div>
-
-            <div class="col-md-4 mt-3">
-                <div class="card" style="width: 100%;">
-                    <img src="assets/img/du-lich-hoi-an.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Tour La Khê -Đống Đa</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Khám phá ngay</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mt-3">
-                <div class="card" style="width: 100%;">
-                    <img src="assets/img/du-lich-hoi-an.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Tour La Khê -Đống Đa</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Khám phá ngay</a>
-                    </div>
+                <div class="carousel-banner">
+                    <h1>Tìm điểm du lịch tại Việt Nam</h1>
+                    <span>Việt Nam nơi có nhiều danh lam thắng cảnh trải khắp tổ quốc</span>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Tour suggest -->
-    <div class="container">
-        <section class="pt-5" id="tourType">
-            <h3 class="text-center mt-3">Combo đi khắp mọi nơi</h3>
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <div class="card"">
-                        <img src="assets/img/ha-noi-mien-bac.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Miền Bắc</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="user/categories.php" class="btn btn-primary">Xem Tour</a>
+        <!-- Hot tours -->
+        <section class="container mt-5">
+            <div class="container">
+                <div class="suggest">
+                    <p class="text-uppercase text-center">Đề Xuất</p>
+                    <h2 class="text-uppercase text-center">Các điểm đến của chúng tôi</h2>
+                </div>
+
+                <div class="row place">
+                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
+                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/ha-noi-mien-bac.jpg') top center/cover no-repeat">
+                            <div class="place-hot-content">
+                                <h4 class="place__heading">Vịnh Hạ Long</h4>
+                                <p class="place__title">Kỳ Quan Thiên Nhiên Thế Giới</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
+                            <div class="place-hot-item border rounded" style="background: url('assets/images/tours/ho_chi_minh_city_skyline.jpg') top center/cover no-repeat">
+                            <div class="place-hot-content">
+                                <h4 class="place__heading">Hồ Chí Minh</h4>
+                                <p class="place__title">Thành Phố Mang Tên Bác</p>
+                            </div>
+                            </div>       
+                    </div>
+
+                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
+                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/quang_truong_da_lat.jpg') top center/cover no-repeat">
+                            <div class="place-hot-content">
+                                <h4 class="place__heading">Đà lạt</h4>
+                                <p class="place__title">Biểu Tượng Thành Phố Ngàn Hoa</p>
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
+                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/phong_nha_ke_bang.jpg') top center/cover no-repeat">
+                            <div class="place-hot-content">
+                                <h4 class="place__heading">Phong Nha Kẻ Bàng</h4>
+                                <p class="place__title">Vẻ Đẹp Hùng Vỹ</p>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
+                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/sapa.jpg') top center/cover no-repeat">
+                            <div class="place-hot-content">
+                                <h4 class="place__heading">Sapa - Lào Cai</h4>
+                                <p class="place__title">Thành Phố Sương Mù</p>
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
+                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/phu_quoc.jpg') top center/cover no-repeat">
+                            <div class="place-hot-content">
+                                <h4 class="place__heading">Phú Quốc</h4>
+                                <p class="place__title">Bãi Biển Xanh Thơ Mộng</p>
+                            </div>   
                         </div>
                     </div>
                 </div>
-    
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="assets/img/ha-noi-mien-bac.jpg" class="card-img-top img-fluid" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Miền Trung</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="user/categories.php" class="btn btn-primary">Xem Tour</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="assets/img/ha-noi-mien-bac.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Miền Nam</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="user/categories.php" class="btn btn-primary">Xem Tour</a>
-                        </div>
-                    </div>
-                </div>
+            
             </div>
         </section>
-    </div>
 
-    <!-- Tour list -->
-    <section class = "container mt-5 tour-list">
-        <h3 class="text-center">Các Tour hiện có</h3>
-        <!-- Tour item -->
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="assets/img/mien-trung.jpg" alt="" class="img-fluid">
+        <!-- Tour suggest -->
+        <div class="container">
+            <section class="pt-5" id="tourType">
+                <h3 class="text-center mt-3">Các loại hình thú vị</h3>
+                <div class="row mt-3">
+                    <div class="col-md-4 mt-3">
+                        <h4 class="text-center">Du lịch trên biển</h4>
+                        <div class="card-test">
+                            <div class="img-content">
+                                <a href="user/categories.php" class="btn btn-primary text-center btn-categories">Xem Tour</a>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Đặt ngay</a>
+                    </div>
+        
+                    <div class="col-md-4 mt-3">
+                        <h4 class="text-center">Du lịch trên biển</h4>
+                        <div class="card-test">
+                            <div class="img-content">
+                                <a href="user/categories.php" class="btn btn-primary text-center btn-categories">Xem Tour</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-4 mt-3">
+                        <h4 class="text-center">Du lịch trên biển</h4>
+                        <div class="card-test">
+                            <div class="img-content">
+                                <a href="user/categories.php" class="btn btn-primary text-center btn-categories">Xem Tour</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="assets/img/mien-trung.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Đặt ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            </section>
         </div>
 
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="assets/img/mien-trung.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Đặt ngay</a>
+
+        
+        <!-- Search tour -->
+        <section class="search-tour mt-5"> 
+            <div class="text-center search-form">       
+                <form action="user/categories.php" method="POST">
+                    <h3>Tìm kiếm điểm du lịch</h3>
+                    <input type="search" name="search" placeholder="Search for tour.." required>
+                    <input type="submit" name="submit" value="Search" class="btn btn-primary">
+                </form>
+                
+            </div>
+        </section>
+    
+        <!-- Tour MEnu Section Starts Here -->
+        <section class="tour-menu mt-5">
+            <div class="container">
+                <h2 class="text-center pt-3">Các Tour hiện có</h2>
+                <div class="row">
+                    
+                    <?php 
+                
+                //Getting tours from Database that are active and featured
+                //SQL Query
+                $sql = "SELECT * FROM Tour LIMIT 6";
+                
+                //Execute the Query
+                $res = mysqli_query($conn, $sql);
+                
+                //Count Rows
+                $count = mysqli_num_rows($res);
+                
+                //CHeck whether tour available or not
+                if($count>0)
+                {
+                    //tour Available
+                    while($row=mysqli_fetch_assoc($res))
+                    {
+                        //Get all the values
+                        $maTour = $row['MaTour'];
+                        $title = $row['TenTour'];
+                        $description = $row['MoTa'];
+                        $image_name = $row['HinhAnh'];
+                        $day_start = $row['NgayKhoiHanh'];
+                        $day_end = $row['NgayKetThuc'];
+                        
+                        ?>
+                        <div class="tour-menu-box p-3 border border-success m-2 rounded" style="width:48%">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <?php 
+                                    //Check whether image available or not
+                                    if($image_name=="")
+                                    {
+                                        //Image not Available
+                                        echo "<div class='error'>Image not available.</div>";
+                                    }
+                                    else
+                                    {
+                                        //Image Available
+                                        ?>
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $image_name.'.jpg'; ?>" alt="" class="img-fluid" style="height: 150px">
+                                        <?php
+                                    }
+                ?>
+                                
+                            </div>
+                            <div class="col-md-7">
+                                <h4><?php echo $title; ?></h4>
+                                <p class="tour-price">$<?php echo $maTour; ?></p>
+                                <p>Ngày Khỏi Hành: <?php echo $day_start ?></p>
+                                <p>Ngày Kết Thúc: <?php echo $day_end ?></p>
+                                <p class="tour-detail">
+                                    <?php echo $description; ?>
+                                </p>
+                                <br>
+                                
+                                <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Đặt Tour Ngay</a>
                             </div>
                         </div>
                     </div>
+                    
+                    <?php
+                    }
+                }else
+                {
+                    //Tour Not Available 
+                    echo "<div class='error'>Tour not available.</div>";
+                }
+                
+                mysqli_close($conn);
+                
+                ?>
                 </div>
+                
             </div>
-
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="assets/img/mien-trung.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Đặt ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="assets/img/mien-trung.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Đặt ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="assets/img/mien-trung.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Đặt ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-  </main>
+            
+            <p class="text-center mt-3">
+                <a href="#boxnoidung" aria-expanded="false" data-toggle="collapse">Bấm vào đây</a>
+                <!-- <a href="#">Xem thêm</a> -->
+            </p>
+        </section>
+        <!-- Tour Menu Section Ends Here -->
+    </main>
 
   <footer>
     <div class="col-md text-center text-muted bg-light mt-3">
