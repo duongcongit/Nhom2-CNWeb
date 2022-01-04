@@ -8,50 +8,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <title>Đặt Tour</title>
 </head>
 
 <body>
-    <header>
-      <!-- navbar -->
-      <div class="container-fluid">
-        <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light main-navbar">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#">Logo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                      <a class="nav-link" href="user.php" tabindex="-1" aria-disabled="true">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="categories.php" tabindex="-1" aria-disabled="true">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="userInfo.php" tabindex="-1" aria-disabled="true">User info</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-        </div>
-      </div>
-  </header>
+    <?php
+    include "partials/header.php";
+    ?>
 
 <?php 
-    //CHeck whether food id is set or not
+    //CHeck whether Tour id is set or not
     if(isset($_GET['MaTour']))
     {
         //Get the Food id and details of the selected food
         $maTour = $_GET['MaTour'];
 
         //Get the DEtails of the SElected Food
-        $sql = "SELECT * FROM tour WHERE MaTour='$maTour'";
+        $sql = "SELECT * FROM tour WHERE maTour='$maTour'";
         //Execute the Query
         $res = mysqli_query($conn, $sql);
         //Count the rows
@@ -63,16 +37,20 @@
             //GEt the Data from Database
             $row = mysqli_fetch_assoc($res);
 
-            $title = $row['TenTour'];
+            $tenTour = $row['tenTour'];
             // $price = $row['price'];
-            $image_name = $row['HinhAnh'];
-            $ngayKhoiHanh = $row['NgayKhoiHanh'];
-            $ngayKetThuc = $row['NgayKetThuc'];
-            $diemKhoiHanh = $row['DiemKhoiHanh'];
-            $diemKetThuc = $row['DiemKetThuc'];
-            $loaiHinh = $row['LoaiHinh'];
-            $moTa = $row['MoTa'];
-            $maCongTy = $row['MaCongTy'];     
+            $hinhAnh = $row['hinhAnh'];
+            $ngayKhoiHanh = $row['ngayKhoiHanh'];
+            $ngayKetThuc = $row['ngayKetThuc'];
+            $diemKhoiHanh = $row['diemKhoiHanh'];
+            $diemKetThuc = $row['diemKetThuc'];
+            $loaiHinh = $row['loaiHinh'];
+            $moTa = $row['moTa'];
+            $maCongTy = $row['maCongTy'];
+            $first_date = strtotime($ngayKhoiHanh);
+            $second_date = strtotime($ngayKetThuc);
+            $datediff = abs($first_date - $second_date);
+            $day = floor($datediff / (60*60*24));     
         }
         else
         {
@@ -81,36 +59,39 @@
             header('location:'.SITEURL);
         }
 
-        $sql1 = "SELECT Gia FROM giatour WHERE MaTour='$maTour' and DoTuoi = 1";
+        $sql1 = "SELECT gia,moTa FROM giatour WHERE maTour='$maTour' and doTuoi = 1";
         //Execute the Query
         $res1 = mysqli_query($conn, $sql1);
         if(mysqli_num_rows($res1)>0){
           while($row1 = mysqli_fetch_assoc($res1)){
-            $giaTuoi1 = $row1['Gia'];
+            $tuoi1 = $row1['moTa'];
+            $giaTuoi1 = $row1['gia'];
           }
         }else{
           $giaTuoi1 = "";
         }
 
-        $sql2 = "SELECT Gia FROM giatour WHERE MaTour='$maTour'and DoTuoi = 2";
+        $sql2 = "SELECT gia,moTa FROM giatour WHERE maTour='$maTour'and doTuoi = 2";
         //Execute the Query
         $res2 = mysqli_query($conn, $sql2);
         if(mysqli_num_rows($res2)>0){
           while($row2 = mysqli_fetch_assoc($res2)){
-            $giaTuoi2 = $row2['Gia'];
+            $tuoi2 = $row2['moTa'];
+            $giaTuoi2 = $row2['gia'];
           }
         }else{
           $giaTuoi2 = "";
         }
 
-        $sql3 = "SELECT Gia FROM giatour WHERE MaTour='$maTour' and DoTuoi = 3";
+        $sql3 = "SELECT gia,moTa FROM giatour WHERE maTour='$maTour' and doTuoi = 3";
         //Execute the Query
         $res3 = mysqli_query($conn, $sql3);
         if(mysqli_num_rows($res3)>0){
           //Count the rows
           while($row3 = mysqli_fetch_assoc($res3)){
             //CHeck whether the data is available or not
-            $giaTuoi3 = $row3['Gia'];
+            $tuoi3 = $row3['moTa'];
+            $giaTuoi3 = $row3['gia'];
           }
         }else{
           $giaTuoi3 = "";
@@ -124,110 +105,109 @@
     }
 ?>
 
-<!-- fOOD sEARCH Section Starts Here -->
-<section class="food-search">
+<!-- Tour Info Section Starts Here -->
+<section class="Tour-info text-center">
     <div class="container">
-        
-        <h2 class="text-center text-white">Fill this form to confirm your order.</h2>
-
+      <div class="row pt-5">
+        <h3 class="mt-5">Thông Tin Tour</h3>
         <form method="POST" class="order">
-            <fieldset>
-                <legend>Selected Tour</legend>
+            <div class="food-menu-img">
+                <?php               
+                    //CHeck whether the image is available or not
+                    if($hinhAnh=="")
+                    {
+                        //Image not Availabe
+                        echo "<div class='error'>Image not Available.</div>";
+                    }
+                    else
+                    {
+                        //Image is Available
+                ?>
+                    <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="Tour-img" style="max-height: 500px;" class="img-fluid">
+                    <?php
+                      }
+                    
+                ?>
+                    
+            </div>
 
-                <div class="food-menu-img">
-                    <?php 
-                    
-                        //CHeck whether the image is available or not
-                        if($image_name=="")
-                        {
-                            //Image not Availabe
-                            echo "<div class='error'>Image not Available.</div>";
-                        }
-                        else
-                        {
-                            //Image is Available
-                            ?>
-                            <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $image_name.'.jpg'; ?>" alt="Chicke Hawain Pizza" style="max-height: 500px;">
-                            <?php
-                        }
-                    
-                    ?>
-                    
+            <div class="food-menu-desc text-center">
+                <h4><?php echo $tenTour; ?></h4>
+                <p>Mã: <?php echo $maTour; ?></p>
+                <p><i class="bi bi-geo-alt me-3"></i>Khởi Hành: <?php echo $diemKhoiHanh; ?> <span>-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
+                <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
+                <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
+                <p>Thông tin về tour: <br> <?php echo $moTa; ?></p>
+                <h4>Phương thức thanh toán</h4>
+
+                <div class="d-flex justify-content-center">
+                  <select class="form-select w-50" aria-label="Default select example" name="cast">
+                    <option selected value ="Chuyển Khoản">Chuyển khoản</option>
+                    <option value="Tiền Mặt">Tiền Mặt</option>
+                  </select>
                 </div>
 
-                <div class="food-menu-desc">
-                    <h3>Tour du lịch: <?php echo $title; ?></h3>
-                    <p>Điểm Khởi Hành: <?php echo $diemKhoiHanh; ?></p>
-                    <p>Điểm kết thúc: <?php echo $diemKetThuc; ?></p>
-                    <p>Ngày Khời Hành: <?php echo $ngayKhoiHanh; ?></p>
-                    <p>Ngày Kết Thúc: <?php echo $ngayKetThuc; ?></p>
-                    <p>Loại Hình: <?php echo $loaiHinh; ?></p>
-                    <p>Thông tin về tour: <?php echo $moTa; ?></p>
-                    <h3>Số Lượng Người Đăng Kí</h3>
-                    
-                    <div class="tour-num-people" style="display:flex">
-                      <div class="order-label me-3">Trẻ em
-                        <?php
-                          if($giaTuoi1==""){
-                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0' disabled>";
-                            echo '<br>';
-                            echo $giaTuoi1;
-                          }
-                          else{
-                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0'>";
-                            echo '<br>';
-                            echo $giaTuoi1;
-                          }
-                        ?>
-                      </div>
-
-                      <div class="order-label me-3">Người lớn
-                        <?php
-                          if($giaTuoi2==""){
-                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0' disabled>";
-                            echo '<br>';
-                            echo $giaTuoi2;
-                          }
-                          else{
-                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0'>";
-                            echo '<br>';
-                            echo $giaTuoi2;
-                          }
-                        ?>
-                      </div>
-
-                      <div class="order-label me-3">Người già
-                        <?php
-                          if($giaTuoi3==""){
-                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0' disabled>";
-                            echo '<br>';
-                            echo $giaTuoi3;
-                          }
-                          else{
-                            echo "<input type='number' id='quantity' name='quantity' min='0' max='5' value ='0'>";
-                            echo '<br>';
-                            echo $giaTuoi3;
-                          }
-                        ?>
-                      </div>
-                    </div>
-
-                    <?php 
-                      $tongtien = 0;
+                <h4 class="mt-3">Số Lượng Người Đăng Kí</h4>                    
+                <div class="tour-num-people d-flex justify-content-center mt-3">
+                  <div class="order-label me-3"><?php echo $tuoi1 ?>
+                    <?php
+                      if($giaTuoi1==""){
+                        echo "<input type='number' name='quantity1' min='0' max='100' value ='0' disabled>";
+                        echo '<br>';
+                        echo "<p id='price1'>".$giaTuoi1."/1 người</p>";
+                      }
+                      else{
+                        echo "<input type='number' name='quantity1' min='0' max='100' value ='0'>";
+                        echo '<br>';
+                        echo "<p id='price1'>".$giaTuoi1."/1 người</p>";
+                      }
                     ?>
+                  </div>
 
-                    <p class="tour-price mt-3">Tổng Tiền: <?php echo $price; ?></p>
-                    <input type="hidden" name="price" value="<?php echo $price; ?>">
-                    
+                  <div class="order-label me-3"><?php echo $tuoi2 ?>
+                    <?php
+                      if($giaTuoi2==""){
+                        echo "<input type='number' name='quantity2' min='1' max='100' value ='0' disabled>";
+                        echo '<br>';
+                        echo "<p id='price2'>".$giaTuoi2."/1 người</p>";
+                      }
+                      else{
+                        echo "<input type='number' name='quantity2' min='1' max='100' value ='0'>";
+                        echo '<br>';
+                        echo "<p id='price2'>".$giaTuoi2."/1 người</p>";
+                      }
+                    ?>
+                  </div>
+
+                  <div class="order-label me-3"><?php echo $tuoi3 ?>
+                    <?php
+                      if($giaTuoi3==""){
+                        echo "<input type='number' name='quantity3' min='0' max='100' value ='0' disabled>";
+                        echo '<br>';
+                        echo "<p id='price3'>".$giaTuoi3."/1 người</p>";
+                      }
+                      else{
+                        echo "<input type='number' name='quantity3' min='0' max='100' value ='0'>";
+                        echo '<br>';
+                        echo "<p id='price3'>".$giaTuoi3."/1 người</p>";
+
+                      }
+                    ?>
+                  </div>
                 </div>
 
-            </fieldset>
+                <?php 
+                  $tongtien = 0;
+                ?>
+                <p class="mt-3" id="tour-price">Tổng Tiền: </p>
+                    
+            </div>
+
             
-            <fieldset>
-                <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary mt-3">
-            </fieldset>
 
-        </form>
+        <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary mt-3">
+      </form>
 
         <?php 
 
@@ -236,36 +216,30 @@
             {
                 // Get all the details from the form
 
-                $tongTien= $_POST[''];
-                $price = $_POST['price'];
-                $qty = $_POST['qty'];
+                if($giaTuoi1==""){
+                  $giaTuoi1 = 0;
+                }
+                if($giaTuoi2==""){
+                  $giaTuoi2 = 0;
+                }
+                if($giaTuoi3==""){
+                  $giaTuoi3 = 0;
+                }
+                $quantity1 = $_POST['quantity1'];
+                $quantity2 = $_POST['quantity2'];
+                $quantity3 = $_POST['quantity3'];
+                $soLuong = $quantity1+$quantity2+$quantity3;
+                $hinhThucThanhToan = $_POST['cast'];
+                $tongTien = $giaTuoi1* $quantity1 + $giaTuoi2* $quantity2+ $giaTuoi3* $quantity3; // total = price x qty 
+                $maPhieuTour = 'PT'.rand(0000,9999);
+                $ngayDat = date("Y-m-d h:i:sa"); 
 
-                $total = $price * $qty; // total = price x qty 
-
-                $order_date = date("Y-m-d h:i:sa"); //Order DAte
-
-                // $status = "Ordered";  // Ordered, On Delivery, Delivered, Cancelled
-
-                // $customer_name = $_POST['full-name'];
-                // $customer_contact = $_POST['contact'];
-                // $customer_email = $_POST['email'];
-                // $customer_address = $_POST['address'];
-
+                $tinhTrang = 0; 
 
                 //Save the Order in Databaase
                 //Create SQL to save the data
-                $sql4 = "INSERT INTO phieudangkitour SET 
-                    makhachhang = '$food',
-                    soluong = $price,
-                    matour = $qty,
-                    hinhthucthanhtoan = $total,
-                    order_date = '$order_date',
-                    status = '$status',
-                    TongTien = 0;
-                ";
-
-                //echo $sql2; die();
-
+                $sql4 = "INSERT INTO phieudangkitour(maPhieuTour,maNguoiDung,soKhach,maTour,thoiGianDat,hinhThucThanhToan,tinhTrang,tongTien)
+                 VALUES ('$maPhieuTour','1','$soLuong','$maTour','$ngayDat','$hinhThucThanhToan','$tinhTrang','$tongTien')";
                 //Execute the Query
                 $res4 = mysqli_query($conn, $sql4);
 
@@ -273,51 +247,58 @@
                 if($res4==true)
                 {
                     //Query Executed and Order Saved
-                    $_SESSION['order'] = "<div class='success text-center'>Food Ordered Successfully.</div>";
-                    header('location:'.SITEURL);
+                    $_SESSION['order'] = "<div class='success text-center'>Chúc mừng bạn đã đặt Tour thành công</div>";
+                    // header('location:'.SITEURL);
                 }
                 else
                 {
                     //Failed to Save Order
-                    $_SESSION['order'] = "<div class='error text-center'>Failed to Order Food.</div>";
-                    header('location:'.SITEURL);
+                    $_SESSION['order'] = "<div class='error text-center'>Đặt TOUR Thất Bại.</div>";
+                    // header('location:'.SITEURL);
                 }
 
             }
+        mysqli_close($conn);
         
         ?>
-
+      </div>
     </div>
 </section>
-<!-- fOOD sEARCH Section Ends Here -->
+<!-- Tour info Section Ends Here -->
 
-    <footer>
-        <div class="col-md text-center text-muted bg-light mt-3">
-        &copy;Nhom 2 12/2021
-        <h4>ConTact</h4>
-        <div class="col-md text-center text-muted bg-light">
-          <a href="">Dương Văn Công</a>
-          <a href="">Lê Công Minh</a>
-          <a href="">Lê Đình Minh</a>
-        </div>
-    </footer>
+    <?php
+    include "partials/footer.php";
+    ?>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
   <script>
       // var giaTien1 = Document.querySelectorAll('#quantity').[0].value;
       // var giaTien2 = Document.querySelectorAll('#quantity').[1].value;
       // var giaTien3 = Document.querySelectorAll('#quantity').[2].value;
-      // var tongTien = ;
+      // var tongTien = 0;
 
-    $(document).ready(function(){
-      //Luon dan bao chi thuc hien noi dung ben trong
-      //khi trang dc tai xong ..(DOM)
-      $("#btnClick").click(function(){
-          $("p:odd").css("color","red");
-      })
-    });
+    // $(document).ready(function(){
+    //   //Luon dan bao chi thuc hien noi dung ben trong
+    //   //khi trang dc tai xong ..(DOM)
+    //   $("#quantity1").change(function(){
+    //       $("#tour-price").css("color","red");
+    //   })
+    // });
+
+    // $(document).ready(function(){
+    //   //Luon dan bao chi thuc hien noi dung ben trong
+    //   //khi trang dc tai xong ..(DOM)
+    //   $("#quantity2").change(function(){
+    //       $("#tour-price").css("color","red");
+    //   })
+    // });
+
+    // $(document).ready(function(){
+    //   //Luon dan bao chi thuc hien noi dung ben trong
+    //   //khi trang dc tai xong ..(DOM)
+    //   $("#quantity2").change(function(){
+    //       $("#tour-price").css("color","red");
+    //   })
+    // });
   </script>
 </body>
 

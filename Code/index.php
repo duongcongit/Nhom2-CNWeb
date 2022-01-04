@@ -27,10 +27,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="logIn.php" tabindex="-1" aria-disabled="true">Đăng nhập</a>
+              <a class="nav-link" href="login1.php" tabindex="-1" aria-disabled="true">Đăng nhập</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="register.php" tabindex="-1" aria-disabled="true">Đăng kí</a>
+              <a class="nav-link" href="signup.php" tabindex="-1" aria-disabled="true">Đăng kí</a>
             </li>
           </ul>
         </div>
@@ -39,7 +39,7 @@
   </div>
 
   <main>
-        <!-- Slider -->
+        <!-- Main page img -->
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -52,117 +52,155 @@
             </div>
         </div>
 
-        <!-- Hot tours -->
-        <section class="container mt-5">
-            <div class="container">
+        <!-- Tour suggest -->
+        <div class="container">
+            <section class="pt-5" id="tourType">
                 <div class="suggest">
                     <p class="text-uppercase text-center">Đề Xuất</p>
                     <h2 class="text-uppercase text-center">Các điểm đến của chúng tôi</h2>
                 </div>
+                <div class="row">
+                <?php 
 
-                <div class="row place">
-                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
-                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/ha-noi-mien-bac.jpg') top center/cover no-repeat">
-                            <div class="place-hot-content">
-                                <h4 class="place__heading">Vịnh Hạ Long</h4>
-                                <p class="place__title">Kỳ Quan Thiên Nhiên Thế Giới</p>
+                //Create SQL Query to Display CAtegories from Database
+                $sql1 = "SELECT distinct loaiHinh,maTour,hinhAnh FROM tour LIMIT 3";
+                //Execute the Query
+                $res1 = mysqli_query($conn, $sql1);
+                //Count rows to check whether the category is available or not
+                $count1 = mysqli_num_rows($res1);
+
+                if($count1>0)
+                {
+                    //CAtegories Available
+                    while($row=mysqli_fetch_assoc($res1))
+                    {
+                        //Get the Values like id, title, image_name
+                        $maTour = $row['maTour'];
+                        $loaiHinh = $row['loaiHinh'];
+                        $hinhAnh = $row['hinhAnh'];
+                        ?>
+                        
+                        <div class="col-lg-4 col-md-6 col-sm-12 mt-3 position-relative">
+                            <a href="<?php echo SITEURL; ?>user/category-tour.php?category_id=<?php echo $maTour; ?> ">
+                            <?php 
+                                    //Check whether Image is available or not
+                                    if($hinhAnh=="")
+                                    {
+                                        //Display MEssage
+                                        echo "<div class='error'>Image not Available</div>";
+                                    }
+                                    else
+                                    {
+                                        //Image Available
+                                        ?>
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" class="img-fluid" style="height:350px">
+                                        <?php
+                                    }
+                                ?>
+                                
+
+                                <h3 class="text-light position-absolute text-center p-1 border border-primary rounded bg-dark" style="z-index:1;bottom:25px;transform: translateX(-50%);left:50%"><?php echo $loaiHinh ?></h3>
+                            </a>
                             </div>
-                        </div>
-                    </div>
+                        
 
-                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
-                            <div class="place-hot-item border rounded" style="background: url('assets/images/tours/ho_chi_minh_city_skyline.jpg') top center/cover no-repeat">
-                            <div class="place-hot-content">
-                                <h4 class="place__heading">Hồ Chí Minh</h4>
-                                <p class="place__title">Thành Phố Mang Tên Bác</p>
-                            </div>
-                            </div>       
-                    </div>
-
-                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
-                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/quang_truong_da_lat.jpg') top center/cover no-repeat">
-                            <div class="place-hot-content">
-                                <h4 class="place__heading">Đà lạt</h4>
-                                <p class="place__title">Biểu Tượng Thành Phố Ngàn Hoa</p>
-                            </div>   
-                        </div>
-                    </div>
-
-                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
-                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/phong_nha_ke_bang.jpg') top center/cover no-repeat">
-                            <div class="place-hot-content">
-                                <h4 class="place__heading">Phong Nha Kẻ Bàng</h4>
-                                <p class="place__title">Vẻ Đẹp Hùng Vỹ</p>
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
-                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/sapa.jpg') top center/cover no-repeat">
-                            <div class="place-hot-content">
-                                <h4 class="place__heading">Sapa - Lào Cai</h4>
-                                <p class="place__title">Thành Phố Sương Mù</p>
-                            </div>   
-                        </div>
-                    </div>
-
-                    <div class="place-hot col-lg-4 col-md-6 col-sm-12 mt-3">
-                        <div class="place-hot-item border rounded" style="background: url('assets/images/tours/phu_quoc.jpg') top center/cover no-repeat">
-                            <div class="place-hot-content">
-                                <h4 class="place__heading">Phú Quốc</h4>
-                                <p class="place__title">Bãi Biển Xanh Thơ Mộng</p>
-                            </div>   
-                        </div>
-                    </div>
-                </div>
-            
+                        <?php
+                    }
+                }
+                else
+                {
+                    //Categories not Available
+                    echo "<div class='error'>Category not Added.</div>";
+                }
+            ?>
             </div>
-        </section>
 
-        <!-- Tour suggest -->
-        <div class="container">
-            <section class="pt-5" id="tourType">
-                <h3 class="text-center mt-3">Các loại hình thú vị</h3>
-                <div class="row mt-3">
-                    <div class="col-md-4 mt-3">
-                        <h4 class="text-center">Du lịch trên biển</h4>
-                        <div class="card-test">
-                            <div class="img-content">
-                                <a href="user/categories.php" class="btn btn-primary text-center btn-categories">Xem Tour</a>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="col-md-4 mt-3">
-                        <h4 class="text-center">Du lịch trên biển</h4>
-                        <div class="card-test">
-                            <div class="img-content">
-                                <a href="user/categories.php" class="btn btn-primary text-center btn-categories">Xem Tour</a>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="col-md-4 mt-3">
-                        <h4 class="text-center">Du lịch trên biển</h4>
-                        <div class="card-test">
-                            <div class="img-content">
-                                <a href="user/categories.php" class="btn btn-primary text-center btn-categories">Xem Tour</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
         </div>
 
-
+        <!-- carousel -->
+        <div class="container-fluid mt-5">
+            <div class="row">
+                <div id="carouselExampleCaptions" class="carousel slide mt-3" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    </div>
+        
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src='../assets/images/tours/vinh-ha-long.jpg' class="d-block w-100 img-fluid" alt="Ha Noi Mien Bac" style="max-height: 500px;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Vịnh Hạ Long</h5>
+                                <p>Kỳ Quan Thiên Nhiên Thế Giới</p>
+                            </div>
+                        </div>
+        
+                        <div class="carousel-item">
+                            <img src='../assets/images/tours/ho_chi_minh_city_skyline.jpg' class="d-block w-100" alt="Ho Chi Minh" style="max-height: 500px;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Hồ Chí Minh</h5>
+                                <p>Thành Phố Mang Tên Bác</p>
+                            </div>
+                        </div>
+        
+                        <div class="carousel-item">
+                            <img src='../assets/images/tours/quang_truong_da_lat.jpg' class="d-block w-100" alt="Da Lat" style="max-height: 500px;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Đà lạt</h5>
+                                <p>Biểu Tượng Thành Phố Ngàn Hoa</p>
+                            </div>
+                        </div>
+        
+                        <div class="carousel-item">
+                            <img src='../assets/images/tours/phong_nha_ke_bang.jpg' class="d-block w-100" alt="Phong Nha Ke Bang" style="max-height: 500px;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Phong Nha Kẻ Bàng</h5>
+                                <p>Vẻ Đẹp Hùng Vỹ</p>
+                            </div>
+                        </div>
+        
+                        <div class="carousel-item">
+                            <img src='../assets/images/tours/sapa.jpg' class="d-block w-100" alt="Lao Cai" style="max-height: 500px;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Sapa - Lào Cai</h5>
+                                <p>Thành Phố Sương Mù</p>
+                            </div>
+                        </div>
+        
+                        <div class="carousel-item">
+                            <img src='../assets/images/tours/phu_quoc.jpg' class="d-block w-100" alt="Phu Quoc" style="max-height: 500px;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Phú Quốc</h5>
+                                <p>Bãi Biển Xanh Thơ Mộng</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
         
         <!-- Search tour -->
-        <section class="search-tour mt-5"> 
+        <section class="search-tour mt-5" id="search-tour"> 
             <div class="text-center search-form">       
-                <form action="user/categories.php" method="POST">
+                <form action="tourSearch.php" method="POST">
                     <h3>Tìm kiếm điểm du lịch</h3>
-                    <input type="search" name="search" placeholder="Search for tour.." required>
-                    <input type="submit" name="submit" value="Search" class="btn btn-primary">
+                    <input type="search" name="search" placeholder="Search for tour.." style="width:300px" required>
+                    <br>
+                    <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-primary mt-3">
                 </form>
                 
             </div>
@@ -178,7 +216,7 @@
                 
                 //Getting tours from Database that are active and featured
                 //SQL Query
-                $sql = "SELECT * FROM Tour LIMIT 6";
+                $sql = "SELECT * FROM Tour LIMIT 8";
                 
                 //Execute the Query
                 $res = mysqli_query($conn, $sql);
@@ -193,20 +231,27 @@
                     while($row=mysqli_fetch_assoc($res))
                     {
                         //Get all the values
-                        $maTour = $row['MaTour'];
-                        $title = $row['TenTour'];
-                        $description = $row['MoTa'];
-                        $image_name = $row['HinhAnh'];
-                        $day_start = $row['NgayKhoiHanh'];
-                        $day_end = $row['NgayKetThuc'];
-                        
+                        $maTour = $row['maTour'];
+                        $tenTour = $row['tenTour'];
+                        $moTa = $row['moTa'];
+                        $hinhAnh = $row['hinhAnh'];
+                        $diemKhoiHanh = $row['diemKhoiHanh'];
+                        $diemKetThuc = $row['diemKetThuc'];
+                        $ngayKhoiHanh = $row['ngayKhoiHanh'];
+                        $ngayKetThuc = $row['ngayKetThuc'];
+                        $loaiHinh = $row['loaiHinh'];
+                        $first_date = strtotime($ngayKhoiHanh);
+                        $second_date = strtotime($ngayKetThuc);
+                        $datediff = abs($first_date - $second_date);
+                        $day = floor($datediff / (60*60*24));
+
                         ?>
-                        <div class="tour-menu-box p-3 border border-success m-2 rounded" style="width:48%">
+                        <div class="tour-menu-box p-3 m-3 border border-success rounded col-md-5 ">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="tour-menu-box-img">
                                     <?php 
                                     //Check whether image available or not
-                                    if($image_name=="")
+                                    if($hinhAnh=="")
                                     {
                                         //Image not Available
                                         echo "<div class='error'>Image not available.</div>";
@@ -215,23 +260,21 @@
                                     {
                                         //Image Available
                                         ?>
-                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $image_name.'.jpg'; ?>" alt="" class="img-fluid" style="height: 150px">
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="" class="img-fluid w-100" style="height: 250px">
                                         <?php
                                     }
                 ?>
                                 
                             </div>
-                            <div class="col-md-7">
-                                <h4><?php echo $title; ?></h4>
-                                <p class="tour-price">$<?php echo $maTour; ?></p>
-                                <p>Ngày Khỏi Hành: <?php echo $day_start ?></p>
-                                <p>Ngày Kết Thúc: <?php echo $day_end ?></p>
-                                <p class="tour-detail">
-                                    <?php echo $description; ?>
-                                </p>
-                                <br>
+                            <div class="tour-menu-box-desc text-center mt-3">
+                                <h4><?php echo $tenTour; ?></h4>
+                                <p>Mã: <?php echo $maTour; ?></p>
+                                <p><i class="bi bi-geo-alt me-3"></i>Khởi Hành: <?php echo $diemKhoiHanh; ?> <span>-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                                <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
+                                <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
+                                <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                 
-                                <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Đặt Tour Ngay</a>
+                                <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem thêm chi tiết</a>
                             </div>
                         </div>
                     </div>
@@ -252,8 +295,7 @@
             </div>
             
             <p class="text-center mt-3">
-                <a href="#boxnoidung" aria-expanded="false" data-toggle="collapse">Bấm vào đây</a>
-                <!-- <a href="#">Xem thêm</a> -->
+                <a href="categories.php" aria-expanded="false" data-toggle="collapse" class="btn">Xem Tất Cả</a>
             </p>
         </section>
         <!-- Tour Menu Section Ends Here -->

@@ -1,3 +1,8 @@
+html{
+    scroll-behavior: smooth;
+}
+
+
 /* Styling for navbar */
 .main-navbar{
     position: fixed;
@@ -87,4 +92,11 @@
     padding-top: 5px;
     background: #000;
     color: #fff;
+}
+
+@media (min-width: 768px){
+    .col-md-5{
+        flex: 0 0 auto;
+        width: 45% !important;
+    }
 }
