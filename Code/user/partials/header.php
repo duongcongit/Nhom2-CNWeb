@@ -11,14 +11,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <?php
+                        if(isset($_SESSION['loginAccount']))
+                        {
+                            echo '<li class="nav-item">';
+                            echo "<a class='nav-link' href='userInfo.php'>Xin chào: ".$_SESSION['loginAccount']."</a>";
+                            echo '</li>';
+                        }
+
+                    ?>
                     <li class="nav-item">
-                      <a class="nav-link" href="user.php" tabindex="-1" aria-disabled="true">Home</a>
+                      <a class="nav-link" href="categories.php" tabindex="-1" aria-disabled="true">Thư Viện</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="categories.php" tabindex="-1" aria-disabled="true">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="userInfo.php" tabindex="-1" aria-disabled="true">User info</a>
+                      <a class="nav-link" href="userInfo.php" tabindex="-1" aria-disabled="true">TT Cá Nhân</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="logOut.php" tabindex="-1" aria-disabled="true">Đăng Xuất</a>

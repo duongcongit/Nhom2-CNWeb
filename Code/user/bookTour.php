@@ -1,4 +1,11 @@
 <?php include('../constants.php'); ?>
+<?php
+    // Trước khi cho người dùng xâm nhập vào bên trong
+    // Phải kiểm tra THẺ LÀM VIỆC
+    if(!isset($_SESSION['loginAccount'])){
+        header("location:".SITEURL);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,10 +21,12 @@
 
 <body>
     <?php
-    include "partials/header.php";
+    require "partials/header.php";
     ?>
 
 <?php 
+ob_start();
+
     //CHeck whether Tour id is set or not
     if(isset($_GET['MaTour']))
     {
@@ -230,6 +239,10 @@
                 $quantity3 = $_POST['quantity3'];
                 $soLuong = $quantity1+$quantity2+$quantity3;
                 $hinhThucThanhToan = $_POST['cast'];
+                $thanhtien1 = $quantity1*$giaTuoi1;
+                $thanhtien2 = $quantity2*$giaTuoi2;
+                $thanhtien3 = $quantity3*$giaTuoi3;
+                
                 $tongTien = $giaTuoi1* $quantity1 + $giaTuoi2* $quantity2+ $giaTuoi3* $quantity3; // total = price x qty 
                 $maPhieuTour = 'PT'.rand(0000,9999);
                 $ngayDat = date("Y-m-d h:i:sa"); 
@@ -239,22 +252,48 @@
                 //Save the Order in Databaase
                 //Create SQL to save the data
                 $sql4 = "INSERT INTO phieudangkitour(maPhieuTour,maNguoiDung,soKhach,maTour,thoiGianDat,hinhThucThanhToan,tinhTrang,tongTien)
-                 VALUES ('$maPhieuTour','1','$soLuong','$maTour','$ngayDat','$hinhThucThanhToan','$tinhTrang','$tongTien')";
+                 VALUES ('$maPhieuTour','{$_SESSION['loginAccount1']}','$soLuong','$maTour','$ngayDat','$hinhThucThanhToan','$tinhTrang','$tongTien')";
                 //Execute the Query
                 $res4 = mysqli_query($conn, $sql4);
+
+                // insert into chitietgia
+                if($quantity1>0){
+                  $sql5 = "INSERT INTO chitietgia(maPhieuTour,maTour,doTuoi,soLuong,thanhTien)
+                  VALUES ('$maPhieuTour','$maTour','1','$quantity1','$thanhtien1')";
+                 //Execute the Query
+                 $res5= mysqli_query($conn, $sql5);
+                }
+
+                // insert into chitietgia
+                if($quantity2>0){
+                  $sql6 = "INSERT INTO chitietgia(maPhieuTour,maTour,doTuoi,soLuong,thanhTien)
+                  VALUES ('$maPhieuTour','$maTour','2','$quantity2','$thanhtien2')";
+                 //Execute the Query
+                 $res6 = mysqli_query($conn, $sql6);
+                }
+
+                // insert into chitietgia
+                if($quantity3>0){
+                  $sql7 = "INSERT INTO chitietgia(maPhieuTour,maTour,doTuoi,soLuong,thanhTien)
+                  VALUES ('$maPhieuTour','$maTour','3','$quantity3','$thanhtien3')";
+                 //Execute the Query
+                 $res7 = mysqli_query($conn, $sql7);
+                }
+
 
                 //Check whether query executed successfully or not
                 if($res4==true)
                 {
                     //Query Executed and Order Saved
-                    $_SESSION['order'] = "<div class='success text-center'>Chúc mừng bạn đã đặt Tour thành công</div>";
-                    // header('location:'.SITEURL);
+                    $_SESSION['order'] = "<div class='success text-center' style='color:red;font-size:40px'>Chúc mừng bạn đã đặt Tour thành công</div>";
+                    header("location:user.php");
+
                 }
                 else
                 {
                     //Failed to Save Order
-                    $_SESSION['order'] = "<div class='error text-center'>Đặt TOUR Thất Bại.</div>";
-                    // header('location:'.SITEURL);
+                    $_SESSION['order'] = "<div class='error text-center' style='color:red;font-size:40px'>Đặt TOUR Thất Bại.</div>";
+                    header("location:user.php");
                 }
 
             }
@@ -268,6 +307,8 @@
 
     <?php
     include "partials/footer.php";
+ob_flush();
+
     ?>
 
   <script>

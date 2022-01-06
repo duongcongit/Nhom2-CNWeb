@@ -1,4 +1,11 @@
 <?php include('../constants.php'); ?>
+<?php
+    // Trước khi cho người dùng xâm nhập vào bên trong
+    // Phải kiểm tra THẺ LÀM VIỆC
+    if(!isset($_SESSION['loginAccount'])){
+        header("location:".SITEURL);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +24,7 @@
   
 <body>
     <?php
-    include "partials/header.php";
+    require "partials/header.php";
     ?>
 
   <main>
@@ -39,7 +46,7 @@
                             die("Kết nối thất bại. Vui lòng kiểm tra lại các thông tin máy chủ");
                         }
                         // Bước 02: Thực hiện truy vấn
-                        $sql = "SELECT * FROM nguoidung";
+                        $sql = "SELECT * FROM nguoidung where maNguoiDung = '{$_SESSION['loginAccount1']}'";
                         $result = mysqli_query($conn,$sql);
                         // Bước 03: Xử lý kết quả truy vấn
                         if(mysqli_num_rows($result) > 0){
@@ -141,11 +148,20 @@
                 //Getting tours from Database that are active and featured
                 //SQL Query
                 $sql1 = "SELECT tour.hinhAnh,phieudangkitour.maPhieuTour,phieudangkitour.maNguoiDung,tour.maTour,phieudangkitour.soKhach,
-                phieudangkitour.hinhThucThanhToan,phieudangkitour.tongTien,phieudangkitour.tinhTrang
-                 FROM phieudangkitour,tour where phieudangkitour.maTour = tour.maTour AND phieudangkitour.tinhTrang ='0'";
+                phieudangkitour.hinhThucThanhToan,phieudangkitour.tongTien,phieudangkitour.tinhTrang,tour.tenTour
+                 FROM phieudangkitour,tour,nguoidung where phieudangkitour.maTour = tour.maTour AND phieudangkitour.tinhTrang ='0'
+                 AND nguoidung.maNguoiDung = phieudangkitour.maNguoiDung AND nguoidung.maNguoiDung = '{$_SESSION['loginAccount1']}'";
                 
                 //Execute the Query
                 $res1 = mysqli_query($conn, $sql1);
+
+
+                //Câu lệnh lấy thông tin chi tiết về giá tour của phiếu
+                $sql3 = "SELECT distinct phieudangkitour.maPhieuTour,giatour.moTa,chitietgia.soLuong,chitietgia.thanhTien
+                 FROM phieudangkitour,chitietgia,giatour where chitietgia.doTuoi = giatour.doTuoi AND chitietgia.maPhieuTour = phieudangkitour.maPhieuTour and giaTour.maTour = phieudangkitour.maTour";
+                
+                //Execute the Query
+                $res3 = mysqli_query($conn, $sql3);
                 
                 
                 //CHeck whether tour available or not
@@ -156,6 +172,7 @@
                     {
                         //Get all the values
                         $hinhAnh = $row1['hinhAnh'];
+                        $tenTour = $row1['tenTour'];
                         $maPhieuTour = $row1['maPhieuTour'];
                         $maKH = $row1['maNguoiDung'];
                         $maTour = $row1['maTour'];
@@ -187,10 +204,18 @@
                             </div>
                             <div class="col-md-8">
                                 <h4>Mã Phiếu Tour: <?php echo $maPhieuTour; ?></h4>
+                                <h4>Tên Tour: <?php echo $tenTour; ?></h4>
                                 <p>Mã Tour: <?php echo $maTour; ?></p>
-                                <p>Tổng số lượng người: <?php echo $soLuong ?></p>
                                 <p>Hình thức thanh toán: <?php echo $hinhThucThanhToan ?></p>
-                                <p>Tổng tiền: <?php echo $TongTien ?></p>
+                                <?php
+                                    if(mysqli_num_rows($res3)>0){
+                                        while($row3=mysqli_fetch_assoc($res3)){
+                                            echo "<p>{$row3['moTa']}: {$row3['soLuong']} -> Thành Tiền: {$row3['thanhTien']}</p>";
+                                            }
+                                    }
+                                ?>
+                                <p>Tổng số lượng người: <?php echo $soLuong ?></p>
+                                <p style="color:red">Tổng tiền: <?php echo $TongTien ?></p>
                                 <br>
                                 
                                 <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem lại Tour</a>
@@ -225,8 +250,9 @@
                 //Getting tours from Database that are active and featured
                 //SQL Query
                 $sql2 = "SELECT tour.hinhAnh,phieudangkitour.maPhieuTour,phieudangkitour.maNguoiDung,tour.maTour,phieudangkitour.soKhach,
-                phieudangkitour.hinhThucThanhToan,phieudangkitour.tongTien,phieudangkitour.tinhTrang
-                 FROM phieudangkitour,tour where phieudangkitour.maTour = tour.maTour AND phieudangkitour.tinhTrang='1'";
+                phieudangkitour.hinhThucThanhToan,phieudangkitour.tongTien,phieudangkitour.tinhTrang,tour.tenTour
+                 FROM phieudangkitour,tour,nguoidung where phieudangkitour.maTour = tour.maTour AND phieudangkitour.tinhTrang ='1'
+                 AND nguoidung.maNguoiDung = phieudangkitour.maNguoiDung AND nguoidung.maNguoiDung = '{$_SESSION['loginAccount1']}'";
                 
                 //Execute the Query
                 $res2 = mysqli_query($conn, $sql2);
@@ -273,10 +299,18 @@
                             </div>
                             <div class="col-md-8">
                                 <h4>Mã Phiếu Tour: <?php echo $maPhieuTour; ?></h4>
+                                <h4>Tên Tour: <?php echo $tenTour; ?></h4>
                                 <p>Mã Tour: <?php echo $maTour; ?></p>
-                                <p>Tổng số lượng người: <?php echo $soLuong ?></p>
                                 <p>Hình thức thanh toán: <?php echo $hinhThucThanhToan ?></p>
-                                <p>Tổng tiền: <?php echo $TongTien ?></p>
+                                <?php
+                                    if(mysqli_num_rows($res3)>0){
+                                        while($row3=mysqli_fetch_assoc($res3)){
+                                            echo "<p>{$row3['moTa']}: {$row3['soLuong']} -> Thành Tiền: {$row3['thanhTien']}</p>";
+                                            }
+                                    }
+                                ?>
+                                <p>Tổng số lượng người: <?php echo $soLuong ?></p>
+                                <p style="color:red">Tổng tiền: <?php echo $TongTien ?></p>
                                 <br>
                                 
                                 <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem lại Tour</a>

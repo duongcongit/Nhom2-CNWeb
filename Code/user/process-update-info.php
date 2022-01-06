@@ -3,12 +3,14 @@ include '../constants.php';
 ?>
 <?php
 
+<?php
     // Trước khi cho người dùng xâm nhập vào bên trong
     // Phải kiểm tra THẺ LÀM VIỆC
-    // session_start();
-    // if(!isset($_SESSION['isLoginOK'])){
-    //     header("location:index.php");
-    // }
+    session_start();
+    if(!isset($_SESSION['loginAccount'])){
+        header("location:".SITEURL);
+    }
+?>
 
     if(isset($_POST['id'])){
         $id = $_POST['id'];

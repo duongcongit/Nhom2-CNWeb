@@ -77,15 +77,15 @@
                         //tour is Available
                         while($row2=mysqli_fetch_assoc($res2))
                         {
-                            $maTour = $row['maTour'];
-                            $tenTour = $row['tenTour'];
-                            $moTa = $row['moTa'];
-                            $hinhAnh = $row['hinhAnh'];
-                            $diemKhoiHanh = $row['diemKhoiHanh'];
-                            $diemKetThuc = $row['diemKetThuc'];
-                            $ngayKhoiHanh = $row['ngayKhoiHanh'];
-                            $ngayKetThuc = $row['ngayKetThuc'];
-                            $loaiHinh = $row['loaiHinh'];
+                            $maTour = $row2['maTour'];
+                            $tenTour = $row2['tenTour'];
+                            $moTa = $row2['moTa'];
+                            $hinhAnh = $row2['hinhAnh'];
+                            $diemKhoiHanh = $row2['diemKhoiHanh'];
+                            $diemKetThuc = $row2['diemKetThuc'];
+                            $ngayKhoiHanh = $row2['ngayKhoiHanh'];
+                            $ngayKetThuc = $row2['ngayKetThuc'];
+                            $loaiHinh = $row2['loaiHinh'];
                             $first_date = strtotime($ngayKhoiHanh);
                             $second_date = strtotime($ngayKetThuc);
                             $datediff = abs($first_date - $second_date);

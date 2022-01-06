@@ -1,4 +1,13 @@
 <?php include('../constants.php'); ?>
+<?php
+    // Trước khi cho người dùng xâm nhập vào bên trong
+    // Phải kiểm tra THẺ LÀM VIỆC
+    session_start();
+    if(!isset($_SESSION['loginAccount'])){
+        header("location:".SITEURL);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +24,7 @@
 
 <body>
     <?php
-    include "partials/header.php";
+    require "partials/header.php";
     ?>
 
     <main>
@@ -23,7 +32,7 @@
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="../assets/images/tours/main.jpg" class="d-block w-100" alt="slider" style="height: 600px;">
+                    <img src="../assets/images/tours/main.jpg" class="d-block w-100" alt="slider" style="height: 500px;">
                 </div>
                 <div class="carousel-banner">
                     <h1>Tìm điểm du lịch tại Việt Nam</h1>
@@ -34,6 +43,12 @@
 
         <!-- Tour suggest -->
         <div class="container">
+            <?php
+                if(isset($_SESSION['order'])){
+                    echo $_SESSION['order'];
+                    unset ($_SESSION['order']);
+                }
+            ?>
             <section class="pt-5" id="tourType">
                 <div class="suggest">
                     <p class="text-uppercase text-center">Đề Xuất</p>

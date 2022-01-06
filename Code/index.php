@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="login1.php" tabindex="-1" aria-disabled="true">Đăng nhập</a>
+              <a class="nav-link" href="login-nguoidung.php" tabindex="-1" aria-disabled="true">Đăng nhập</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="signup.php" tabindex="-1" aria-disabled="true">Đăng kí</a>

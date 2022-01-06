@@ -14,7 +14,7 @@
 
 <body>
     <?php
-    include "partials/header.php";
+    require "partials/header.php";
     ?>
 
   <main>
