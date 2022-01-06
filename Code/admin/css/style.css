@@ -1,0 +1,246 @@
+/* Chung */
+
+html body{
+  height: 100%;
+  /* overflow-x: hidden; */
+}
+
+
+/* CSS cho hộp thông báo xác nhận kích hoạt */
+.modal-activate-confirm {
+  background-color:rgb(231, 231, 231);
+  width: 500px;
+  height: 300px;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.modal-activate-confirm .modal_header {
+  height: 90px;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-activate-confirm .modal_header .icon {
+  font-size: 50px;
+  color: white;
+}
+
+.modal-activate-confirm button {
+  font-size: 18px;
+  width: 95px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+.modal-activate-confirm .btn-footer{
+  position: absolute;
+  bottom: 5px;
+}
+
+
+
+/* CSS cho hộp thông báo xác nhận vô hiệu hóa */
+.modal-disable-confirm {
+  background-color:rgb(231, 231, 231);
+  width: 500px;
+  height: 300px;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.modal-disable-confirm .modal_header {
+  height: 90px;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-disable-confirm .modal_header .icon {
+  font-size: 50px;
+  color: white;
+}
+
+.modal-disable-confirm button {
+  font-size: 18px;
+  width: 95px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+.modal-disable-confirm .btn-footer{
+  position: absolute;
+  bottom: 5px;
+}
+
+
+/* CSS cho hộp thông báo xác nhận xóa */
+.modal-delete-confirm {
+  width: 500px;
+  height: 300px;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.modal-delete-confirm .modal_header {
+  height: 90px;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-delete-confirm .modal_header .icon {
+  font-size: 50px;
+  color: white;
+}
+
+.modal-delete-confirm button {
+  font-size: 18px;
+  width: 95px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+
+/* CSS cho hộp thông báo thành công */
+.modal-success {
+  background-color:rgb(231, 231, 231);
+  width: 500px;
+  height: 300px;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.modal-success .modal_header {
+  height: 90px;
+  background-color: #198754;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-success .modal_header .icon {
+  font-size: 50px;
+  color: white;
+}
+
+.modal-success button {
+  font-size: 18px;
+  width: 95px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+.modal-success .btn-footer{
+  position: absolute;
+  bottom: 5px;
+}
+
+
+/* CSS cho hộp thông báo thất bại */
+.modal-error {
+  background-color:rgb(231, 231, 231);
+  width: 500px;
+  height: 300px;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.modal-error .modal_header {
+  height: 90px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-error .modal_header .icon {
+  font-size: 50px;
+  color: white;
+}
+
+.modal-error button {
+  font-size: 18px;
+  width: 95px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+.modal-error .btn-footer{
+  position: absolute;
+  bottom: 5px;
+}
+
+
+
+
+/* CSS for Header */
+.header{
+  color: aliceblue;
+}
+
+/* CSS for Sidebar */
+.sidebar{
+
+}
+
+.sidebar .nav-link{
+  height: 50px;
+}
+
+/* @media screen and (max-width: 800px){
+  .sidebar-text{
+    display: none;
+  } */
+
+.sidebar .nav-link:hover{
+    background-color: rgb(149, 180, 236);
+}
+
+/* CSS for main */
+.main{
+  height: 95vh;
+  padding-bottom: 20px;
+  overflow-y: auto;
+  overflow-x: auto;
+  /* background-color: #27303f; */
+  background-color: #f5f5f5;
+}
+
+/* CSS for Dashboard */
+
+.dashboard-card{
+  transition: transform 0.5s ease;
+  width: 15rem;
+  border-radius: 30px;
+  
+}
+.dashboard-card:hover{
+  transform: scale(1.1);
+}
+
+/*  */
+.btn-action:hover{
+  background-color: rgb(207, 205, 205);
+  
+}
+
+.btn-action{
+  font-size: 20px;
+}
+
+
+
+
+
+
+

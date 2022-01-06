@@ -1,13 +1,13 @@
 <?php
-  include "../config/constants.php";
-  include "./partials/header.php";
+include "../config/constants.php";
+include "./partials/header.php";
 ?>
 
 
 <div class="container-fluid main mx-0 w-9 row">
   <div class="row m-0 mt-5" style="height: fit-content">
     <div class="col-md my-3 mx-0 d-flex justify-content-center">
-      <a href="./manage-user.php" class="link-dark text-decoration-none">
+      <a href="./pages/manage-user/" class="link-dark text-decoration-none">
         <div class="card text-center shadow dashboard-card">
           <?php
           //Sql Query 
@@ -28,7 +28,7 @@
       </a>
     </div>
     <div class="col-md my-3 mx-0 d-flex justify-content-center">
-      <a href="./manage-tour.php" class="link-dark text-decoration-none">
+      <a href="./pages/manage-tour/" class="link-dark text-decoration-none">
         <div class="card text-center shadow dashboard-card">
           <?php
           //Sql Query 
@@ -49,11 +49,11 @@
       </a>
     </div>
     <div class="col-md my-3 mx-0 d-flex justify-content-center">
-      <a href="./manage-partner.php" class="link-dark text-decoration-none">
+      <a href="./pages/manage-partner/" class="link-dark text-decoration-none">
         <div class="card text-center shadow dashboard-card">
           <?php
           //Sql Query 
-          $sql_partner = "SELECT * FROM congtydoitac";
+          $sql_partner = "SELECT * FROM doitac";
           //Execute Query
           $res_partner = mysqli_query($conn, $sql_partner);
           //Count Rows
@@ -70,7 +70,7 @@
       </a>
     </div>
     <div class="col-md my-3 mx-0 d-flex justify-content-center">
-      <a href="./manage-admin.php" class="link-dark text-decoration-none">
+      <a href="./pages/manage-admin/" class="link-dark text-decoration-none">
         <div class="card text-center shadow dashboard-card">
           <?php
           //Sql Query 

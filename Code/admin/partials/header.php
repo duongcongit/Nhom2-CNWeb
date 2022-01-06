@@ -1,16 +1,16 @@
 <?php
-    // include SITEURL."admin/partials/login-check.php";
-    // include($_SERVER['DOCUMENT_ROOT']."/baitaplon/admin/partials/login-check.php");
+// include SITEURL."admin/partials/login-check.php";
+// include($_SERVER['DOCUMENT_ROOT']."/baitaplon/admin/partials/login-check.php");
 
-    //Include login-check.php file in directory contain header.php file
-    // Not directory contain file which includes header.php
-    include dirname(__FILE__).'/login-check.php';
-    
-    $cur_dir_arr = explode('\\', getcwd()); // Get path of current directory and push to array
-    $current_page_folder = $cur_dir_arr[count($cur_dir_arr)-1]; // Get name of current folder in array
-    //echo $current_page_folder;
-    
-    
+//Include login-check.php file in directory contain header.php file
+// Not directory contain file which includes header.php
+include dirname(__FILE__) . '/login-check.php';
+
+$cur_dir_arr = explode('\\', getcwd()); // Get path of current directory and push to array
+$current_page_folder = $cur_dir_arr[count($cur_dir_arr) - 1]; // Get name of current folder in array
+//echo $current_page_folder;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="<?php echo SITEURL ?>admin/assets/css/style.css" />
+    <link rel="stylesheet" href="<?php echo SITEURL ?>admin/css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="<?php echo SITEURL ?>admin/js/script.js"></script>
 </head>
 
 <body>
@@ -44,30 +46,30 @@
                         <!--  -->
                         <!--  -->
                         <li>
-                            <a href="<?php echo SITEURL."admin/" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "admin" ? "active" : "") ?>">
+                            <a href="<?php echo SITEURL . "admin/" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "admin" ? "active" : "") ?>">
                                 <i class="bi bi-speedometer2 me-0" style="font-size: 24px;"></i>
                                 <span class="sidebar-item-text collapsing ms-2 d-none d-md-inline">Thống kê</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo SITEURL."admin/pages/manage-user" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "manage-user" ? "active" : "") ?>">
+                            <a href="<?php echo SITEURL . "admin/pages/manage-user" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "manage-user" ? "active" : "") ?>">
                                 <i class="bi bi-person-circle me-0" style="font-size: 24px;"></i>
                                 <span class="sidebar-item-text collapsing ms-2 d-none d-md-inline">Người dùng</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo SITEURL."admin/pages/manage-tour" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "manage-tour" ? "active" : "") ?>">
+                            <a href="<?php echo SITEURL . "admin/pages/manage-tour" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "manage-tour" ? "active" : "") ?>">
                                 <i class="fas fa-route me-0 mt-1" style="font-size: 24px;"></i>
                                 <span class="sidebar-item-text collapsing ms-2 d-none d-md-inline">Tour</span>
                             </a>
                         <li>
-                            <a href="<?php echo SITEURL."admin/pages/manage-partner" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "manage-partner" ? "active" : "") ?>">
+                            <a href="<?php echo SITEURL . "admin/pages/manage-partner" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "manage-partner" ? "active" : "") ?>">
                                 <i class="far fa-handshake me-0 mt-1" style="font-size: 24px;"></i>
                                 <span class="sidebar-item-text collapsing ms-2 d-none d-md-inline">Đối tác</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo SITEURL."admin/pages/manage-admin" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "manage-admin" ? "active" : "") ?>">
+                            <a href="<?php echo SITEURL . "admin/pages/manage-admin" ?>" class="nav-link link-light m-2 <?php echo ($current_page_folder == "manage-admin" ? "active" : "") ?>">
                                 <i class="fas fa-user-cog me-0 mt-1" style="font-size: 24px;"></i>
                                 <span class="sidebar-item-text collapsing ms-2 d-none d-md-inline">Admin</span>
                             </a>

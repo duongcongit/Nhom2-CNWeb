@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 25, 2021 lúc 03:53 PM
--- Phiên bản máy phục vụ: 10.4.21-MariaDB
--- Phiên bản PHP: 7.3.31
+-- Host: 127.0.0.1
+-- Generation Time: Jan 03, 2022 at 04:40 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,202 +18,259 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `ql_tour_dulich`
+-- Database: `ql_tour_dulich`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chitietgia`
+-- Table structure for table `chitietgia`
 --
 
 CREATE TABLE `chitietgia` (
-  `MaPhieuTour` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `MaTour` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `DoTuoi` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `SoLuong` int(11) NOT NULL,
-  `ThanhTien` float NOT NULL,
-  `DonVi` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `maPhieuTour` char(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `maTour` char(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `doTuoi` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `soLuong` int(11) NOT NULL,
+  `thanhTien` bigint(20) NOT NULL,
+  `donVi` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `congtydoitac`
+-- Table structure for table `doitac`
 --
 
-CREATE TABLE `congtydoitac` (
-  `MaCongTy` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `TenCongTy` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `HinhAnh` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `SoDienThoai` char(20) COLLATE utf8_unicode_ci NOT NULL,
-  `Email` char(50) COLLATE utf8_unicode_ci NOT NULL,
-  `DiaChi` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `TinhTrang` int(11) NOT NULL,
-  `PassWord` varchar(250) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE `doitac` (
+  `id` int(11) NOT NULL,
+  `maCongTy` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tenCongTy` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hinhAnh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `soDienThoai` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `diaChi` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tinhTrang` int(11) NOT NULL DEFAULT 0,
+  `linkXacMinhEmail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thoiGianXacMinhEmail` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `giatour`
+-- Table structure for table `giatour`
 --
 
 CREATE TABLE `giatour` (
-  `MaTour` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `DoTuoi` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `MoTa` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `Gia` float NOT NULL,
-  `DonVi` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `maTour` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `doTuoi` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `moTa` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gia` bigint(20) NOT NULL,
+  `donVi` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nguoidung`
+-- Table structure for table `nguoidung`
 --
 
 CREATE TABLE `nguoidung` (
-  `MaNguoiDung` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `HoTen` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `HinhAnh` text COLLATE utf8_unicode_ci NOT NULL,
-  `NgaySinh` date NOT NULL,
-  `GioiTinh` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `SoDienThoai` char(20) COLLATE utf8_unicode_ci NOT NULL,
-  `Email` char(50) COLLATE utf8_unicode_ci NOT NULL,
-  `DiaChi` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `SoCMT` char(15) COLLATE utf8_unicode_ci NOT NULL,
-  `PassWord` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `TinhTrang` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id` int(11) NOT NULL,
+  `maNguoiDung` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hoVaTen` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hinhAnh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ngaySinh` date NOT NULL,
+  `gioiTinh` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `soDienThoai` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `diaChi` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `soCMT` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tinhTrang` int(11) NOT NULL DEFAULT 0,
+  `linkXacMinhEmail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thoiGianXacMinhEmail` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nhanvien`
+-- Table structure for table `nhanvien`
 --
 
 CREATE TABLE `nhanvien` (
-  `MaNhanVien` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `HoTen` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `HinhAnh` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `UserName` char(50) COLLATE utf8_unicode_ci NOT NULL,
-  `PassWord` varchar(250) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id` int(11) NOT NULL,
+  `maNhanVien` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hoVaTen` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hinhAnh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ngaySinh` date NOT NULL,
+  `gioiTinh` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `soDienThoai` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tinhTrang` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `phieudangkitour`
+-- Table structure for table `phieudangkitour`
 --
 
 CREATE TABLE `phieudangkitour` (
-  `MaPhieuTour` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `MaKhachHang` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `SoLuong` int(11) NOT NULL,
-  `MaTour` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `HinhThucThanhToan` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `TinhTrang` int(11) NOT NULL,
-  `TongTien` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `maPhieuTour` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `maNguoiDung` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `soKhach` int(11) NOT NULL,
+  `maTour` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thoiGianDat` datetime NOT NULL,
+  `hinhThucThanhToan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tinhTrang` int(11) NOT NULL DEFAULT 0,
+  `tongTien` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tour`
+-- Table structure for table `tour`
 --
 
 CREATE TABLE `tour` (
-  `MaTour` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `TenTour` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `HinhAnh` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `NgayKhoiHanh` date NOT NULL,
-  `NgayKetThuc` date NOT NULL,
-  `DiemKhoiHanh` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `DiemKetThuc` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `LoaiHinh` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `MoTa` varchar(7000) COLLATE utf8_unicode_ci NOT NULL,
-  `MaCongTy` varchar(200) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id` int(11) NOT NULL,
+  `maTour` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tenTour` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hinhAnh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ngayKhoiHanh` date NOT NULL,
+  `ngayKetThuc` date NOT NULL,
+  `diemKhoiHanh` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `diemKetThuc` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `loaiHinh` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `moTa` varchar(7000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `maCongTy` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tinhTrang` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `chitietgia`
+-- Indexes for table `chitietgia`
 --
 ALTER TABLE `chitietgia`
-  ADD PRIMARY KEY (`MaPhieuTour`,`MaTour`,`DoTuoi`),
-  ADD KEY `MaTour` (`MaTour`);
+  ADD PRIMARY KEY (`maPhieuTour`,`maTour`,`doTuoi`),
+  ADD KEY `maTour` (`maTour`,`doTuoi`);
 
 --
--- Chỉ mục cho bảng `congtydoitac`
+-- Indexes for table `doitac`
 --
-ALTER TABLE `congtydoitac`
-  ADD PRIMARY KEY (`MaCongTy`),
-  ADD UNIQUE KEY `SoDienThoai` (`SoDienThoai`,`Email`);
+ALTER TABLE `doitac`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `maCongTy` (`maCongTy`),
+  ADD UNIQUE KEY `soDienThoai` (`soDienThoai`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
--- Chỉ mục cho bảng `giatour`
+-- Indexes for table `giatour`
 --
 ALTER TABLE `giatour`
-  ADD PRIMARY KEY (`MaTour`,`DoTuoi`);
+  ADD PRIMARY KEY (`maTour`,`doTuoi`);
 
 --
--- Chỉ mục cho bảng `nguoidung`
+-- Indexes for table `nguoidung`
 --
 ALTER TABLE `nguoidung`
-  ADD PRIMARY KEY (`MaNguoiDung`),
-  ADD UNIQUE KEY `SoDienThoai` (`SoDienThoai`,`Email`,`SoCMT`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `maNguoiDung` (`maNguoiDung`),
+  ADD UNIQUE KEY `soDienThoai` (`soDienThoai`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `diaChi` (`diaChi`),
+  ADD UNIQUE KEY `soCMT` (`soCMT`);
 
 --
--- Chỉ mục cho bảng `nhanvien`
+-- Indexes for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  ADD PRIMARY KEY (`MaNhanVien`),
-  ADD UNIQUE KEY `MaNhanVien` (`MaNhanVien`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `maNhanVien` (`maNhanVien`),
+  ADD UNIQUE KEY `soDienThoai` (`soDienThoai`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
--- Chỉ mục cho bảng `phieudangkitour`
+-- Indexes for table `phieudangkitour`
 --
 ALTER TABLE `phieudangkitour`
-  ADD PRIMARY KEY (`MaPhieuTour`),
-  ADD UNIQUE KEY `MaKhachHang` (`MaKhachHang`),
-  ADD KEY `MaTour` (`MaTour`);
+  ADD PRIMARY KEY (`maPhieuTour`),
+  ADD KEY `maTour` (`maTour`),
+  ADD KEY `maNguoiDung` (`maNguoiDung`);
 
 --
--- Chỉ mục cho bảng `tour`
+-- Indexes for table `tour`
 --
 ALTER TABLE `tour`
-  ADD PRIMARY KEY (`MaTour`),
-  ADD KEY `MaCongTy` (`MaCongTy`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `maTour` (`maTour`),
+  ADD KEY `maCongTy` (`maCongTy`);
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `chitietgia`
+-- AUTO_INCREMENT for table `doitac`
+--
+ALTER TABLE `doitac`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `nguoidung`
+--
+ALTER TABLE `nguoidung`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `nhanvien`
+--
+ALTER TABLE `nhanvien`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tour`
+--
+ALTER TABLE `tour`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `chitietgia`
 --
 ALTER TABLE `chitietgia`
-  ADD CONSTRAINT `chitietgia_ibfk_1` FOREIGN KEY (`MaTour`,`DoTuoi`) REFERENCES `giatour` (`MaTour`, `DoTuoi`);
+  ADD CONSTRAINT `chitietgia_ibfk_1` FOREIGN KEY (`maTour`) REFERENCES `tour` (`maTour`),
+  ADD CONSTRAINT `chitietgia_ibfk_2` FOREIGN KEY (`maTour`,`doTuoi`) REFERENCES `giatour` (`maTour`, `doTuoi`);
 
 --
--- Các ràng buộc cho bảng `phieudangkitour`
+-- Constraints for table `giatour`
+--
+ALTER TABLE `giatour`
+  ADD CONSTRAINT `giatour_ibfk_1` FOREIGN KEY (`maTour`) REFERENCES `tour` (`maTour`);
+
+--
+-- Constraints for table `phieudangkitour`
 --
 ALTER TABLE `phieudangkitour`
-  ADD CONSTRAINT `phieudangkitour` FOREIGN KEY (`MaTour`) REFERENCES `tour` (`MaTour`),
-  ADD CONSTRAINT `phieudangkitour_ibfk_1` FOREIGN KEY (`MaKhachHang`) REFERENCES `nguoidung` (`MaNguoiDung`),
-  ADD CONSTRAINT `phieudangkitour_ibfk_2` FOREIGN KEY (`MaTour`) REFERENCES `giatour` (`MaTour`),
-  ADD CONSTRAINT `phieudangkitour_ibfk_3` FOREIGN KEY (`MaPhieuTour`) REFERENCES `chitietgia` (`MaPhieuTour`);
+  ADD CONSTRAINT `phieudangkitour_ibfk_1` FOREIGN KEY (`maTour`) REFERENCES `tour` (`maTour`),
+  ADD CONSTRAINT `phieudangkitour_ibfk_2` FOREIGN KEY (`maNguoiDung`) REFERENCES `nguoidung` (`maNguoiDung`);
 
 --
--- Các ràng buộc cho bảng `tour`
+-- Constraints for table `tour`
 --
 ALTER TABLE `tour`
-  ADD CONSTRAINT `tour_ibfk_1` FOREIGN KEY (`MaCongTy`) REFERENCES `congtydoitac` (`MaCongTy`),
-  ADD CONSTRAINT `tour_ibfk_2` FOREIGN KEY (`MaTour`) REFERENCES `giatour` (`MaTour`);
+  ADD CONSTRAINT `tour_ibfk_1` FOREIGN KEY (`maCongTy`) REFERENCES `doitac` (`maCongTy`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

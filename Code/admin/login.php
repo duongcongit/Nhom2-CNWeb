@@ -63,17 +63,27 @@ if (isset($_SESSION['adminAccount'])) {
 
     // Kiểm tài khoản nhận từ form xem có trong cơ sở dữ liệu không
     // Nếu có thì tiến hành xác minh mật khẩu
-    $sql = "SELECT * from nhanvien where UserName='$username'";
-    $result = mysqli_query($conn, $sql);
+    $sql = "SELECT * from nhanvien where username='$username'";
+    $result = $conn->query($sql);
 
     if (mysqli_num_rows($result) == 1) {
       // Lấy mật khẩu raw từ cơ sở dữ liệu
-      $raw_password = mysqli_fetch_assoc($result)['PassWord'];
+      $raw_password = $result->fetch_assoc()['password'];
+
+      
 
       // Tiến hành xác minh mật khẩu nhận từ form và mật khẩu raw trên cơ sở dữ liệu
       if (password_verify($password, $raw_password)) { // Nếu mật khẩu chính xác
-        $_SESSION['adminAccount'] = $username; // Cấp thẻ là việc
+        //$status = $result->fetch_assoc()['tinhTrang'];
+        
+        $_SESSION['adminAccount'] = $username; // Cấp thẻ làm việc
         header('location:' . SITEURL . 'admin/'); // Chuyển hướng tới trang admin
+
+        // if($status == 1){
+        //   $_SESSION['adminAccount'] = $username; // Cấp thẻ làm việc
+        //   header('location:' . SITEURL . 'admin/'); // Chuyển hướng tới trang admin
+        // }
+
       } else { // Nếu mật khẩu sai
         // Chuyển hướng lại về trang đăng nhập kèm theo thông báo lỗi
         $error = "Mật khẩu sai. Vui lòng nhập lại!";
