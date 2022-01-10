@@ -25,19 +25,19 @@
           }else
            if($raw_tinhTrang == '0'){
               $error = "Tài khoản chưa đc kích hoạt";
-              header("location:login-nguoidung.php?error=$error");
+              header("location:login-doitac.php?error=$error");
             }
           else if($raw_tinhTrang == '2'){
               $error = "Tài khoản đã bị vô hiệu hóa";
-              header("location:login-nguoidung.php?error=$error");
+              header("location:login-doitac.php?error=$error");
             }
             else if($raw_tinhTrang == '3'){
                 $error = "Tài khoản đang đợi xét duyệt .";
-                header("location:login-nguoidung.php?error=$error");
+                header("location:login-doitac.php?error=$error");
               }  
         } else { 
           $error = "Mật khẩu sai. Vui lòng nhập lại!";
-          header("location:login-nguoidung.php?error=$error");
+          header("location:login-doitac.php?error=$error");
         }
       } else { 
         $error = "Thông tin tài khoản hoặc mật khẩu bạn nhập không chính xác!";
@@ -45,7 +45,7 @@
       }
       mysqli_close($conn);
    }else{
-       header("location:login-nguoidung.php");
+       header("location:login-doitac.php");
    }
 ?>
  

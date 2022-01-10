@@ -2,7 +2,7 @@
 
 <?php
     if(!isset($_POST['btnRegister2'])){
-        heade("location:signup_doitac.php");
+        header("location:signup_doitac.php");
     }
     $tencongty = $_POST["TenCongTy"];
     $phone = $_POST["phone"];
@@ -31,7 +31,7 @@
             $sql_update_uname = "UPDATE doitac SET maCongTy='$uname' WHERE id='$uid'";
             mysqli_query($conn, $sql_update_uname);
         }
-        $link = "<a href='http://localhost/baitaplon/activation-doitac.php?key=".$email."&token=".$token."'>click vào đây để kích hoạt</a>";
+        $link = "<a href='http://localhost/baitaplon/login/activation-doitac.php?key=".$email."&token=".$token."'>click vào đây để kích hoạt</a>";
         include "send_email.php";
         if(sendEmailForAccountActive($email, $link)){
             echo "vui lòng kiểm tra hộp thư của bạn để kích hoạt tài khoản đăng nhập...";
