@@ -16,6 +16,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <title>Đặt Tour</title>
 </head>
 
@@ -30,10 +31,10 @@ ob_start();
     //CHeck whether Tour id is set or not
     if(isset($_GET['MaTour']))
     {
-        //Get the Food id and details of the selected food
+        //Get the tour id and details of the selected tour
         $maTour = $_GET['MaTour'];
 
-        //Get the DEtails of the SElected Food
+        //Get the DEtails of the SElected tour
         $sql = "SELECT * FROM tour WHERE maTour='$maTour'";
         //Execute the Query
         $res = mysqli_query($conn, $sql);
@@ -45,9 +46,7 @@ ob_start();
             //WE Have DAta
             //GEt the Data from Database
             $row = mysqli_fetch_assoc($res);
-
             $tenTour = $row['tenTour'];
-            // $price = $row['price'];
             $hinhAnh = $row['hinhAnh'];
             $ngayKhoiHanh = $row['ngayKhoiHanh'];
             $ngayKetThuc = $row['ngayKetThuc'];
@@ -63,7 +62,7 @@ ob_start();
         }
         else
         {
-            //Food not Availabe
+            //tour not Availabe
             //REdirect to Home Page
             header('location:'.SITEURL);
         }
@@ -115,12 +114,15 @@ ob_start();
 ?>
 
 <!-- Tour Info Section Starts Here -->
-<section class="Tour-info text-center">
+<section class="Tour-info">
     <div class="container">
       <div class="row pt-5">
+        <div class="col-md-8">
+
+        </div>
         <h3 class="mt-5">Thông Tin Tour</h3>
-        <form method="POST" class="order">
-            <div class="food-menu-img">
+        
+            <div class="tour-menu-img">
                 <?php               
                     //CHeck whether the image is available or not
                     if($hinhAnh=="")
@@ -139,8 +141,8 @@ ob_start();
                 ?>
                     
             </div>
-
-            <div class="food-menu-desc text-center">
+            <form method="POST" class="order">
+            <div class="food-menu-desc">
                 <h4><?php echo $tenTour; ?></h4>
                 <p>Mã: <?php echo $maTour; ?></p>
                 <p><i class="bi bi-geo-alt me-3"></i>Khởi Hành: <?php echo $diemKhoiHanh; ?> <span>-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
@@ -150,7 +152,7 @@ ob_start();
                 <p>Thông tin về tour: <br> <?php echo $moTa; ?></p>
                 <h4>Phương thức thanh toán</h4>
 
-                <div class="d-flex justify-content-center">
+                <div class="d-flex ">
                   <select class="form-select w-50" aria-label="Default select example" name="cast">
                     <option selected value ="Chuyển Khoản">Chuyển khoản</option>
                     <option value="Tiền Mặt">Tiền Mặt</option>
@@ -158,18 +160,18 @@ ob_start();
                 </div>
 
                 <h4 class="mt-3">Số Lượng Người Đăng Kí</h4>                    
-                <div class="tour-num-people d-flex justify-content-center mt-3">
+                <div class="tour-num-people d-flex  mt-3">
                   <div class="order-label me-3"><?php echo $tuoi1 ?>
                     <?php
                       if($giaTuoi1==""){
-                        echo "<input type='number' name='quantity1' min='0' max='100' value ='0' disabled>";
+                        echo "<input type='number' name='quantity1' id='quantity1' min='0' max='100' value ='0' disabled>";
                         echo '<br>';
-                        echo "<p id='price1'>".$giaTuoi1."/1 người</p>";
+                        echo "<p id='price1' name='price1'>".$giaTuoi1."</p>";
                       }
                       else{
-                        echo "<input type='number' name='quantity1' min='0' max='100' value ='0'>";
+                        echo "<input type='number' name='quantity1' id='quantity1' min='0' max='100' value ='0'>";
                         echo '<br>';
-                        echo "<p id='price1'>".$giaTuoi1."/1 người</p>";
+                        echo "<p id='price1' name='price1'>".$giaTuoi1."</p>";
                       }
                     ?>
                   </div>
@@ -177,14 +179,14 @@ ob_start();
                   <div class="order-label me-3"><?php echo $tuoi2 ?>
                     <?php
                       if($giaTuoi2==""){
-                        echo "<input type='number' name='quantity2' min='1' max='100' value ='0' disabled>";
+                        echo "<input type='number' name='quantity2' id='quantity2' min='1' max='100' value ='0' disabled>";
                         echo '<br>';
-                        echo "<p id='price2'>".$giaTuoi2."/1 người</p>";
+                        echo "<p id='price2' name='price2'>".$giaTuoi2."</p>";
                       }
                       else{
-                        echo "<input type='number' name='quantity2' min='1' max='100' value ='0'>";
+                        echo "<input type='number' name='quantity2' id='quantity2' min='1' max='100' value ='0'>";
                         echo '<br>';
-                        echo "<p id='price2'>".$giaTuoi2."/1 người</p>";
+                        echo "<p id='price2' name='price2'>".$giaTuoi2."</p>";
                       }
                     ?>
                   </div>
@@ -192,14 +194,14 @@ ob_start();
                   <div class="order-label me-3"><?php echo $tuoi3 ?>
                     <?php
                       if($giaTuoi3==""){
-                        echo "<input type='number' name='quantity3' min='0' max='100' value ='0' disabled>";
+                        echo "<input type='number' name='quantity3' id='quantity3' min='0' max='100' value ='0' disabled>";
                         echo '<br>';
-                        echo "<p id='price3'>".$giaTuoi3."/1 người</p>";
+                        echo "<p id='price3' name='price3'>".$giaTuoi3."</p>";
                       }
                       else{
-                        echo "<input type='number' name='quantity3' min='0' max='100' value ='0'>";
+                        echo "<input type='number' name='quantity3' id='quantity3' min='0' max='100' value ='0'>";
                         echo '<br>';
-                        echo "<p id='price3'>".$giaTuoi3."/1 người</p>";
+                        echo "<p id='price3' name='price3'>".$giaTuoi3."</p>";
 
                       }
                     ?>
@@ -209,7 +211,7 @@ ob_start();
                 <?php 
                   $tongtien = 0;
                 ?>
-                <p class="mt-3" id="tour-price">Tổng Tiền: </p>
+                <p class="mt-3" id="price">Tổng Tiền: <span id="tour-price"></span></p>
                     
             </div>
 
@@ -217,6 +219,11 @@ ob_start();
 
         <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary mt-3">
       </form>
+
+      </div>
+    </div>
+</section>
+<!-- Tour info Section Ends Here -->
 
         <?php 
 
@@ -285,7 +292,7 @@ ob_start();
                 if($res4==true)
                 {
                     //Query Executed and Order Saved
-                    $_SESSION['order'] = "<div class='success text-center' style='color:red;font-size:40px'>Chúc mừng bạn đã đặt Tour thành công</div>";
+                    $_SESSION['order'] = "<div class='success text-center' style='color:green;font-size:40px'>Chúc mừng bạn đã đặt Tour thành công</div>";
                     header("location:user.php");
 
                 }
@@ -300,46 +307,40 @@ ob_start();
         mysqli_close($conn);
         
         ?>
-      </div>
-    </div>
-</section>
-<!-- Tour info Section Ends Here -->
 
     <?php
     include "partials/footer.php";
-ob_flush();
-
+      ob_flush();
     ?>
 
   <script>
-      // var giaTien1 = Document.querySelectorAll('#quantity').[0].value;
-      // var giaTien2 = Document.querySelectorAll('#quantity').[1].value;
-      // var giaTien3 = Document.querySelectorAll('#quantity').[2].value;
-      // var tongTien = 0;
+    var tongTien=0;
+    window.tongTien = tongTien;
 
-    // $(document).ready(function(){
-    //   //Luon dan bao chi thuc hien noi dung ben trong
-    //   //khi trang dc tai xong ..(DOM)
-    //   $("#quantity1").change(function(){
-    //       $("#tour-price").css("color","red");
-    //   })
-    // });
 
-    // $(document).ready(function(){
-    //   //Luon dan bao chi thuc hien noi dung ben trong
-    //   //khi trang dc tai xong ..(DOM)
-    //   $("#quantity2").change(function(){
-    //       $("#tour-price").css("color","red");
-    //   })
-    // });
+    $(document).on('input', '#quantity1', function(){
+      var moneyString = $("#price1").text();
+      var money = parseInt(moneyString);
+      var number = $("#quantity1").val();
+      var toTal = tongTien + money*number;
+      $("#tour-price").text(toTal);
+    })
 
-    // $(document).ready(function(){
-    //   //Luon dan bao chi thuc hien noi dung ben trong
-    //   //khi trang dc tai xong ..(DOM)
-    //   $("#quantity2").change(function(){
-    //       $("#tour-price").css("color","red");
-    //   })
-    // });
+    $(document).on('input', '#quantity2', function(){
+      var moneyString = $("#price2").text();
+      var money = parseInt(moneyString);
+      var number = $("#quantity2").val();
+      var toTal = tongTien + money*number;
+      $("#tour-price").text(toTal);
+    })
+
+    $(document).on('input', '#quantity3', function(){
+      var moneyString = $("#price3").text();
+      var money = parseInt(moneyString);
+      var number = $("#quantity3").val();
+      var toTal = tongTien + money*number;
+      $("#tour-price").text(toTal);
+    })
   </script>
 </body>
 

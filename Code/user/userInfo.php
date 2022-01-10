@@ -158,7 +158,8 @@
 
                 //Câu lệnh lấy thông tin chi tiết về giá tour của phiếu
                 $sql3 = "SELECT distinct phieudangkitour.maPhieuTour,giatour.moTa,chitietgia.soLuong,chitietgia.thanhTien
-                 FROM phieudangkitour,chitietgia,giatour where chitietgia.doTuoi = giatour.doTuoi AND chitietgia.maPhieuTour = phieudangkitour.maPhieuTour and giaTour.maTour = phieudangkitour.maTour";
+                 FROM phieudangkitour,chitietgia,giatour where chitietgia.doTuoi = giatour.doTuoi AND chitietgia.maPhieuTour = phieudangkitour.maPhieuTour and giatour.maTour = phieudangkitour.maTour
+                 and phieudangkitour.maNguoiDung = '{$_SESSION['loginAccount1']}' and chitietgia.maTour=giatour.maTour";
                 
                 //Execute the Query
                 $res3 = mysqli_query($conn, $sql3);
@@ -228,7 +229,7 @@
                 }else
                 {
                     //Tour Not Available 
-                    echo "<div class='error'>Bạn chưa đặt tour nào.</div>";
+                    echo "<div class='error text-center mt-3'>Bạn chưa đặt tour nào.</div>";
                 }
                 
                 
@@ -304,9 +305,7 @@
                                 <p>Hình thức thanh toán: <?php echo $hinhThucThanhToan ?></p>
                                 <?php
                                     if(mysqli_num_rows($res3)>0){
-                                        while($row3=mysqli_fetch_assoc($res3)){
-                                            echo "<p>{$row3['moTa']}: {$row3['soLuong']} -> Thành Tiền: {$row3['thanhTien']}</p>";
-                                            }
+                                        echo "<p>{$row3['moTa']}: {$row3['soLuong']} -> Thành Tiền: {$row3['thanhTien']}</p>";                  
                                     }
                                 ?>
                                 <p>Tổng số lượng người: <?php echo $soLuong ?></p>
@@ -323,7 +322,7 @@
                 }else
                 {
                     //Tour Not Available 
-                    echo "<div class='error'>Chưa có Tour nào được chấp nhận.</div>";
+                    echo "<div class='error text-center mt-3' >Chưa có Tour nào được chấp nhận.</div>";
                 }
                 
                 

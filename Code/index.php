@@ -9,9 +9,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/userStyle.css">
-  <title>Document</title>
+  <title>Trang chủ</title>
 </head>
 
 <body>
@@ -27,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="login-nguoidung.php" tabindex="-1" aria-disabled="true">Đăng nhập</a>
+              <a class="nav-link" href="login/login-nguoidung.php" tabindex="-1" aria-disabled="true">Đăng nhập</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="signup.php" tabindex="-1" aria-disabled="true">Đăng kí</a>
@@ -118,80 +117,7 @@
             </section>
         </div>
 
-        <!-- carousel -->
-        <div class="container-fluid mt-5">
-            <div class="row">
-                <div id="carouselExampleCaptions" class="carousel slide mt-3" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                    </div>
-        
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src='../assets/images/tours/vinh-ha-long.jpg' class="d-block w-100 img-fluid" alt="Ha Noi Mien Bac" style="max-height: 500px;">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Vịnh Hạ Long</h5>
-                                <p>Kỳ Quan Thiên Nhiên Thế Giới</p>
-                            </div>
-                        </div>
-        
-                        <div class="carousel-item">
-                            <img src='../assets/images/tours/ho_chi_minh_city_skyline.jpg' class="d-block w-100" alt="Ho Chi Minh" style="max-height: 500px;">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Hồ Chí Minh</h5>
-                                <p>Thành Phố Mang Tên Bác</p>
-                            </div>
-                        </div>
-        
-                        <div class="carousel-item">
-                            <img src='../assets/images/tours/quang_truong_da_lat.jpg' class="d-block w-100" alt="Da Lat" style="max-height: 500px;">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Đà lạt</h5>
-                                <p>Biểu Tượng Thành Phố Ngàn Hoa</p>
-                            </div>
-                        </div>
-        
-                        <div class="carousel-item">
-                            <img src='../assets/images/tours/phong_nha_ke_bang.jpg' class="d-block w-100" alt="Phong Nha Ke Bang" style="max-height: 500px;">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Phong Nha Kẻ Bàng</h5>
-                                <p>Vẻ Đẹp Hùng Vỹ</p>
-                            </div>
-                        </div>
-        
-                        <div class="carousel-item">
-                            <img src='../assets/images/tours/sapa.jpg' class="d-block w-100" alt="Lao Cai" style="max-height: 500px;">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Sapa - Lào Cai</h5>
-                                <p>Thành Phố Sương Mù</p>
-                            </div>
-                        </div>
-        
-                        <div class="carousel-item">
-                            <img src='../assets/images/tours/phu_quoc.jpg' class="d-block w-100" alt="Phu Quoc" style="max-height: 500px;">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Phú Quốc</h5>
-                                <p>Bãi Biển Xanh Thơ Mộng</p>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+    
         
         <!-- Search tour -->
         <section class="search-tour mt-5" id="search-tour"> 

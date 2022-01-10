@@ -24,7 +24,7 @@
                       <a class="nav-link" href="categories.php" tabindex="-1" aria-disabled="true">Thư Viện</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="userInfo.php" tabindex="-1" aria-disabled="true">TT Cá Nhân</a>
+                      <a class="nav-link" href="userInfo.php" tabindex="-1" aria-disabled="true">Giỏ Hàng</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="logOut.php" tabindex="-1" aria-disabled="true">Đăng Xuất</a>
