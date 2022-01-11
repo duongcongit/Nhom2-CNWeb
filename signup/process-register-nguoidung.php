@@ -33,7 +33,7 @@
                 $sql_update_uname = "UPDATE nguoidung SET maNguoiDung='$uname' WHERE id='$uid'";
                 mysqli_query($conn, $sql_update_uname);
             }
-            $link = "<a href='http://localhost/baitaplon/login/activation-nguoidung.php?key=".$email."&token=".$token."'>click vào đây để kích hoạt</a>";
+            $link = "<a href='http://localhost/baitaplon/signup/activation-nguoidung.php?key=".$email."&token=".$token."'>click vào đây để kích hoạt</a>";
             include "send_email.php";
             if(sendEmailForAccountActive($email, $link)){
                 echo "vui lòng kiểm tra hộp thư của bạn để kích hoạt tài khoản đăng nhập...";
@@ -43,7 +43,7 @@
                  }
         
     }else{
-        $error="nhập lại mật khẩu .";
+        $error="nhập lại mật khẩu không trùng khớp";
         header("location:signup_nguoidung.php?error=$error");}}
 
 ?>

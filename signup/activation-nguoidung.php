@@ -24,16 +24,16 @@ if($_GET['key'] && $_GET['token'])
         $row= mysqli_fetch_array($query);
             if($row['thoiGianXacMinhEmail'] == NULL){
                 mysqli_query($conn,"UPDATE nguoidung set thoiGianXacMinhEmail ='" . $d . "',TinhTrang=1 WHERE Email='" . $email . "'");
-                $msg = "Congratulations! Your email has been verified.";
+                $msg = "Chúng tôi sẽ không bao giờ chia sẻ email của bạn với bất kỳ ai khác.";
             }else{
-                $msg = "You have already verified your account with us";
+                $msg = "Bạn đã xác minh tài khoản của mình với chúng tôi.";
         }
     } else {
-        $msg = "This email has been not registered with us";
+        $msg = "Email này chưa được đăng ký với chúng tôi.";
     }
 }
 else{
-    $msg = "Danger! Your something goes to wrong.";
+    $msg = "Nguy hiểm! Có điều gì đó không ổn.";
 }
 ?>
     <div class="container mt-3">

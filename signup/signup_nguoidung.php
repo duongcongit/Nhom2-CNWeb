@@ -96,7 +96,7 @@
                     
                     ?>
                     <div class="text-center">
-                        <button class="btn btn-primary btn-block " type="submit" name="btnRegister" >Đăng kí</button>
+                        <button class="btn btn-primary btn-block " type="submit" name="btnRegister" >Đăng ký</button>
                     </div>
                     <p class="mt-3 mb-3 text-muted text-center">Đã có tài khoản? <a href="http://localhost/baitaplon/login/login-nguoidung.php">Đăng Nhập</a> </p>
                 </form>
