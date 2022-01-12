@@ -15,6 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="../assets/js/userInfo.js"></script>
   <link rel="stylesheet" href="../assets/css/userInfoStyle.css">
@@ -145,25 +146,19 @@
                 <div class="row">        
                 <?php 
                 
-                //Getting tours from Database that are active and featured
+                //Lấy ra các tour đã đặt và đang chờ duyệt (tình trạng = 0)
                 //SQL Query
                 $sql1 = "SELECT tour.hinhAnh,phieudangkitour.maPhieuTour,phieudangkitour.maNguoiDung,tour.maTour,phieudangkitour.soKhach,
-                phieudangkitour.hinhThucThanhToan,phieudangkitour.tongTien,phieudangkitour.tinhTrang,tour.tenTour
+                phieudangkitour.hinhThucThanhToan,phieudangkitour.tongTien,phieudangkitour.tinhTrang,tour.tenTour,
+                tour.ngayKhoiHanh,tour.ngayKetThuc,tour.diemKhoiHanh,tour.diemKetThuc,tour.loaiHinh
                  FROM phieudangkitour,tour,nguoidung where phieudangkitour.maTour = tour.maTour AND phieudangkitour.tinhTrang ='0'
                  AND nguoidung.maNguoiDung = phieudangkitour.maNguoiDung AND nguoidung.maNguoiDung = '{$_SESSION['loginAccount1']}'";
                 
                 //Execute the Query
                 $res1 = mysqli_query($conn, $sql1);
+                $rowLayMa = mysqli_fetch_assoc($res1);
+                $maPhieu = $rowLayMa['maPhieuTour'];
 
-
-                //Câu lệnh lấy thông tin chi tiết về giá tour của phiếu
-                $sql3 = "SELECT distinct phieudangkitour.maPhieuTour,giatour.moTa,chitietgia.soLuong,chitietgia.thanhTien
-                 FROM phieudangkitour,chitietgia,giatour where chitietgia.doTuoi = giatour.doTuoi AND chitietgia.maPhieuTour = phieudangkitour.maPhieuTour and giatour.maTour = phieudangkitour.maTour
-                 and phieudangkitour.maNguoiDung = '{$_SESSION['loginAccount1']}' and chitietgia.maTour=giatour.maTour";
-                
-                //Execute the Query
-                $res3 = mysqli_query($conn, $sql3);
-                
                 
                 //CHeck whether tour available or not
                 if(mysqli_num_rows($res1) > 0)
@@ -181,11 +176,25 @@
                         $hinhThucThanhToan = $row1['hinhThucThanhToan'];
                         $TongTien = $row1['tongTien'];
                         $TinhTrang = $row1['tinhTrang'];
-                        
+                        $ngayKhoiHanh = $row1['ngayKhoiHanh'];
+                        $ngayKetThuc = $row1['ngayKetThuc'];
+                        $diemKhoiHanh = $row1['diemKhoiHanh'];
+                        $diemKetThuc = $row1['diemKetThuc'];
+                        $loaiHinh = $row1['loaiHinh'];
+                        $first_date = strtotime($ngayKhoiHanh);
+                        $second_date = strtotime($ngayKetThuc);
+                        $datediff = abs($first_date - $second_date);
+                        $day = floor($datediff / (60*60*24));
+                        //Lấy ra những chi tiết mà khách hàng đã đặt cho tour này
+                        $sql3 = "SELECT distinct phieudangkitour.maPhieuTour,giatour.moTa,chitietgia.soLuong,chitietgia.thanhTien
+                        FROM phieudangkitour,chitietgia,giatour where chitietgia.doTuoi = giatour.doTuoi AND chitietgia.maPhieuTour = phieudangkitour.maPhieuTour and giatour.maTour = phieudangkitour.maTour
+                        and chitietgia.maTour=giatour.maTour and phieudangkitour.maPhieuTour = '$maPhieuTour'";
+                        $res3 = mysqli_query($conn, $sql3);
+      
                 ?>
                         <div class="tour-menu-box p-3 border border-success m-2 rounded">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <?php 
                                     //Check whether image available or not
                                     if($hinhAnh=="")
@@ -203,10 +212,15 @@
                 ?>
                                 
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-7">
+                                <!-- Đổ ra thông tin tour mà khách hàng đã đặt -->
                                 <h4>Mã Phiếu Tour: <?php echo $maPhieuTour; ?></h4>
-                                <h4>Tên Tour: <?php echo $tenTour; ?></h4>
+                                <h4>Tour du lịch: <?php echo $tenTour; ?></h4>
                                 <p>Mã Tour: <?php echo $maTour; ?></p>
+                                <p><i class="bi bi-geo-alt me-3"></i><?php echo $diemKhoiHanh; ?> <span>-><?php echo $diemKetThuc; ?></span></p>
+                                <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
+                                <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
+                                <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                 <p>Hình thức thanh toán: <?php echo $hinhThucThanhToan ?></p>
                                 <?php
                                     if(mysqli_num_rows($res3)>0){
@@ -228,7 +242,7 @@
                     }
                 }else
                 {
-                    //Tour Not Available 
+                    //Nếu chưa đặt tour nào thì hiển thị ra
                     echo "<div class='error text-center mt-3'>Bạn chưa đặt tour nào.</div>";
                 }
                 
@@ -248,7 +262,7 @@
                 <div class="row">        
                 <?php 
                 
-                //Getting tours from Database that are active and featured
+                //Câu lệnh lấy ra thông tin các tour đã được duyệt (tình trạng - 1)
                 //SQL Query
                 $sql2 = "SELECT tour.hinhAnh,phieudangkitour.maPhieuTour,phieudangkitour.maNguoiDung,tour.maTour,phieudangkitour.soKhach,
                 phieudangkitour.hinhThucThanhToan,phieudangkitour.tongTien,phieudangkitour.tinhTrang,tour.tenTour
@@ -276,6 +290,11 @@
                         $hinhThucThanhToan = $row2['hinhThucThanhToan'];
                         $TongTien = $row2['tongTien'];
                         $TinhTrang = $row2['tinhTrang'];
+                        //Lấy ra chi tiết
+                        $sql4 = "SELECT distinct phieudangkitour.maPhieuTour,giatour.moTa,chitietgia.soLuong,chitietgia.thanhTien
+                        FROM phieudangkitour,chitietgia,giatour where chitietgia.doTuoi = giatour.doTuoi AND chitietgia.maPhieuTour = phieudangkitour.maPhieuTour and giatour.maTour = phieudangkitour.maTour
+                        and chitietgia.maTour=giatour.maTour and phieudangkitour.maPhieuTour = '$maPhieuTour'";
+                        $res4 = mysqli_query($conn, $sql4);
                         
                 ?>
                         <div class="tour-menu-box p-3 border border-success m-2 rounded">
@@ -299,13 +318,14 @@
                                 
                             </div>
                             <div class="col-md-8">
+                                <!-- Đổ ra thông tin chi tiết -->
                                 <h4>Mã Phiếu Tour: <?php echo $maPhieuTour; ?></h4>
                                 <h4>Tên Tour: <?php echo $tenTour; ?></h4>
                                 <p>Mã Tour: <?php echo $maTour; ?></p>
                                 <p>Hình thức thanh toán: <?php echo $hinhThucThanhToan ?></p>
                                 <?php
-                                    if(mysqli_num_rows($res3)>0){
-                                        echo "<p>{$row3['moTa']}: {$row3['soLuong']} -> Thành Tiền: {$row3['thanhTien']}</p>";                  
+                                    if(mysqli_num_rows($res4)>0){
+                                        echo "<p>{$row4['moTa']}: {$row4['soLuong']} -> Thành Tiền: {$row4['thanhTien']}</p>";                  
                                     }
                                 ?>
                                 <p>Tổng số lượng người: <?php echo $soLuong ?></p>
@@ -321,7 +341,7 @@
                     }
                 }else
                 {
-                    //Tour Not Available 
+                    //Nếu chưa có tour nào được duyệt
                     echo "<div class='error text-center mt-3' >Chưa có Tour nào được chấp nhận.</div>";
                 }
                 

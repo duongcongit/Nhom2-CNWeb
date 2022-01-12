@@ -18,7 +18,7 @@
     ?>
 
   <main>
-        <!-- CAtegories Section Starts Here -->
+        <!-- Bắt đầu : Thư viện tất cả các tour mà web hiện có -->
         <section class="categories mt-5 pt-5">
             <div class="container">
                 <h2 class="text-center">Các Tour Hiện Có</h2>
@@ -27,7 +27,7 @@
 
                     //Display all the cateories that are active
                     //Sql Query
-                    $sql = "SELECT * FROM tour ";
+                    $sql = "SELECT * FROM tour where tinhTrang='1'";
 
                     //Execute the Query
                     $res = mysqli_query($conn, $sql);

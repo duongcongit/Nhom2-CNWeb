@@ -16,25 +16,31 @@
 <body>
   <!-- navbar -->
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light main-navbar">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="login/login-nguoidung.php" tabindex="-1" aria-disabled="true">Đăng nhập</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="signup.php" tabindex="-1" aria-disabled="true">Đăng kí</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light main-navbar">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="index.php">Logo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Đăng nhập</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="login/login-nguoidung.php">Khách hàng</a></li>
+                        <li><a class="dropdown-item" href="login/login-doitac.php">Đối tác</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="signup/signup.php" tabindex="-1" aria-disabled="true">Đăng kí</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </div>
   </div>
 
   <main>
@@ -221,7 +227,7 @@
             </div>
             
             <p class="text-center mt-3">
-                <a href="categories.php" aria-expanded="false" data-toggle="collapse" class="btn">Xem Tất Cả</a>
+                <a href="categories.php" aria-expanded="false" data-toggle="collapse" class="btn text-primary">Xem Tất Cả</a>
             </p>
         </section>
         <!-- Tour Menu Section Ends Here -->

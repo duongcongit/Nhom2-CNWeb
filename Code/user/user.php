@@ -6,6 +6,9 @@
     if(!isset($_SESSION['loginAccount'])){
         header("location:".SITEURL);
     }
+    if(isset($_SESSION['partnerAccount'])){
+        header("location:".SITEURL.'partner/index.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +60,7 @@
                 <div class="row">
                 <?php 
 
-                //Create SQL Query to Display CAtegories from Database
+                //Lấy ra 3 tour du lịch từ CSDL
                 $sql1 = "SELECT distinct loaiHinh,maTour,hinhAnh FROM tour LIMIT 3";
                 //Execute the Query
                 $res1 = mysqli_query($conn, $sql1);
@@ -69,7 +72,6 @@
                     //CAtegories Available
                     while($row=mysqli_fetch_assoc($res1))
                     {
-                        //Get the Values like id, title, image_name
                         $maTour = $row['maTour'];
                         $loaiHinh = $row['loaiHinh'];
                         $hinhAnh = $row['hinhAnh'];
@@ -105,7 +107,7 @@
                 else
                 {
                     //Categories not Available
-                    echo "<div class='error'>Category not Added.</div>";
+                    echo "<div class='error'>Cơ sở dữ liệu hiện chưa có tour du lịch nào</div>";
                 }
             ?>
             </div>
@@ -113,7 +115,7 @@
             </section>
         </div>
 
-        <!-- carousel -->
+        <!-- carousel Một vài tour đẹp gợi ý cho khách hàng-->
         <div class="container-fluid mt-5">
             <div class="row">
                 <div id="carouselExampleCaptions" class="carousel slide mt-3" data-bs-ride="carousel">
@@ -188,7 +190,7 @@
             </div>
         </div>
         
-        <!-- Search tour -->
+        <!-- Tìm kiếm tour cơ bản -->
         <section class="search-tour mt-5" id="search-tour"> 
             <div class="text-center search-form">       
                 <form action="tourSearch.php" method="POST">
@@ -201,7 +203,7 @@
             </div>
         </section>
     
-        <!-- Tour MEnu Section Starts Here -->
+        <!-- Lấy ra 8 tour đầu tiên có trong cơ sở dữ liệu -->
         <section class="tour-menu mt-5">
             <div class="container">
                 <h2 class="text-center pt-3">Các Tour hiện có</h2>
@@ -209,9 +211,9 @@
                     
                     <?php 
                 
-                //Getting tours from Database that are active and featured
+                //Getting tours from Database that are active 
                 //SQL Query
-                $sql = "SELECT * FROM Tour LIMIT 8";
+                $sql = "SELECT * FROM tour where tinhTrang = '1' LIMIT 8";
                 
                 //Execute the Query
                 $res = mysqli_query($conn, $sql);
@@ -290,10 +292,10 @@
             </div>
             
             <p class="text-center mt-3">
-                <a href="categories.php" aria-expanded="false" data-toggle="collapse" class="btn">Xem Tất Cả</a>
+                <a href="categories.php" aria-expanded="false" data-toggle="collapse" class="btn text-primary">Xem Tất Cả</a>
             </p>
         </section>
-        <!-- Tour Menu Section Ends Here -->
+        <!-- Kết thúc -->
     </main>
     
     <?php

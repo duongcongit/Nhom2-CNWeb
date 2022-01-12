@@ -18,7 +18,7 @@
     ?>
     <main>
         <?php 
-            //CHeck whether id is passed or not
+            //Lấy ra mã tour gợi ý
             if(isset($_GET['category_id']))
             {
                 //Category id is set and get the id

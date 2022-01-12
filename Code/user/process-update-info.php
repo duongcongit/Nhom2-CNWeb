@@ -12,25 +12,20 @@ include '../constants.php';
     }
 ?>
 
+    // Lấy ra mã người dùng và thông tin của các trường mà người dùng muốn sửa
     if(isset($_POST['id'])){
         $id = $_POST['id'];
         $text = $_POST['text'];
         $column_name = $_POST['column_name'];
     }
     
-    // Thực hiện truy vấn
+    // Thực hiện truy vấn cập nhật dữ liệu lên database
     $sql = "UPDATE nguoidung SET $column_name='$text' where maNguoiDung = '$id' ";
     echo $sql;
 
     $ketqua = mysqli_query($conn,$sql);
     
-    // if(!$ketqua){
-    //     header("location: error.php"); //Chuyển hướng lỗi
-    // }else{
-    //     header("location: userInfo.php"); //Chuyển hướng lại Trang Quản trị
-    // }
 
-    // Bước 03: Đóng kết nối
     mysqli_close($conn);
 
 ?>

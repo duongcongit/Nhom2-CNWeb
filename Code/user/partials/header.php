@@ -2,7 +2,7 @@
       <!-- navbar -->
       <div class="container-fluid">
         <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white  main-navbar" style="box-shadow: 7px 7px 7px rgb(0 0 0 / 30%);z-index:1;position:fixed;left:0;right:0:top:56px">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white  main-navbar" style="box-shadow: 7px 7px 7px rgb(0 0 0 / 30%);z-index:2;position:fixed;left:0;right:0:top:56px">
               <div class="container-fluid">
                 <a class="navbar-brand" href="user.php">Logo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

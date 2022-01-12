@@ -28,23 +28,24 @@
 <?php 
 ob_start();
 
-    //CHeck whether Tour id is set or not
+    //Kiểm tra xem có nhận được mã tour từ giới thiệu tour
     if(isset($_GET['MaTour']))
     {
-        //Get the tour id and details of the selected tour
+        //Lấy mã tour và thông tin của tour du lịch đã chọn
         $maTour = $_GET['MaTour'];
 
-        //Get the DEtails of the SElected tour
+        //sql lấy thông tin của tour du lịch
         $sql = "SELECT * FROM tour WHERE maTour='$maTour'";
-        //Execute the Query
+
+        //Thực thi câu lệnh
         $res = mysqli_query($conn, $sql);
-        //Count the rows
+
+        //Đếm số bản ghi
         $count = mysqli_num_rows($res);
-        //CHeck whether the data is available or not
+        //Kiểm tra xem bản ghi có tồn tại không
         if($count==1)
         {
-            //WE Have DAta
-            //GEt the Data from Database
+            //Lấy dữ liệu từ database
             $row = mysqli_fetch_assoc($res);
             $tenTour = $row['tenTour'];
             $hinhAnh = $row['hinhAnh'];
@@ -62,16 +63,17 @@ ob_start();
         }
         else
         {
-            //tour not Availabe
-            //REdirect to Home Page
+            //Chuyển hướng về trang chủ
             header('location:'.SITEURL);
         }
 
+        // phần lấy giá của độ tuổi có mã là 1
         $sql1 = "SELECT gia,moTa FROM giatour WHERE maTour='$maTour' and doTuoi = 1";
         //Execute the Query
         $res1 = mysqli_query($conn, $sql1);
         if(mysqli_num_rows($res1)>0){
           while($row1 = mysqli_fetch_assoc($res1)){
+            //Lấy mô tả và giá tuổi
             $tuoi1 = $row1['moTa'];
             $giaTuoi1 = $row1['gia'];
           }
@@ -79,11 +81,13 @@ ob_start();
           $giaTuoi1 = "";
         }
 
+        // phần lấy giá của độ tuổi có mã là 2
         $sql2 = "SELECT gia,moTa FROM giatour WHERE maTour='$maTour'and doTuoi = 2";
         //Execute the Query
         $res2 = mysqli_query($conn, $sql2);
         if(mysqli_num_rows($res2)>0){
           while($row2 = mysqli_fetch_assoc($res2)){
+            //Lấy mô tả và giá tuổi
             $tuoi2 = $row2['moTa'];
             $giaTuoi2 = $row2['gia'];
           }
@@ -91,13 +95,14 @@ ob_start();
           $giaTuoi2 = "";
         }
 
+        // phần lấy giá của độ tuổi có mã là 3
         $sql3 = "SELECT gia,moTa FROM giatour WHERE maTour='$maTour' and doTuoi = 3";
         //Execute the Query
         $res3 = mysqli_query($conn, $sql3);
         if(mysqli_num_rows($res3)>0){
           //Count the rows
           while($row3 = mysqli_fetch_assoc($res3)){
-            //CHeck whether the data is available or not
+            //Lấy mô tả và giá tuổi
             $tuoi3 = $row3['moTa'];
             $giaTuoi3 = $row3['gia'];
           }
@@ -108,129 +113,134 @@ ob_start();
     }
     else
     {
-        //Redirect to homepage
+        //Chuyển hướng về trang chủ
         header('location:'.SITEURL);
     }
 ?>
 
-<!-- Tour Info Section Starts Here -->
+<!-- Thông tin của tour đã chọn -->
 <section class="Tour-info">
     <div class="container">
-      <div class="row pt-5">
-        <div class="col-md-8">
+      <div class="row" style='padding-top: 70px'>
+        <!-- Đặt tour -->
+        <div class="col-md-8 border p-3 border-success rounded">
+          <h3>Thông Tin Tour</h3>
+          <div class="tour-menu-img">
+              <?php               
+                  //Kiểm tra hình ảnh
+                  if($hinhAnh=="")
+                  {
+                      //nếu không có
+                      echo "<div class='error'>Image not Available.</div>";
+                  }
+                  else
+                  {
+                      //nếu có
+              ?>
+                  <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="Tour-img" style="max-height: 400px;width:100%" class="img-fluid">
+                  <?php
+                    }
+                  
+              ?>
+                  
+          </div>
+          <form method="POST" class="order">
+          <!-- Chi tiết của tour và chọn thanh toán -->
+          <div class="tour-menu-desc">
+              <h4><?php echo $tenTour; ?></h4>
+              <p>Mã: <?php echo $maTour; ?></p>
+              <p><i class="bi bi-geo-alt me-3"></i>Khởi Hành: <?php echo $diemKhoiHanh; ?> <span>-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+              <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
+              <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
+              <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
+              <p>Thông tin về tour: <br> <?php echo $moTa; ?></p>
+              <h4>Phương thức thanh toán</h4>
+  
+              <div class="d-flex ">
+                <select class="form-select w-50" aria-label="Default select example" name="cast">
+                  <option selected value ="Chuyển Khoản">Chuyển khoản</option>
+                  <option value="Tiền Mặt">Tiền Mặt</option>
+                </select>
+              </div>
+  
+              <h4 class="mt-3">Số Lượng Người Đăng Kí</h4>                    
+              <div class="tour-num-people d-flex  mt-3">
+                <div class="order-label me-3"><?php echo $tuoi1 ?>
+                  <?php
+                    if($giaTuoi1==""){
+                      echo "<input type='number' class='input' name='quantity1' id='quantity1' min='0' max='100' value ='0' disabled>";
+                      echo '<br>';
+                      echo "<p id='price1' name='price1'>".$giaTuoi1."</p>";
+                    }
+                    else{
+                      echo "<input type='number' class='input' name='quantity1' id='quantity1' min='0' max='100' value ='0'>";
+                      echo '<br>';
+                      echo "<p id='price1' name='price1'>".$giaTuoi1."</p>";
+                    }
+                  ?>
+                </div>
+  
+                <div class="order-label me-3"><?php echo $tuoi2 ?>
+                  <?php
+                    if($giaTuoi2==""){
+                      echo "<input type='number' class='input' name='quantity2' id='quantity2' min='1' max='100' value ='0' disabled>";
+                      echo '<br>';
+                      echo "<p id='price2' name='price2'>".$giaTuoi2."</p>";
+                    }
+                    else{
+                      echo "<input type='number' class='input' name='quantity2' id='quantity2' min='1' max='100' value ='0'>";
+                      echo '<br>';
+                      echo "<p id='price2' name='price2'>".$giaTuoi2."</p>";
+                    }
+                  ?>
+                </div>
+  
+                <div class="order-label me-3"><?php echo $tuoi3 ?>
+                  <?php
+                    if($giaTuoi3==""){
+                      echo "<input type='number' class='input' name='quantity3' id='quantity3' min='0' max='100' value ='0' disabled>";
+                      echo '<br>';
+                      echo "<p id='price3' name='price3'>".$giaTuoi3."</p>";
+                    }
+                    else{
+                      echo "<input type='number' class='input' name='quantity3' id='quantity3' min='0' max='100' value ='0'>";
+                      echo '<br>';
+                      echo "<p id='price3' name='price3'>".$giaTuoi3."</p>";
+  
+                    }
+                  ?>
+                </div>
+              </div>
+  
+
+              <p class="mt-3" id="price">Tổng Tiền: <span id="tour_price"></span></p>
+                  
+          </div>
+  
+          
+  
+      <input type="submit" name="submit" value="Xác nhận đặt tour" class="btn btn-primary mt-3">
+    </form>
+        </div>
+
+        <!-- Hết đặt tour -->
+
+        <!-- Thời tiết và quảng cáo -->
+        <div class="col-md-4">
 
         </div>
-        <h3 class="mt-5">Thông Tin Tour</h3>
-        
-            <div class="tour-menu-img">
-                <?php               
-                    //CHeck whether the image is available or not
-                    if($hinhAnh=="")
-                    {
-                        //Image not Availabe
-                        echo "<div class='error'>Image not Available.</div>";
-                    }
-                    else
-                    {
-                        //Image is Available
-                ?>
-                    <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="Tour-img" style="max-height: 500px;" class="img-fluid">
-                    <?php
-                      }
-                    
-                ?>
-                    
-            </div>
-            <form method="POST" class="order">
-            <div class="food-menu-desc">
-                <h4><?php echo $tenTour; ?></h4>
-                <p>Mã: <?php echo $maTour; ?></p>
-                <p><i class="bi bi-geo-alt me-3"></i>Khởi Hành: <?php echo $diemKhoiHanh; ?> <span>-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
-                <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
-                <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
-                <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
-                <p>Thông tin về tour: <br> <?php echo $moTa; ?></p>
-                <h4>Phương thức thanh toán</h4>
-
-                <div class="d-flex ">
-                  <select class="form-select w-50" aria-label="Default select example" name="cast">
-                    <option selected value ="Chuyển Khoản">Chuyển khoản</option>
-                    <option value="Tiền Mặt">Tiền Mặt</option>
-                  </select>
-                </div>
-
-                <h4 class="mt-3">Số Lượng Người Đăng Kí</h4>                    
-                <div class="tour-num-people d-flex  mt-3">
-                  <div class="order-label me-3"><?php echo $tuoi1 ?>
-                    <?php
-                      if($giaTuoi1==""){
-                        echo "<input type='number' name='quantity1' id='quantity1' min='0' max='100' value ='0' disabled>";
-                        echo '<br>';
-                        echo "<p id='price1' name='price1'>".$giaTuoi1."</p>";
-                      }
-                      else{
-                        echo "<input type='number' name='quantity1' id='quantity1' min='0' max='100' value ='0'>";
-                        echo '<br>';
-                        echo "<p id='price1' name='price1'>".$giaTuoi1."</p>";
-                      }
-                    ?>
-                  </div>
-
-                  <div class="order-label me-3"><?php echo $tuoi2 ?>
-                    <?php
-                      if($giaTuoi2==""){
-                        echo "<input type='number' name='quantity2' id='quantity2' min='1' max='100' value ='0' disabled>";
-                        echo '<br>';
-                        echo "<p id='price2' name='price2'>".$giaTuoi2."</p>";
-                      }
-                      else{
-                        echo "<input type='number' name='quantity2' id='quantity2' min='1' max='100' value ='0'>";
-                        echo '<br>';
-                        echo "<p id='price2' name='price2'>".$giaTuoi2."</p>";
-                      }
-                    ?>
-                  </div>
-
-                  <div class="order-label me-3"><?php echo $tuoi3 ?>
-                    <?php
-                      if($giaTuoi3==""){
-                        echo "<input type='number' name='quantity3' id='quantity3' min='0' max='100' value ='0' disabled>";
-                        echo '<br>';
-                        echo "<p id='price3' name='price3'>".$giaTuoi3."</p>";
-                      }
-                      else{
-                        echo "<input type='number' name='quantity3' id='quantity3' min='0' max='100' value ='0'>";
-                        echo '<br>';
-                        echo "<p id='price3' name='price3'>".$giaTuoi3."</p>";
-
-                      }
-                    ?>
-                  </div>
-                </div>
-
-                <?php 
-                  $tongtien = 0;
-                ?>
-                <p class="mt-3" id="price">Tổng Tiền: <span id="tour-price"></span></p>
-                    
-            </div>
-
-            
-
-        <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary mt-3">
-      </form>
 
       </div>
     </div>
 </section>
-<!-- Tour info Section Ends Here -->
+<!-- Kết thúc phần thông tin tour -->
 
         <?php 
 
-            //CHeck whether submit button is clicked or not
+            //Kiểm tra xem nút đặt tour có được bấm không
             if(isset($_POST['submit']))
             {
-                // Get all the details from the form
+                // Lấy thông tin từ form do khách hàng nhập
 
                 if($giaTuoi1==""){
                   $giaTuoi1 = 0;
@@ -256,7 +266,7 @@ ob_start();
 
                 $tinhTrang = 0; 
 
-                //Save the Order in Databaase
+
                 //Create SQL to save the data
                 $sql4 = "INSERT INTO phieudangkitour(maPhieuTour,maNguoiDung,soKhach,maTour,thoiGianDat,hinhThucThanhToan,tinhTrang,tongTien)
                  VALUES ('$maPhieuTour','{$_SESSION['loginAccount1']}','$soLuong','$maTour','$ngayDat','$hinhThucThanhToan','$tinhTrang','$tongTien')";
@@ -288,7 +298,7 @@ ob_start();
                 }
 
 
-                //Check whether query executed successfully or not
+                //Nếu việc đặt tour được thực hiện thành công
                 if($res4==true)
                 {
                     //Query Executed and Order Saved
@@ -314,33 +324,41 @@ ob_start();
     ?>
 
   <script>
-    var tongTien=0;
-    window.tongTien = tongTien;
+    $(document).ready(function(){
+
+      $(".input").on('input', function(){
+        var moneyString1 = $("#price1").text();
+        var money1 = parseInt(moneyString1);
+        var number1 = document.getElementById('quantity1').value;
+        number1 = parseInt(number1);
+
+        var moneyString2 = $("#price2").text();
+        var money2 = parseInt(moneyString2);
+        var number2 = document.getElementById('quantity2').value;
+        number2 = parseInt(number2);
+
+        var moneyString3 = $("#price3").text();
+        var money3 = parseInt(moneyString3);
+        var number3 = document.getElementById('quantity3').value;
+        number3 = parseInt(number3);
+
+        if(Number.isNaN(number1)){
+          number1 = 0;
+        }
+        else if(Number.isNaN(number2)){
+          number2 = 0;
+        }
+        else if(Number.isNaN(number3)){
+          number3 = 0;
+        }
+
+        $("#tour_price").text(money1*number1+money2*number2+money3*number3);
+
+      })
+        
+    });
 
 
-    $(document).on('input', '#quantity1', function(){
-      var moneyString = $("#price1").text();
-      var money = parseInt(moneyString);
-      var number = $("#quantity1").val();
-      var toTal = tongTien + money*number;
-      $("#tour-price").text(toTal);
-    })
-
-    $(document).on('input', '#quantity2', function(){
-      var moneyString = $("#price2").text();
-      var money = parseInt(moneyString);
-      var number = $("#quantity2").val();
-      var toTal = tongTien + money*number;
-      $("#tour-price").text(toTal);
-    })
-
-    $(document).on('input', '#quantity3', function(){
-      var moneyString = $("#price3").text();
-      var money = parseInt(moneyString);
-      var number = $("#quantity3").val();
-      var toTal = tongTien + money*number;
-      $("#tour-price").text(toTal);
-    })
   </script>
 </body>
 
