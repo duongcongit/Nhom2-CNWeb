@@ -1,6 +1,7 @@
 <?php
 include "../../../config/constants.php";
 include "../../partials/header.php";
+echo "<script>showToursData()</script>";
 ?>
 
 <div class="container-fluid px-0">
@@ -19,6 +20,7 @@ include "../../partials/header.php";
                 </div>
             </form>
             <div class="mt-4 ms-3">
+                <a id="add-tour" class="btn" type="button" href="add-tour.php"><i class="bi bi-plus-circle-fill me-1"></i>Thêm tour</a>
                 <button id="refesh-tour" type="button"><i class="fas fa-sync me-1"></i>Làm mới</button>
                 <button id="search-tour" type="button"><i class="fas fa-search me-1"></i>Tìm kiếm</button>
                 <button id="export-tour" type="button"><i class="fas fa-download me-1"></i></i>Xuất ra Excel</button>
@@ -27,24 +29,9 @@ include "../../partials/header.php";
 
         <div class="col-md-12 table-show-tour shadow">
             <h3 class="text-danger"><i class="fas fa-plane-departure me-1"></i>DANH SÁCH TOUR</h3>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="table-tour">
+            </div>
+            
         </div>
 
 
