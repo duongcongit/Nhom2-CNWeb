@@ -40,10 +40,11 @@
             }else{
                 $error= "xin lỗi,email chưa đc gửi đi. Vui lòng kiểm tra lại thông tin đăng kí tài khoản";
                 header("location:signup_nguoidung.php?erroro=$error");
-                 }
-        
-    }else{
-        $error="nhập lại mật khẩu không trùng khớp";
-        header("location:signup_nguoidung.php?error=$error");}}
+                 }       
+        }else{
+            $error="nhập lại mật khẩu không trùng khớp";
+            header("location:signup_nguoidung.php?error=$error");
+        }
+    }
 
 ?>
