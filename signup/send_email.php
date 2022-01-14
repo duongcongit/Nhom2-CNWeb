@@ -33,7 +33,7 @@ function sendEmailForAccountActive($email, $link){
         $mail->addAddress($email);     
         
         $mail->isHTML(true);                                 
-        $mail->Subject = '[hahalolo.com] active your account';
+        $mail->Subject = '[hahalolo.com] Kích hoạt tài khoản của bạn';
         $mail->Body    = 'chào mừng bạn đến với hahalolo. Để sử dụng tài khoản,'.$link;
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
