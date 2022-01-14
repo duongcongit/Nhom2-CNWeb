@@ -70,7 +70,7 @@
                     <input type="tel" id="inputPhone" name="phone" class="form-control" placeholder="Số điện thoại" required autofocus>                    
 
                     <label for="inputEmail" class="sr-only">Email người dùng </label>
-                    <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="nhập Email" required autofocus>
+                    <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="nhập Email người dùng" required autofocus>
 
                     <label for="inputDiaChi" class="sr-only mt-3">Địa chỉ</label>
                     <input type="text" id="inputDiaChi" name="DiaChi" class="form-control" placeholder="Địa chỉ người dùng" required>
@@ -79,10 +79,10 @@
                     <input type="text" id="inputCMT" name="CMT" class="form-control" placeholder="cmt hoặc cccd" required>
 
                     <label for="inputPassword" class="sr-only mt-3">Mật khẩu</label>
-                    <input type="password" id="inputPassword" name="PassWord" class="form-control" placeholder="Password" required>
+                    <input type="password" id="inputPassword" name="PassWord" class="form-control" placeholder="Nhập mật khẩu" required>
 
                     <label for="inputRetypePassword" class="sr-only mt-3">Nhập lại mật khẩu</label>
-                    <input type="password" id="inputRetypePassword" name="RePassWord" class="form-control" placeholder="Retype Password" required>
+                    <input type="password" id="inputRetypePassword" name="RePassWord" class="form-control" placeholder="Nhập lại mật khẩu" required>
 
                     <div class="checkbox mb-3">
                         <label>

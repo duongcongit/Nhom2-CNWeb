@@ -48,7 +48,7 @@ else{
                     <?php echo $msg; ?>
                 </p>
             </div>
-            <p class="mt-3 mb-3 text-muted text-center"><a href="login-nguoidung.php">Đăng nhập</a> </p>
+            <p class="mt-3 mb-3 text-muted text-center"><a href="http://localhost/baitaplon/login/login-nguoidung.php">Đăng nhập</a> </p>
         </div>
     </div>
 </body>

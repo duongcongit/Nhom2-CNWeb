@@ -69,6 +69,7 @@
                     <div class="text-center">
                         <button class="mt-3 mb-3 btn btn-primary btn-block " type="submit" name="submit" >Đăng nhập</button>
                     </div>
+                    <p class="mt-3 mb-3 text-muted text-center"> <a href="http://localhost/baitaplon/forgot-password-doitac/forgot-password.php?">Quên mật khẩu ?</a> </p>
                     <p class="mt-3 mb-3 text-muted text-center">Đã chưa có tài khoản? <a href="http://localhost/baitaplon/signup/signup_doitac.php">Đăng ký</a> </p>
                 </form>
             </div>
