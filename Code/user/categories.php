@@ -27,7 +27,9 @@
 
                     //Display all the cateories that are active
                     //Sql Query
-                    $sql = "SELECT * FROM tour where tinhTrang='1'";
+                    $sql = "SELECT tour.maTour,tour.tenTour,tour.moTa,tour.hinhAnh,tour.diemKhoiHanh,tour.diemKetThuc,
+                    tour.ngayKhoiHanh,tour.ngayKetThuc,tour.loaiHinh,doitac.maCongTy,doitac.tenCongTy,doitac.email
+                     FROM tour,doitac where tour.tinhTrang='1' and tour.maCongTy = doitac.maCongTy";
 
                     //Execute the Query
                     $res = mysqli_query($conn, $sql);
@@ -50,6 +52,9 @@
                             $ngayKhoiHanh = $row['ngayKhoiHanh'];
                             $ngayKetThuc = $row['ngayKetThuc'];
                             $loaiHinh = $row['loaiHinh'];
+                            $maCongTy = $row['maCongTy'];
+                            $tenCongTy = $row['tenCongTy'];
+                            $email = $row['email'];
                             $first_date = strtotime($ngayKhoiHanh);
                             $second_date = strtotime($ngayKetThuc);
                             $datediff = abs($first_date - $second_date);
@@ -69,7 +74,7 @@
                                       {
                                           //Image Available
                                           ?>
-                                          <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="" class="img-fluid">
+                                          <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" alt="" class="img-fluid">
                                           <?php
                                       }
                                   ?>
@@ -79,10 +84,13 @@
                               <div class="tour-menu-desc col-md-8">
                                 <h4><?php echo $tenTour; ?></h4>
                                 <p>Mã: <?php echo $maTour; ?></p>
-                                <p><i class="bi bi-geo-alt me-3"></i>Khởi Hành: <?php echo $diemKhoiHanh; ?> <span>-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                                <p><i class="bi bi-geo-alt me-3"></i><span class="text-success">Khởi Hành: <?php echo $diemKhoiHanh; ?></span> <span class="text-danger">-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                                <p class="text-warning"><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                 <p><i class="bi bi-calendar3 me-3"></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
                                 <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
-                                <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
+                                <p><i class="bi bi-building me-3"></i>Mã công ty: <?php echo $maCongTy ?></p>
+                                <p><i class="bi bi-building me-3"></i>Tên công ty: <?php echo $tenCongTy ?></p>
+                                <p><i class="bi bi-envelope me-3"></i>Email liên hệ: <?php echo $email ?></p>
                                 <br>
                                 <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem Thông Tin</a>
                               </div>

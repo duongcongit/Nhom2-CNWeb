@@ -206,7 +206,7 @@
                                     {
                                         //Image Available
                                         ?>
-                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="" class="img-fluid">
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" alt="" class="img-fluid">
                                         <?php
                                     }
                 ?>
@@ -299,7 +299,7 @@
                 ?>
                         <div class="tour-menu-box p-3 border border-success m-2 rounded">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <?php 
                                     //Check whether image available or not
                                     if($hinhAnh=="")
@@ -311,21 +311,27 @@
                                     {
                                         //Image Available
                                         ?>
-                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="" class="img-fluid">
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" alt="" class="img-fluid">
                                         <?php
                                     }
                 ?>
                                 
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-7">
                                 <!-- Đổ ra thông tin chi tiết -->
                                 <h4>Mã Phiếu Tour: <?php echo $maPhieuTour; ?></h4>
                                 <h4>Tên Tour: <?php echo $tenTour; ?></h4>
                                 <p>Mã Tour: <?php echo $maTour; ?></p>
+                                <p><i class="bi bi-geo-alt me-3"></i><?php echo $diemKhoiHanh; ?> <span>-><?php echo $diemKetThuc; ?></span></p>
+                                <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
+                                <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
+                                <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                 <p>Hình thức thanh toán: <?php echo $hinhThucThanhToan ?></p>
                                 <?php
                                     if(mysqli_num_rows($res4)>0){
-                                        echo "<p>{$row4['moTa']}: {$row4['soLuong']} -> Thành Tiền: {$row4['thanhTien']}</p>";                  
+                                        while($row4=mysqli_fetch_assoc($res4)){
+                                            echo "<p>{$row4['moTa']}: {$row4['soLuong']} -> Thành Tiền: {$row4['thanhTien']}</p>";                  
+                                        }
                                     }
                                 ?>
                                 <p>Tổng số lượng người: <?php echo $soLuong ?></p>

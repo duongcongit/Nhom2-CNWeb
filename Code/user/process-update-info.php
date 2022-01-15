@@ -2,15 +2,12 @@
 include '../constants.php';
 ?>
 <?php
-
-<?php
     // Trước khi cho người dùng xâm nhập vào bên trong
     // Phải kiểm tra THẺ LÀM VIỆC
     session_start();
     if(!isset($_SESSION['loginAccount'])){
         header("location:".SITEURL);
     }
-?>
 
     // Lấy ra mã người dùng và thông tin của các trường mà người dùng muốn sửa
     if(isset($_POST['id'])){

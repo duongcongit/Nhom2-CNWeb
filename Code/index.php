@@ -19,7 +19,7 @@
     <div class="row">
         <nav class="navbar navbar-expand-lg navbar-light bg-light main-navbar">
           <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">Logo</a>
+            <a class="navbar-brand" href="index.php"><img src="assets/images/tours/logo.png" alt="logo" class='img-fluid' style='max-width:90px;max-height:40px'></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -98,7 +98,7 @@
                                     {
                                         //Image Available
                                         ?>
-                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" class="img-fluid" style="height:350px">
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" class="img-fluid" style="height:350px">
                                         <?php
                                     }
                                 ?>
@@ -192,7 +192,7 @@
                                     {
                                         //Image Available
                                         ?>
-                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="" class="img-fluid w-100" style="height: 250px">
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" alt="" class="img-fluid w-100" style="height: 250px">
                                         <?php
                                     }
                 ?>

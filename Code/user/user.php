@@ -6,9 +6,9 @@
     if(!isset($_SESSION['loginAccount'])){
         header("location:".SITEURL);
     }
-    if(isset($_SESSION['partnerAccount'])){
-        header("location:".SITEURL.'partner/index.php');
-    }
+    // if(isset($_SESSION['partnerAccount'])){
+    //     header("location:".SITEURL.'partner/index.php');
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="../assets/css/userStyle.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
   <title>Trang chủ</title>
@@ -90,7 +91,7 @@
                                     {
                                         //Image Available
                                         ?>
-                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" class="img-fluid" style="height:350px">
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" class="img-fluid" style="height:350px">
                                         <?php
                                     }
                                 ?>
@@ -192,14 +193,28 @@
         
         <!-- Tìm kiếm tour cơ bản -->
         <section class="search-tour mt-5" id="search-tour"> 
-            <div class="text-center search-form">       
-                <form action="tourSearch.php" method="POST">
-                    <h3>Tìm kiếm điểm du lịch</h3>
-                    <input type="search" name="search" placeholder="Search for tour.." style="width:300px" required>
-                    <br>
-                    <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-primary mt-3">
-                </form>
-                
+            <div class="text-center search-form">
+                <div class="normal-search text-center">
+                    <form action="tourSearch.php" method="POST">
+                        <h3>Tìm kiếm điểm du lịch</h3>
+                        <input class='mt-3' type="search1" name="search1" placeholder="Nhập tìm kiếm" style="width:300px">
+                        <button type="submit" name="submit" class="btn btn-primary submit">Tìm kiếm</button>
+                    </form>
+                    <button class='more-detail btn btn-success'>Tìm kiếm nâng cao</button>
+                </div>
+
+                <div class="detail-search text-center" style='display:none'>
+                    <form action="tourSearchDetail.php" method ="POST">
+                        <h3>Tìm kiếm điểm du lịch</h3>
+                        Khởi hành: <input class='mt-3' type="month" name="month" placeholder="Khởi hành trong tháng" style="width:300px" required>
+                        <input class='mt-3' type="text" name="search2" placeholder="Điểm khởi hành" style="width:300px" required>
+                        <input class='mt-3' type="text" name="search3" placeholder="Điểm đến" style="width:300px" required>
+                        <input class='mt-3' type="text" name="search4" placeholder="Chủ đề" style="width:300px" required>
+                        <br>
+                        <button type="submit1" name="submit1" class="btn btn-primary submit1 mt-3">Tìm kiếm</button>
+                    </form>
+                    <button class='more-detail-close btn btn-success'>Thu gọn</button>
+                </div>   
             </div>
         </section>
     
@@ -213,7 +228,9 @@
                 
                 //Getting tours from Database that are active 
                 //SQL Query
-                $sql = "SELECT * FROM tour where tinhTrang = '1' LIMIT 8";
+                $sql = "SELECT tour.maTour,tour.tenTour,tour.moTa,tour.hinhAnh,tour.diemKhoiHanh,tour.diemKetThuc,
+                tour.ngayKhoiHanh,tour.ngayKetThuc,tour.loaiHinh,doitac.maCongTy,doitac.tenCongTy,doitac.email
+                 FROM tour,doitac where tour.tinhTrang='1' and tour.maCongTy = doitac.maCongTy LIMIT 8";
                 
                 //Execute the Query
                 $res = mysqli_query($conn, $sql);
@@ -237,6 +254,9 @@
                         $ngayKhoiHanh = $row['ngayKhoiHanh'];
                         $ngayKetThuc = $row['ngayKetThuc'];
                         $loaiHinh = $row['loaiHinh'];
+                        $maCongTy = $row['maCongTy'];
+                        $tenCongTy = $row['tenCongTy'];
+                        $email = $row['email'];
                         $first_date = strtotime($ngayKhoiHanh);
                         $second_date = strtotime($ngayKetThuc);
                         $datediff = abs($first_date - $second_date);
@@ -257,7 +277,7 @@
                                     {
                                         //Image Available
                                         ?>
-                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="" class="img-fluid w-100" style="height: 250px">
+                                        <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" alt="" class="img-fluid w-100" style="height: 250px">
                                         <?php
                                     }
                 ?>
@@ -266,10 +286,13 @@
                             <div class="tour-menu-box-desc text-center mt-3">
                                 <h4><?php echo $tenTour; ?></h4>
                                 <p>Mã: <?php echo $maTour; ?></p>
-                                <p><i class="bi bi-geo-alt me-3"></i>Khởi Hành: <?php echo $diemKhoiHanh; ?> <span>-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                                <p><i class="bi bi-geo-alt me-3"></i><span class="text-success">Khởi Hành: <?php echo $diemKhoiHanh; ?></span> <span class="text-danger">-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                                <p class="text-warning"><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                 <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
                                 <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
-                                <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
+                                <p><i class="bi bi-building me-3"></i>Mã công ty: <?php echo $maCongTy ?></p>
+                                <p><i class="bi bi-building me-3"></i>Tên công ty: <?php echo $tenCongTy ?></p>
+                                <p><i class="bi bi-envelope me-3"></i>Email liên hệ: <?php echo $email ?></p>
                                 
                                 <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem thêm chi tiết</a>
                             </div>
@@ -296,6 +319,24 @@
             </p>
         </section>
         <!-- Kết thúc -->
+
+
+        <script>
+            $(document).ready(function () {
+                $(".more-detail").click(function () {
+                    $('.detail-search').show();
+                    $(".more-detail").hide();
+                    $(".submit").hide();
+                    $(".normal-search").hide();
+                });
+                $(".more-detail-close").click(function () {
+                    $('.detail-search').hide();
+                    $(".more-detail").show();
+                    $(".submit").show();
+                    $(".normal-search").show();
+                });
+            });
+        </script>
     </main>
     
     <?php

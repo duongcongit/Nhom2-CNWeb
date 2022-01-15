@@ -4,7 +4,7 @@
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-white  main-navbar" style="box-shadow: 7px 7px 7px rgb(0 0 0 / 30%);z-index:2;position:fixed;left:0;right:0:top:56px">
               <div class="container-fluid">
-                <a class="navbar-brand" href="user.php">Logo</a>
+                <a class="navbar-brand" href="user.php"><img src="../assets/images/tours/logo.png" alt="logo" class='img-fluid' style='max-width:90px;max-height:40px'></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>

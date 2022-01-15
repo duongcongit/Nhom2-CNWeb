@@ -105,7 +105,7 @@
                                         {
                                             //Image Available
                                             ?>
-                                            <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="" class="img-fluid">
+                                            <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" alt="" class="img-fluid">
                                             <?php
                                         }
                                     ?>
@@ -115,10 +115,10 @@
                                 <div class="tour-menu-desc col-md-8">
                                     <h4><?php echo $tenTour; ?></h4>
                                     <p>Mã: <?php echo $maTour; ?></p>
-                                    <p><i class="bi bi-geo-alt me-3"></i>Khởi Hành: <?php echo $diemKhoiHanh; ?> <span>-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                                    <p><i class="bi bi-geo-alt me-3"></i><span class="text-success">Khởi Hành: <?php echo $diemKhoiHanh; ?></span> <span class="text-danger">-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                                    <p class="text-warning"><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                     <p><i class="bi bi-calendar3 me-3"></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
                                     <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
-                                    <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                     <p class="tour-detail">
                                         Mô tả: 
                                         <?php echo $moTa; ?>
@@ -136,7 +136,7 @@
                     else
                     {
                         //Tour not available
-                        echo "<div class='error'>Tour not Available.</div>";
+                        echo "<div class='error'>Tour không tồn tại.</div>";
                     }
                     
                 mysqli_close($conn);

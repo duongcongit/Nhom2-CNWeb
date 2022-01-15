@@ -25,14 +25,22 @@
 
                 //Get the Search Keyword
                 // $search = $_POST['search'];
-                $search = mysqli_real_escape_string($conn, $_POST['search1']);
+                $date = mysqli_real_escape_string($conn, $_POST['month']);
+                $year = substr($date,0,4);
+                $month = substr($date,5);
+                $search2 = mysqli_real_escape_string($conn, $_POST['search2']);
+                $search3 = mysqli_real_escape_string($conn, $_POST['search3']);
+                $search4 = mysqli_real_escape_string($conn, $_POST['search4']);
             
             ?>
 
 
-        <h2 class="text-center">Tour theo yêu cầu của bạn: <span>"
-            <?php echo $search; ?>"
-            </span></h2>
+        <h2 class="text-center">Tour theo yêu cầu của bạn: </h2>
+            <h4>Khởi hành vào: <?php echo $date; ?></h4>
+            <h4>Điểm khởi hành: <?php echo $search2; ?></h4>
+            <h4>Điểm đến: <?php echo $search3; ?></h4>
+            <h4>Chủ đề: <?php echo $search4; ?></h4>
+            
 
         </div>
     </section>
@@ -48,7 +56,9 @@
             <?php 
 
                 //SQL Query to Get tours based on search keyword
-                $sql = "SELECT * FROM tour WHERE diemKhoiHanh LIKE '%$search%' OR diemKetThuc LIKE '%search%' OR tenTour LIKE '%$search%' OR loaiHinh like '%search%'";
+                $sql = "SELECT * FROM tour WHERE diemKhoiHanh LIKE '%$search2%' AND diemKetThuc LIKE '%$search3%' AND loaiHinh like '%$search4%'
+                and YEAR(ngayKhoiHanh) = '$year' AND MONTH(ngayKhoiHanh) = '$month'";
+
                 //Execute the Query
                 $res = mysqli_query($conn, $sql);
 
@@ -121,7 +131,7 @@
                 else
                 {
                     //Tour Not Available
-                    echo "<div class='error'>Hiện không có tour du lịch này.</div>";
+                    echo "<div class='error text-center text-danger' style='font-size:40px'>Hiện không có tour du lịch này.</div>";
                 }
 
 

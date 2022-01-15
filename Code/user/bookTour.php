@@ -36,7 +36,9 @@ ob_start();
         $maTour = $_GET['MaTour'];
 
         //sql lấy thông tin của tour du lịch
-        $sql = "SELECT * FROM tour WHERE maTour='$maTour'";
+        $sql = "SELECT tour.maTour,tour.tenTour,tour.moTa,tour.hinhAnh,tour.diemKhoiHanh,tour.diemKetThuc,
+        tour.ngayKhoiHanh,tour.ngayKetThuc,tour.loaiHinh,doitac.maCongTy,doitac.tenCongTy,doitac.email
+         FROM tour,doitac where tour.maCongTy = doitac.maCongTy and tour.maTour = '$maTour'";
 
         //Thực thi câu lệnh
         $res = mysqli_query($conn, $sql);
@@ -57,6 +59,8 @@ ob_start();
             $loaiHinh = $row['loaiHinh'];
             $moTa = $row['moTa'];
             $maCongTy = $row['maCongTy'];
+            $tenCongTy = $row['tenCongTy'];
+            $email = $row['email'];
             $first_date = strtotime($ngayKhoiHanh);
             $second_date = strtotime($ngayKetThuc);
             $datediff = abs($first_date - $second_date);
@@ -124,7 +128,7 @@ ob_start();
     <div class="container">
       <div class="row" style='padding-top: 70px'>
         <!-- Đặt tour -->
-        <div class="col-md-8 border p-3 border-success rounded">
+        <div class="col-md-8 border p-3 border-success rounded info-tour ">
           <h3>Thông Tin Tour</h3>
           <div class="tour-menu-img">
               <?php               
@@ -138,7 +142,7 @@ ob_start();
                   {
                       //nếu có
               ?>
-                  <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh.'.jpg'; ?>" alt="Tour-img" style="max-height: 400px;width:100%" class="img-fluid">
+                  <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" alt="Tour-img" style="max-height: 400px;width:100%" class="img-fluid">
                   <?php
                     }
                   
@@ -150,10 +154,13 @@ ob_start();
           <div class="tour-menu-desc">
               <h4><?php echo $tenTour; ?></h4>
               <p>Mã: <?php echo $maTour; ?></p>
-              <p><i class="bi bi-geo-alt me-3"></i>Khởi Hành: <?php echo $diemKhoiHanh; ?> <span>-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
-              <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
+              <p class="text-warning"><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
+              <p><i class="bi bi-geo-alt me-3"></i><span class="text-success">Khởi Hành: <?php echo $diemKhoiHanh; ?></span> <span class="text-danger">-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+              <p><i class="bi bi-calendar3 me-3"></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
               <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
-              <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
+              <p><i class="bi bi-building me-3"></i>Mã công ty: <?php echo $maCongTy ?></p>
+              <p><i class="bi bi-building me-3"></i>Tên công ty: <?php echo $tenCongTy ?></p>
+              <p><i class="bi bi-envelope me-3"></i>Email liên hệ: <?php echo $email ?></p>
               <p>Thông tin về tour: <br> <?php echo $moTa; ?></p>
               <h4>Phương thức thanh toán</h4>
   
@@ -227,7 +234,7 @@ ob_start();
         <!-- Hết đặt tour -->
 
         <!-- Thời tiết và quảng cáo -->
-        <div class="col-md-4">
+        <div class="col-md-4 weather-tour">
           <div id="weather">
               <input type="text" placeholder="Search..." class="input-search" value="<?php echo $diemKetThuc?>">
               <div class="content">
@@ -364,6 +371,7 @@ ob_start();
     
   <script src="../assets/js/weather.js"></script>
   <script>
+    // JS xử lý tổng tiền thanh toán
     $(document).ready(function(){
 
       $(".input").on('input', function(){
