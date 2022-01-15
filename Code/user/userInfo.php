@@ -188,7 +188,7 @@
                         //Lấy ra những chi tiết mà khách hàng đã đặt cho tour này
                         $sql3 = "SELECT distinct phieudangkitour.maPhieuTour,giatour.moTa,chitietgia.soLuong,chitietgia.thanhTien
                         FROM phieudangkitour,chitietgia,giatour where chitietgia.doTuoi = giatour.doTuoi AND chitietgia.maPhieuTour = phieudangkitour.maPhieuTour and giatour.maTour = phieudangkitour.maTour
-                        and chitietgia.maTour=giatour.maTour and phieudangkitour.maPhieuTour = '$maPhieuTour'";
+                        and chitietgia.maTour=giatour.maTour and phieudangkitour.maPhieuTour = '$maPhieuTour' AND phieudangkitour.tinhTrang ='0'";
                         $res3 = mysqli_query($conn, $sql3);
       
                 ?>
@@ -217,10 +217,10 @@
                                 <h4>Mã Phiếu Tour: <?php echo $maPhieuTour; ?></h4>
                                 <h4>Tour du lịch: <?php echo $tenTour; ?></h4>
                                 <p>Mã Tour: <?php echo $maTour; ?></p>
-                                <p><i class="bi bi-geo-alt me-3"></i><?php echo $diemKhoiHanh; ?> <span>-><?php echo $diemKetThuc; ?></span></p>
+                                <p><i class="bi bi-geo-alt me-3"></i><span class="text-success">Khởi Hành: <?php echo $diemKhoiHanh; ?></span> <span class="text-danger">-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                                <p class="text-warning"><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                 <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
                                 <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
-                                <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                 <p>Hình thức thanh toán: <?php echo $hinhThucThanhToan ?></p>
                                 <?php
                                     if(mysqli_num_rows($res3)>0){
@@ -233,6 +233,12 @@
                                 <p style="color:red">Tổng tiền: <?php echo $TongTien ?></p>
                                 <br>
                                 
+                                <?php
+                                    $date = date('Y-m-d');
+                                    $date1 = strtotime($date);
+                                    $datediff1 = abs($first_date - $date1);
+                                    $current = floor($datediff1 / (60*60*24));
+                                ?>
                                 <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem lại Tour</a>
                             </div>
                         </div>
@@ -265,7 +271,8 @@
                 //Câu lệnh lấy ra thông tin các tour đã được duyệt (tình trạng - 1)
                 //SQL Query
                 $sql2 = "SELECT tour.hinhAnh,phieudangkitour.maPhieuTour,phieudangkitour.maNguoiDung,tour.maTour,phieudangkitour.soKhach,
-                phieudangkitour.hinhThucThanhToan,phieudangkitour.tongTien,phieudangkitour.tinhTrang,tour.tenTour
+                phieudangkitour.hinhThucThanhToan,phieudangkitour.tongTien,phieudangkitour.tinhTrang,tour.tenTour,
+                tour.ngayKhoiHanh,tour.ngayKetThuc,tour.diemKhoiHanh,tour.diemKetThuc,tour.loaiHinh
                  FROM phieudangkitour,tour,nguoidung where phieudangkitour.maTour = tour.maTour AND phieudangkitour.tinhTrang ='1'
                  AND nguoidung.maNguoiDung = phieudangkitour.maNguoiDung AND nguoidung.maNguoiDung = '{$_SESSION['loginAccount1']}'";
                 
@@ -290,10 +297,19 @@
                         $hinhThucThanhToan = $row2['hinhThucThanhToan'];
                         $TongTien = $row2['tongTien'];
                         $TinhTrang = $row2['tinhTrang'];
+                        $ngayKhoiHanh = $row2['ngayKhoiHanh'];
+                        $ngayKetThuc = $row2['ngayKetThuc'];
+                        $diemKhoiHanh = $row2['diemKhoiHanh'];
+                        $diemKetThuc = $row2['diemKetThuc'];
+                        $loaiHinh = $row2['loaiHinh'];
+                        $first_date = strtotime($ngayKhoiHanh);
+                        $second_date = strtotime($ngayKetThuc);
+                        $datediff = abs($first_date - $second_date);
+                        $day = floor($datediff / (60*60*24));
                         //Lấy ra chi tiết
                         $sql4 = "SELECT distinct phieudangkitour.maPhieuTour,giatour.moTa,chitietgia.soLuong,chitietgia.thanhTien
                         FROM phieudangkitour,chitietgia,giatour where chitietgia.doTuoi = giatour.doTuoi AND chitietgia.maPhieuTour = phieudangkitour.maPhieuTour and giatour.maTour = phieudangkitour.maTour
-                        and chitietgia.maTour=giatour.maTour and phieudangkitour.maPhieuTour = '$maPhieuTour'";
+                        and chitietgia.maTour=giatour.maTour and phieudangkitour.maPhieuTour = '$maPhieuTour' AND phieudangkitour.tinhTrang ='1'";
                         $res4 = mysqli_query($conn, $sql4);
                         
                 ?>
@@ -337,6 +353,14 @@
                                 <p>Tổng số lượng người: <?php echo $soLuong ?></p>
                                 <p style="color:red">Tổng tiền: <?php echo $TongTien ?></p>
                                 <br>
+                                <?php
+                                    $date = date('Y-m-d');
+                                    $date1 = strtotime($date);
+                                    $datediff1 = abs($first_date - $date1);
+                                    $current = floor($datediff1 / (60*60*24));
+
+                                ?>
+                                
                                 
                                 <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem lại Tour</a>
                             </div>
