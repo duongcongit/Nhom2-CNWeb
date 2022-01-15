@@ -348,15 +348,15 @@ ob_start();
                 if($res4==true)
                 {
                     //Query Executed and Order Saved
-                    $_SESSION['order'] = "<div class='success text-center' style='color:green;font-size:40px'>Chúc mừng bạn đã đặt Tour thành công</div>";
-                    header("location:user.php");
+                    $_SESSION['order'] = "<div class='success text-center' style='color:green;font-size:30px'>Chúc mừng bạn đã đặt Tour thành công, xin vui lòng đợi xác nhận</div>";
+                    header("location:".SITEURL.'user/userInfo.php');
 
                 }
                 else
                 {
                     //Failed to Save Order
                     $_SESSION['order'] = "<div class='error text-center' style='color:red;font-size:40px'>Đặt TOUR Thất Bại.</div>";
-                    header("location:user.php");
+                    header("location:".SITEURL.'user/userInfo.php');
                 }
 
             }

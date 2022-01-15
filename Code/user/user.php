@@ -47,12 +47,6 @@
 
         <!-- Tour suggest -->
         <div class="container">
-            <?php
-                if(isset($_SESSION['order'])){
-                    echo $_SESSION['order'];
-                    unset ($_SESSION['order']);
-                }
-            ?>
             <section class="pt-5" id="tourType">
                 <div class="suggest">
                     <p class="text-uppercase text-center">Đề Xuất</p>

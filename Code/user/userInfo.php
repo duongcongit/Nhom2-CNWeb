@@ -142,7 +142,23 @@
     <div class="container mt-5">
         
         <div class="container">
+            <!-- Thông báo nếu đặt tour thành công -->
+            <?php
+                if(isset($_SESSION['order'])){
+                    echo $_SESSION['order'];
+                    unset ($_SESSION['order']);
+                }
+            ?>
+
+            <!-- Thông báo nếu hủy tour thành công -->
+            <?php
+                if(isset($_SESSION['canceled'])){
+                    echo $_SESSION['canceled'];
+                    unset ($_SESSION['canceled']);
+                }
+            ?>
                 <h2 class="text-center pt-3">Các Tour Đang Chờ Duyệt</h2>
+                <h2 class="text-center pt-3 text-primary ">Bạn sẽ được hủy tour cách 2 tuần so với ngày khởi hành</h2>
                 <div class="row">        
                 <?php 
                 
@@ -234,10 +250,16 @@
                                 <br>
                                 
                                 <?php
+                                    // Tính khoảng cách giữa ngày hiên tại với ngày khởi hành
                                     $date = date('Y-m-d');
                                     $date1 = strtotime($date);
                                     $datediff1 = abs($first_date - $date1);
                                     $current = floor($datediff1 / (60*60*24));
+                                    if($current>14){
+                                        ?>
+                                        <a href='<?php echo SITEURL; ?>user/process-cancel-tour.php?MaPhieuTour=<?php echo $maPhieuTour; ?>' class='btn btn-success'>Hủy tour</a>";
+                                        <?php
+                                    }
                                 ?>
                                 <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem lại Tour</a>
                             </div>
@@ -290,6 +312,7 @@
                     {
                         //Get all the values
                         $hinhAnh = $row2['hinhAnh'];
+                        $tenTour = $row2['tenTour'];
                         $maPhieuTour = $row2['maPhieuTour'];
                         $maKH = $row2['maNguoiDung'];
                         $maTour = $row2['maTour'];
@@ -338,10 +361,10 @@
                                 <h4>Mã Phiếu Tour: <?php echo $maPhieuTour; ?></h4>
                                 <h4>Tên Tour: <?php echo $tenTour; ?></h4>
                                 <p>Mã Tour: <?php echo $maTour; ?></p>
-                                <p><i class="bi bi-geo-alt me-3"></i><?php echo $diemKhoiHanh; ?> <span>-><?php echo $diemKetThuc; ?></span></p>
+                                <p><i class="bi bi-geo-alt me-3"></i><span class="text-success">Khởi Hành: <?php echo $diemKhoiHanh; ?></span> <span class="text-danger">-> Kết Thúc: <?php echo $diemKetThuc; ?></span></p>
+                                <p class="text-warning"><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                 <p><i class="bi bi-calendar3 me-3"></i></i>Bắt Đầu: <?php echo $ngayKhoiHanh ?><span>-> Kết Thúc: <?php echo $ngayKetThuc ?></span> </p>
                                 <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
-                                <p><i class="bi bi-flag me-3"></i>Loại Hình: <?php echo $loaiHinh ?></p>
                                 <p>Hình thức thanh toán: <?php echo $hinhThucThanhToan ?></p>
                                 <?php
                                     if(mysqli_num_rows($res4)>0){
@@ -353,13 +376,6 @@
                                 <p>Tổng số lượng người: <?php echo $soLuong ?></p>
                                 <p style="color:red">Tổng tiền: <?php echo $TongTien ?></p>
                                 <br>
-                                <?php
-                                    $date = date('Y-m-d');
-                                    $date1 = strtotime($date);
-                                    $datediff1 = abs($first_date - $date1);
-                                    $current = floor($datediff1 / (60*60*24));
-
-                                ?>
                                 
                                 
                                 <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem lại Tour</a>
