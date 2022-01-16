@@ -36,7 +36,7 @@
         }
       } else { 
         $error = "Thông tin tài khoản hoặc mật khẩu bạn nhập không chính xác!";
-        header("location:" );
+        header("location:login-nguoidung.php?error=$error" );
       }
       mysqli_close($conn);
    }else{
