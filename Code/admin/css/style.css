@@ -236,13 +236,13 @@ body{
 }
 
 .sidebar-menu ul .partner-show.show {
-  background-color: rgb(245, 216, 166);
+  background-color: rgb(109, 69, 69);
   display: block;
 }
 
 
 .sidebar-menu ul .admin-show.show {
-  background-color: rgb(245, 216, 166);
+  background-color: rgb(109, 69, 69);
   display: block;
 }
 
@@ -424,7 +424,7 @@ header {
   width: 200px;
 }
 
-#refesh-tour{
+#refresh-tour{
   border-width: 1px;
   border-radius: 5px;
   height: 40px;
@@ -475,7 +475,7 @@ header {
   width: 200px;
 }
 
-#refesh-user{
+#refresh-user{
   border-width: 1px;
   border-radius: 5px;
   height: 40px;
@@ -527,7 +527,7 @@ header {
   width: 200px;
 }
 
-#refesh-partner{
+#refresh-partner{
   border-width: 1px;
   border-radius: 5px;
   height: 40px;
@@ -580,7 +580,7 @@ header {
   width: 200px;
 }
 
-#refesh-admin{
+#refresh-admin{
   border-width: 1px;
   border-radius: 5px;
   height: 40px;
@@ -603,6 +603,40 @@ header {
   height: 40px;
 }
 
+/* CSS for modal box */
+.modal-confirm {
+  background-color:rgb(231, 231, 231);
+  width: 500px;
+  height: 300px;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.modal-confirm .modal_header {
+  height: 90px;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-confirm .modal_header .icon {
+  font-size: 50px;
+  color: white;
+}
+
+.modal-confirm button {
+  font-size: 18px;
+  width: 95px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+.modal-confirm .btn-footer{
+  position: absolute;
+  bottom: 5px;
+}
 
 
 

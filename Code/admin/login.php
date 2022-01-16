@@ -51,50 +51,47 @@
 </html>
 
 <?php
-// Kiểm tra nếu đã đăng nhập thì chuyển hướng tới trang Admin
+// check if logged in
 if (isset($_SESSION['adminAccount'])) {
   header("location:" . SITEURL . "admin/");
 } else {
   if (isset($_POST['btnLogin'])) {
-    // Lấy dữ liệu từ form
+    // Get data
     $username = $_POST['userName'];
     $password = $_POST['passWord'];
 
-    // Kiểm tài khoản nhận từ form xem có trong cơ sở dữ liệu không
-    // Nếu có thì tiến hành xác minh mật khẩu
+    // Check account info
     $sql = "SELECT * from nhanvien where username='$username'";
     $result = $conn->query($sql);
 
     if (mysqli_num_rows($result) == 1) {
-      // Lấy mật khẩu raw từ cơ sở dữ liệu
+      // Get raw password from database
       $raw = $result->fetch_assoc();
       $raw_password = $raw['password'];
       $status = $raw['tinhTrang'];
 
-
-
-      // Tiến hành xác minh mật khẩu nhận từ form và mật khẩu raw trên cơ sở dữ liệu
-      if (password_verify($password, $raw_password)) { // Nếu mật khẩu chính xác
+      // Password verification
+      if (password_verify($password, $raw_password)) { // If password is correct
 
         if ($status == 1) {
           $_SESSION['adminAccount'] = $username; // Cấp thẻ làm việc
-          header('location:' . SITEURL . 'admin/'); // Chuyển hướng tới trang admin
+          header('location:' . SITEURL . 'admin/'); // Redirect to dashboard page
         } elseif ($status == 2) {
           $_SESSION['loginAdminError'] = "Tài khoản của bạn hiện không hoạt động, vui lòng kiểm tra lại!";
           header("location:" . SITEURL . "admin/login.php");
         }
-      } else { // Nếu mật khẩu sai
-        // Chuyển hướng lại về trang đăng nhập kèm theo thông báo lỗi
+      } else { // If password is incorrect
+        // Redirect to login page
         $_SESSION['loginAdminError'] = "Mật khẩu không đúng. Vui lòng kiểm tra lại!";
         header("location:" . SITEURL . "admin/login.php");
       }
-    } else { // Nếu không có tài khoản
-      // Chuyển hướng lại về trang đăng nhập kèm theo thông báo lỗi
+    } else { // If account is not exists
+      // Redirect to login page
       $_SESSION['loginAdminError'] = "Thông tin tài khoản hoặc mật khẩu bạn nhập không chính xác!";
       header("location:" . SITEURL . "admin/login.php");
     }
-    // Đóng kết nối
-    mysqli_close($conn);
+    // Close connect
+    $conn->close();
   }
 }
 ?>

@@ -6,8 +6,8 @@ include "../../partials/header.php";
 <div class="container-fluid px-0">
     <div class="row me-0">
         <!--  -->
-        <h3 class="text-muted">Thống kê tour</h3>
-        <div class="col-md-12 form-search-tour shadow">
+        <h3 class="text-muted">Thống kê hóa đơn</h3>
+        <div class="col-md-12 form-search-bill shadow">
             <form class="d-flex">
                 <div class="col ms-3">
                     <p>Từ ngày:</p>
@@ -19,9 +19,10 @@ include "../../partials/header.php";
                 </div>
             </form>
             <div class="mt-4 ms-3">
-                <button id="refresh-tour" type="button"><i class="fas fa-sync me-1"></i>Làm mới</button>
-                <button id="search-tour" type="button"><i class="fas fa-search me-1"></i>Tìm kiếm</button>
-                <button id="export-tour" type="button"><i class="fas fa-download me-1"></i></i>Xuất ra Excel</button>
+                <a id="add-bill" class="btn" type="button" href="#"><i class="bi bi-plus-circle-fill me-1"></i>Thêm hóa đơn</a>
+                <button id="refresh-bill" type="button"><i class="fas fa-sync me-1"></i>Làm mới</button>
+                <button id="search-bill" type="button"><i class="fas fa-search me-1"></i>Tìm kiếm</button>
+                <button id="export-bill" type="button"><i class="fas fa-download me-1"></i></i>Xuất ra Excel</button>
             </div>
         </div>
 
@@ -30,9 +31,9 @@ include "../../partials/header.php";
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
-        <div class="col-md-12 table-show-tour shadow">
-            <h3 class="text-danger"><i class="fas fa-plane-departure me-1"></i>DANH SÁCH TOUR</h3>
-            <div id="table-tour">
+        <div class="col-md-12 table-show-bill shadow">
+            <h3 class="text-danger"><i class="bi bi-receipt-cutoff me-1"></i>DANH SÁCH HÓA ĐƠN</h3>
+            <div id="table-bill">
             </div>
 
         </div>

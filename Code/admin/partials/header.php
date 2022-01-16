@@ -18,14 +18,12 @@ $infoAdmin = $resultInfoAd->fetch_assoc();
 $currentFileName =  basename($_SERVER['REQUEST_URI']);
 
 $adminAvatarName = $infoAdmin['hinhAnh'];
-if($adminAvatarName == ""){
-  if($infoAdmin['gioiTinh'] == "Nam"){
+if ($adminAvatarName == "") {
+  if ($infoAdmin['gioiTinh'] == "Nam") {
     $adminAvatarName = "default-avatar-male.png";
-  }
-  elseif($infoAdmin['gioiTinh'] == "Nữ"){
+  } elseif ($infoAdmin['gioiTinh'] == "Nữ") {
     $adminAvatarName = "default-avatar-female.png";
-  }
-  else{
+  } else {
     $adminAvatarName = "default-avatar-male.png";
   }
 }
@@ -62,7 +60,7 @@ if($adminAvatarName == ""){
   <!-- Offcanvas sidebar start -->
   <div class="container sidebar off-sidebar offcanvas offcanvas-start" id="offcanvassidebar">
     <div class="sidebar-avatar">
-      <img class="avatar" src="<?php echo SITEURL."admin/images/$adminAvatarName" ?>" alt="">
+      <img class="avatar" src="<?php echo SITEURL . "admin/images/$adminAvatarName" ?>" alt="">
       <h3 class="mt-3"><?php echo $infoAdmin['hoVaTen']  ?></h3>
     </div>
     <!-- Offcanvas menu-->
@@ -165,7 +163,7 @@ if($adminAvatarName == ""){
       <!-- Sidebar start -->
       <div class="col container sidebar sidebar-show">
         <div class="sidebar-avatar">
-          <img class="avatar" src="<?php echo SITEURL."admin/images/$adminAvatarName" ?>" alt="">
+          <img class="avatar" src="<?php echo SITEURL . "admin/images/$adminAvatarName" ?>" alt="">
           <h3 class="mt-3"><?php echo $infoAdmin['hoVaTen']  ?></h3>
         </div>
         <!-- Sidebar menu -->
@@ -193,9 +191,9 @@ if($adminAvatarName == ""){
               </a>
               <ul class="user-show <?php echo ($current_page_folder == "manage-user" ? "show" : "") ?>">
                 <li>
-                  <a href="<?php echo SITEURL . "admin/pages/manage-user/add-user.php" ?>" class=" <?php echo ($currentFileName == "add-user.php" ? "active" : "") ?>">Thêm user</a>
+                  <a href="<?php echo SITEURL . "admin/pages/manage-user/add-user.php" ?>" class=" <?php echo ($currentFileName == "add-user.php" ? "active" : "") ?>">Thêm người dùng</a>
                 </li>
-                <li><a href="<?php echo SITEURL . "admin/pages/manage-user/index.php" ?>" class=" <?php echo ($current_page_folder == "manage-user" && $currentFileName == "index.php" ? "active" : "") ?>">Danh sách user</a></li>
+                <li><a href="<?php echo SITEURL . "admin/pages/manage-user/index.php" ?>" class=" <?php echo ($current_page_folder == "manage-user" && $currentFileName == "index.php" ? "active" : "") ?>">Danh sách người dùng</a></li>
               </ul>
             </li>
             <hr>
@@ -307,5 +305,23 @@ if($adminAvatarName == ""){
           </div>
         </header>
         <!-- Header end -->
+
+        <!-- Modal confirm start -->
+        <div class="modal fade" id="modal-confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-confirm">
+              <div class="modal_header w-100">
+                <i class="bi bi-question-circle icon"></i>
+              </div>
+              <h2 class="px-4 mt-2 mb-0 modal-confirm-title mt-2 mb-4">Xác nhận</h2>
+              <p id="modal-confirm-message"></p><b id="modal-confirm-taget"></b>
+              <div class="btn-footer">
+                <button type="button" class="btn btn-secondary p-0 mx-4" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-success p-0 mx-4" id="btn-confirm-modal">Xác nhận</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal confirm end -->
 
         <!-- Main content start -->

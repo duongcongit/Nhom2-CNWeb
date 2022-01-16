@@ -19,6 +19,7 @@ include "../../partials/header.php";
                 </div>
             </form>
             <div class="mt-4 ms-3">
+                <a id="add-tour" class="btn" type="button" href="add-tour.php"><i class="bi bi-plus-circle-fill me-1"></i>Thêm tour</a>
                 <button id="refresh-tour" type="button"><i class="fas fa-sync me-1"></i>Làm mới</button>
                 <button id="search-tour" type="button"><i class="fas fa-search me-1"></i>Tìm kiếm</button>
                 <button id="export-tour" type="button"><i class="fas fa-download me-1"></i></i>Xuất ra Excel</button>

@@ -41,7 +41,7 @@ include "./partials/header.php";
             <div class="card-body">
                 <?php
                 //Sql Query 
-                $sql_users = "SELECT distinct maNguoiDung FROM phieudangkitour, tour WHERE phieudangkitour.maTour = tour.maTour and tour.maCongTy = '{$_SESSION['partnerAccount']}'";
+                $sql_users = "SELECT * from nguoidung";
                 //Execute Query
                 $res_users = $conn->query($sql_users);
                 //Count Rows
@@ -86,36 +86,57 @@ include "./partials/header.php";
     <!-- Dashboard card end -->
     <!--  -->
     <div class="row">
-        <div class="col-md-7 recent-bills me-4 ms-2 shadow">
+        <div class="col-md-12 recent-bills me-4 ms-2 shadow">
             <div class="d-flex justify-content-between">
-                <h3 class="">Hóa đơn gần đây</h3>
+                <h3 class="">Người dùng mới đăng ký</h3>
                 <?php
-                $sql_recent_bills = "SELECT * FROM phieudangkitour ORDER BY thoiGianDat desc LIMIT 0,10";
-                $res_recent_bills = $conn->query($sql_recent_bills);
-                if ($res_recent_bills->num_rows > 0) {
+                $sql_recent_users = "SELECT * FROM nguoidung ORDER BY thoiGianXacMinhEmail desc LIMIT 0,10";
+                $res_recent_users = $conn->query($sql_recent_users);
+                if ($res_recent_users->num_rows > 0) {
                 ?>
-                    <a type="button" href="./pages/bill/index.php" class="btn btn-primary ms-auto">Xem tất cả</a>
+                    <a type="button" href="./pages/manage-user/index.php" class="btn btn-primary ms-auto">Xem tất cả</a>
             </div>
             <!--  -->
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Mã hóa đơn</th>
-                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Mã người dùng</th>
+                        <th scope="col">Họ và tên</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col">Số điện thoại</th>
                         <th scope="col">Tình trạng</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     <?php
-                    while ($rows_recent_bills = $res_recent_bills->fetch_assoc()) {
+                    while ($rows_recent_users = $res_recent_users->fetch_assoc()) {
                     ?>
                         <tr>
-                            <th scope="row"><?php echo $rows_recent_bills['maPhieuTour'] ?></th>
-                            <td><?php echo $rows_recent_bills['tongTien'] ?></td>
-                            <td><?php echo $rows_recent_bills['tinhTrang'] ?></td>
-                        </tr>
+                            <th scope="row"><?php echo $rows_recent_users['maNguoiDung'] ?></th>
+                            <td><?php echo $rows_recent_users['hoVaTen'] ?></td>
+                            <td><?php echo $rows_recent_users['gioiTinh'] ?></td>
+                            <td><?php echo $rows_recent_users['soDienThoai'] ?></td>
 
+                            <?php
+                            if ($rows_recent_users['tinhTrang'] == 1) {
+                            ?>
+                                <td class="pt-2 m-0"><span class="px-1 py-2" style="color: green;border-radius: 5px; width: 100px;">Bình thường</span></td>
+                            <?php
+                            }
+                            if ($rows_recent_users['tinhTrang'] == 2) {
+                            ?>
+                                <td><span class="p-1" style="color: orange;border-radius: 5px;width: 100px;">Không hoạt động</span></td>
+                            <?php
+                            }
+                            if ($rows_recent_users['tinhTrang'] == 0) {
+                            ?>
+                                <td><span class="p-1" style="color: grey;border-radius: 5px;width: 100px;">Chưa xác thực</span></td>
+                            <?php
+                            }
+                            ?>
+
+                        </tr>
                     <?php
                     }
                 } else {
@@ -132,37 +153,12 @@ include "./partials/header.php";
     ?>
     </tbody>
     </table>
-        </div>
-        <div class="col-md-4 recent-users shadow">
-            <div class="d-flex justify-content-between">
-                <h3 class="">Hóa đơn gần đây</h3>
-                <button class="btn btn-primary ms-auto">Xem tất cả</button>
-            </div>
-            <!--  -->
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
+</div>
 
 
 
-    <!--  -->
+<!--  -->
 </div>
 
 

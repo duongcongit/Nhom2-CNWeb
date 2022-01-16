@@ -6,48 +6,28 @@ include "../../partials/header.php";
 <div class="container-fluid px-0">
     <div class="row me-0">
         <!--  -->
-        <h3 class="text-muted">Thống kê tour</h3>
+        <h3 class="text-muted">Thống kê người dùng</h3>
         <div class="col-md-12 form-search-user shadow">
-            <form class="d-flex">
-                <div class="col ms-3">
-                    <p>Từ ngày:</p>
-                    <input type="date" class="shadow" id="start-date-tour" name="trip-start" value="2020-01-01" min="2018-01-01" max="2099-01-01">
-                </div>
-                <div class="col">
-                    <p>Đến ngày:</p>
-                    <input type="date" id="end-date-tour" name="trip-start" value="2020-01-01" min="2018-01-01" max="2099-01-01">
-                </div>
-            </form>
+            <div class="input-group mb-3 w-75 mt-3">
+                <!-- <h6 class="me-5 fw-bold mt-2 ms-4">Tiêu đề <span class="text-danger">(*)</span></h6> -->
+                <input type="text" id="txtSearchUser" class="form-control ms-3" name="add-tour-title" placeholder="Nhập gì đó để tìm kiếm. vd: sdt, email, tên,...">
+            </div>
             <div class="mt-4 ms-3">
-                <button id="refesh-user" type="button"><i class="fas fa-sync me-1"></i>Làm mới</button>
+                <button id="refresh-user" type="button"><i class="fas fa-sync me-1"></i>Làm mới</button>
                 <button id="search-user" type="button"><i class="fas fa-search me-1"></i>Tìm kiếm</button>
                 <button id="export-user" type="button"><i class="fas fa-download me-1"></i></i>Xuất ra Excel</button>
             </div>
         </div>
+        <div class="d-none alert alert-success alert-dismissible show fade pb-3 pt-2" role="alert">
+            <p id="alert-success-content" class="d-inline"></p><strong id="alert-success-taget"></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 
         <div class="col-md-12 table-show-user shadow">
             <h3 class="text-danger"><i class="fas fa-users me-1"></i>DANH SÁCH NGƯỜI DÙNG</h3>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="table-users">
+            </div>
         </div>
-
-
 
         <!--  -->
     </div>
