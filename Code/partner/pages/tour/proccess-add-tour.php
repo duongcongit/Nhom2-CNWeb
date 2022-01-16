@@ -54,19 +54,19 @@ if (isset($_POST['btnAddTour'])) {
     // Insert tour price to database
     $tourAdultPrice = $_POST['add-tour-adult'];
     $tourAdultPriceDescr = "Trên 12 tuổi";
-    $sql_adult_price = "INSERT INTO `giatour` (`maTour`, `doTuoi`, `moTa`, `gia`, `donVi`) VALUES ('$tourID', 'Người lớn', '$tourAdultPriceDescr', '$tourAdultPrice', 'VNĐ');";
+    $sql_adult_price = "INSERT INTO `giatour` (`maTour`, `doTuoi`, `moTa`, `gia`, `donVi`) VALUES ('$tourID', '2', '$tourAdultPriceDescr', '$tourAdultPrice', 'VNĐ');";
     $insert_price_adult = $conn->query($sql_adult_price);
     
     if (isset($_POST['add-tour-children'])) {   // If set price for children
         $tourChildrenPrice = $_POST['add-tour-children'];
         $tourChildrenPriceDescr = "4 - 12 tuổi";
-        $sql_children_price = "INSERT INTO `giatour` (`maTour`, `doTuoi`, `moTa`, `gia`, `donVi`) VALUES ('$tourID', 'Trẻ em', '$tourChildrenPriceDescr', '$tourChildrenPrice', 'VNĐ');";
+        $sql_children_price = "INSERT INTO `giatour` (`maTour`, `doTuoi`, `moTa`, `gia`, `donVi`) VALUES ('$tourID', '1', '$tourChildrenPriceDescr', '$tourChildrenPrice', 'VNĐ');";
         $insert_price_children = $conn->query($sql_children_price);
     }
     if (isset($_POST['add-tour-older'])) {  // If set price for older
         $tourOlderPrice = $_POST['add-tour-older'];
         $tourOlderPriceDescr = "Trên 60 tuổi";
-        $sql_older_price = "INSERT INTO `giatour` (`maTour`, `doTuoi`, `moTa`, `gia`, `donVi`) VALUES ('$tourID', 'Người già', '$tourOlderPriceDescr', '$tourOlderPrice', 'VNĐ');";
+        $sql_older_price = "INSERT INTO `giatour` (`maTour`, `doTuoi`, `moTa`, `gia`, `donVi`) VALUES ('$tourID', '3', '$tourOlderPriceDescr', '$tourOlderPrice', 'VNĐ');";
         $insert_price_older = $conn->query($sql_older_price);
     }
 
