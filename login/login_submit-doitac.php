@@ -16,10 +16,8 @@
        $raw=mysqli_fetch_assoc($result);
        $raw_password=$raw['password'];
        $raw_tinhTrang=$raw['tinhTrang'];
-       $raw_manguoidung=$raw['maNguoiDung'];
         if (password_verify($password, $raw_password)==1) { 
           $_SESSION['partnerAccount'] = $email;
-          $_SESSION['loginAccount1']=$raw_manguoidung;
           if($raw_tinhTrang == '1'){
             header("location:partner/index.php");
           }else
