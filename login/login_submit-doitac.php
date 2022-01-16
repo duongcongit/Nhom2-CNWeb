@@ -18,7 +18,7 @@
        $raw_tinhTrang=$raw['tinhTrang'];
        $raw_manguoidung=$raw['maNguoiDung'];
         if (password_verify($password, $raw_password)==1) { 
-          $_SESSION['loginAccount'] = $email;
+          $_SESSION['partnerAccount'] = $email;
           $_SESSION['loginAccount1']=$raw_manguoidung;
           if($raw_tinhTrang == '1'){
             header("location:partner/index.php");
@@ -41,7 +41,7 @@
         }
       } else { 
         $error = "Thông tin tài khoản hoặc mật khẩu bạn nhập không chính xác!";
-        header("location:" );
+        header("location:login-doitac.php?error=$error" );
       }
       mysqli_close($conn);
    }else{
