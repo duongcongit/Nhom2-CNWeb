@@ -1,3 +1,4 @@
+<!-- Trang đặt tour du lịch -->
 <?php include('../constants.php'); ?>
 <?php
     // Trước khi cho người dùng xâm nhập vào bên trong
@@ -313,7 +314,7 @@ ob_start();
                 $tinhTrang = 0; 
 
 
-                //Create SQL to save the data
+                //Câu lệnh SQL lưu thông tin vào phiếu đăng kí
                 $sql4 = "INSERT INTO phieudangkitour(maPhieuTour,maNguoiDung,soKhach,maTour,thoiGianDat,hinhThucThanhToan,tinhTrang,tongTien)
                  VALUES ('$maPhieuTour','{$_SESSION['loginAccount1']}','$soLuong','$maTour','$ngayDat','$hinhThucThanhToan','$tinhTrang','$tongTien')";
                 //Execute the Query
@@ -344,17 +345,17 @@ ob_start();
                 }
 
 
-                //Nếu việc đặt tour được thực hiện thành công
+                //kiểm tra việc đặt tour được thực hiện thành công hay thất bại
                 if($res4==true)
                 {
-                    //Query Executed and Order Saved
-                    $_SESSION['order'] = "<div class='success text-center' style='color:green;font-size:30px'>Chúc mừng bạn đã đặt Tour thành công, xin vui lòng đợi xác nhận</div>";
+                    //Nếu thành công
+                    $_SESSION['order'] = "<div class='success text-center' style='color:green;font-size:30px'>Bạn đã hoàn thảnh thủ tục đặt Tour, xin vui lòng đợi xác nhận từ công ty</div>";
                     header("location:".SITEURL.'user/userInfo.php');
 
                 }
                 else
                 {
-                    //Failed to Save Order
+                    //Nếu thất bại
                     $_SESSION['order'] = "<div class='error text-center' style='color:red;font-size:40px'>Đặt TOUR Thất Bại.</div>";
                     header("location:".SITEURL.'user/userInfo.php');
                 }

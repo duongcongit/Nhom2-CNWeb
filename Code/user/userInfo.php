@@ -1,3 +1,4 @@
+<!-- Trang thông tin cá nhân của khách hàng -->
 <?php include('../constants.php'); ?>
 <?php
     // Trước khi cho người dùng xâm nhập vào bên trong

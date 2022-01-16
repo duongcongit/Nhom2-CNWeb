@@ -1,4 +1,12 @@
+<!-- Trang lấy thông tin tour với mã tour được lấy từ trang chủ phần tour suggest -->
 <?php include('../constants.php'); ?>
+<?php
+    // Trước khi cho người dùng xâm nhập vào bên trong
+    // Phải kiểm tra THẺ LÀM VIỆC
+    if(!isset($_SESSION['loginAccount'])){
+        header("location:".SITEURL);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,32 +26,28 @@
     ?>
     <main>
         <?php 
-            //Lấy ra mã tour gợi ý
+            //Lấy ra mã tour từ phần gợi ý
             if(isset($_GET['category_id']))
             {
-                //Category id is set and get the id
                 $category_id = $_GET['category_id'];
-                // Get the CAtegory Title Based on Category ID
+
+                // Lấy ra tên tour
                 $sql = "SELECT tenTour FROM tour WHERE maTour='$category_id'";
 
-                //Execute the Query
                 $res = mysqli_query($conn, $sql);
 
-                //Get the value from Database
                 $row = mysqli_fetch_assoc($res);
-                //Get the TItle
                 $category_title = $row['tenTour'];
             }
             else
             {
-                //CAtegory not passed
-                //Redirect to Home page
+                //Không có thì trở về trang chủ
                 header('location:'.SITEURL);
             }
         ?>
 
 
-        <!-- Tour sEARCH Section Starts Here -->
+        <!-- thông tin lấy được từ phần suggest -->
         <section class="tour-search text-center pt-5">
             <div class="container mt-5">
                 
@@ -51,27 +55,25 @@
 
             </div>
         </section>
-        <!-- Tour sEARCH Section Ends Here -->
+        <!-- kết thúc -->
 
 
 
-        <!-- Tour MEnu Section Starts Here -->
-        <section class="food-menu container mt-5">
+        <!-- Bắt đầu phần thông tin tour -->
+        <section class="tour-menu container mt-5">
             <h2 class="text-center">Tour Menu</h2>
             <div class="row">
 
                 <?php 
                 
-                    //Create SQL Query to Get tours based on Selected CAtegory
+                    //SQL lấy thông tin tour
                     $sql2 = "SELECT * FROM tour WHERE maTour='$category_id'";
 
-                    //Execute the Query
                     $res2 = mysqli_query($conn, $sql2);
 
-                    //Count the Rows
                     $count2 = mysqli_num_rows($res2);
 
-                    //CHeck whether tour is available or not
+                    //Kiểm tra xem tour có tồn tại
                     if($count2>0)
                     {
                         //tour is Available
@@ -98,12 +100,12 @@
                                     <?php 
                                         if($hinhAnh=="")
                                         {
-                                            //Image not Available
+                                            //Nếu không có hình ảnh
                                             echo "<div class='error'>Image not Available.</div>";
                                         }
                                         else
                                         {
-                                            //Image Available
+                                            //Có hình ảnh
                                             ?>
                                             <img src="<?php echo SITEURL; ?>assets/images/tours/<?php echo $hinhAnh; ?>" alt="" class="img-fluid">
                                             <?php
@@ -135,7 +137,7 @@
                     }
                     else
                     {
-                        //Tour not available
+                        //Tour không tồn tại
                         echo "<div class='error'>Tour không tồn tại.</div>";
                     }
                     
@@ -147,7 +149,7 @@
             </div>
 
         </section>
-        <!-- Tour Menu Section Ends Here -->
+        <!-- Kết thúc -->
 
 
   </main>

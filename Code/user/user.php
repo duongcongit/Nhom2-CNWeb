@@ -59,7 +59,6 @@
                 $sql1 = "SELECT distinct loaiHinh,maTour,hinhAnh FROM tour LIMIT 3";
                 //Execute the Query
                 $res1 = mysqli_query($conn, $sql1);
-                //Count rows to check whether the category is available or not
                 $count1 = mysqli_num_rows($res1);
 
                 if($count1>0)
@@ -101,7 +100,6 @@
                 }
                 else
                 {
-                    //Categories not Available
                     echo "<div class='error'>Cơ sở dữ liệu hiện chưa có tour du lịch nào</div>";
                 }
             ?>
@@ -203,7 +201,7 @@
                         Khởi hành: <input class='mt-3' type="month" name="month" placeholder="Khởi hành trong tháng" style="width:300px" required>
                         <input class='mt-3' type="text" name="search2" placeholder="Điểm khởi hành" style="width:300px" required>
                         <input class='mt-3' type="text" name="search3" placeholder="Điểm đến" style="width:300px" required>
-                        <input class='mt-3' type="text" name="search4" placeholder="Chủ đề" style="width:300px" required>
+                        <input class='mt-3' type="text" name="search4" placeholder="Chủ đề" style="width:300px">
                         <br>
                         <button type="submit1" name="submit1" class="btn btn-primary submit1 mt-3">Tìm kiếm</button>
                     </form>
@@ -286,7 +284,7 @@
                                 <p><i class="bi bi-clock me-3"></i>Thời Gian: <?php  echo $day.' ngày'?></p>
                                 <p><i class="bi bi-building me-3"></i>Mã công ty: <?php echo $maCongTy ?></p>
                                 <p><i class="bi bi-building me-3"></i>Tên công ty: <?php echo $tenCongTy ?></p>
-                                <p><i class="bi bi-envelope me-3"></i>Email liên hệ: <?php echo $email ?></p>
+                                <p><i class="bi bi-envelope me-3"></i>Email liên hệ: <?php echo $email ?></p>a
                                 
                                 <a href="<?php echo SITEURL; ?>user/bookTour.php?MaTour=<?php echo $maTour; ?>" class="btn btn-primary">Xem thêm chi tiết</a>
                             </div>

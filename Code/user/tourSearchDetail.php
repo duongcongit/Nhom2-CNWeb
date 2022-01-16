@@ -1,3 +1,4 @@
+<!-- Tìm kiếm tour nâng cao -->
 <?php include('../constants.php'); ?>
 <!DOCTYPE html>
 <html lang="en">

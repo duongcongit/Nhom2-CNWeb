@@ -13,6 +13,8 @@ include '../constants.php';
 
     // Bước 02: Thực hiện truy vấn
 
+    // Xóa phiếu tour thì phải xóa cả chi tiết giá kèm theo vì có ràng buộc
+
     $sql = "DELETE FROM chitietgia WHERE maPhieuTour = '$maPhieuTour'";
     $res = mysqli_query($conn, $sql);
 
@@ -21,7 +23,7 @@ include '../constants.php';
 
     if($res1==true)
     {
-        //Query Executed and Order Saved
+        //Nếu xóa thành công
         $_SESSION['canceled'] = "<div class='success text-center' style='color:green;font-size:40px'>Chúc mừng bạn hủy Tour thành công</div>";
         header("location:".SITEURL.'user/userInfo.php');
     }

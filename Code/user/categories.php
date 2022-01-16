@@ -1,3 +1,4 @@
+<!-- Trang thư viện chứa các tour đã có -->
 <?php include('../constants.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +26,7 @@
 
                 <?php 
 
-                    //Display all the cateories that are active
+                    //Lấy ra các tour mà có tình trạng là 1
                     //Sql Query
                     $sql = "SELECT tour.maTour,tour.tenTour,tour.moTa,tour.hinhAnh,tour.diemKhoiHanh,tour.diemKetThuc,
                     tour.ngayKhoiHanh,tour.ngayKetThuc,tour.loaiHinh,doitac.maCongTy,doitac.tenCongTy,doitac.email
@@ -34,13 +35,12 @@
                     //Execute the Query
                     $res = mysqli_query($conn, $sql);
 
-                    //Count Rows
+                    //Đếm số bản ghi
                     $count = mysqli_num_rows($res);
 
-                    //CHeck whether categories available or not
                     if($count>0)
                     {
-                        //CAtegories Available
+                        //Tồn tại bản ghi
                         while($row=mysqli_fetch_assoc($res))
                         {
                             $maTour = $row['maTour'];
@@ -102,8 +102,8 @@
                   }
                   else
                   {
-                      //Tour not available
-                      echo "<div class='error'>Tour not Available.</div>";
+                      //Không có tour
+                      echo "<div class='error'>Tour không tồn tại</div>";
                   }
                   
                   mysqli_close($conn);
@@ -112,7 +112,7 @@
             
             </div>
         </section>
-        <!-- Categories Section Ends Here -->
+        <!-- Kết thúc thư viện -->
 
         <?php
     include "partials/footer.php";

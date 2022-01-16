@@ -48,7 +48,7 @@
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="assets/images/tours/main.jpg" class="d-block w-100" alt="slider" style="height: 600px;">
+                    <img src="assets/images/tours/main.jpg" class="d-block w-100" alt="slider" style="height: 500px;">
                 </div>
                 <div class="carousel-banner">
                     <h1>Tìm điểm du lịch tại Việt Nam</h1>
@@ -126,15 +126,29 @@
     
         
         <!-- Search tour -->
-        <section class="search-tour mt-5" id="search-tour"> 
-            <div class="text-center search-form">       
-                <form action="tourSearch.php" method="POST">
-                    <h3>Tìm kiếm điểm du lịch</h3>
-                    <input type="search" name="search" placeholder="Search for tour.." style="width:300px" required>
-                    <br>
-                    <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-primary mt-3">
-                </form>
-                
+        <section class="search-tour mt-5" id="search-tour" style="height:250px"> 
+            <div class="text-center search-form">
+                <div class="normal-search text-center">
+                    <form action="user/tourSearch.php" method="POST">
+                        <h3>Tìm kiếm điểm du lịch</h3>
+                        <input class='mt-3' type="search1" name="search1" placeholder="Nhập tìm kiếm" style="width:300px">
+                        <button type="submit" name="submit" class="btn btn-primary submit">Tìm kiếm</button>
+                    </form>
+                    <button class='more-detail btn btn-success'>Tìm kiếm nâng cao</button>
+                </div>
+
+                <div class="detail-search text-center" style='display:none'>
+                    <form action="tourSearchDetail.php" method ="POST">
+                        <h3>Tìm kiếm điểm du lịch</h3>
+                        Khởi hành: <input class='mt-3' type="month" name="month" placeholder="Khởi hành trong tháng" style="width:300px" required>
+                        <input class='mt-3' type="text" name="search2" placeholder="Điểm khởi hành" style="width:300px" required>
+                        <input class='mt-3' type="text" name="search3" placeholder="Điểm đến" style="width:300px" required>
+                        <input class='mt-3' type="text" name="search4" placeholder="Chủ đề" style="width:300px">
+                        <br>
+                        <button type="submit1" name="submit1" class="btn btn-primary submit1 mt-3">Tìm kiếm</button>
+                    </form>
+                    <button class='more-detail-close btn btn-success'>Thu gọn</button>
+                </div>   
             </div>
         </section>
     
@@ -148,7 +162,7 @@
                 
                 //Getting tours from Database that are active and featured
                 //SQL Query
-                $sql = "SELECT * FROM Tour LIMIT 8";
+                $sql = "SELECT * FROM Tour LIMIT 6";
                 
                 //Execute the Query
                 $res = mysqli_query($conn, $sql);
@@ -227,7 +241,7 @@
             </div>
             
             <p class="text-center mt-3">
-                <a href="categories.php" aria-expanded="false" data-toggle="collapse" class="btn text-primary">Xem Tất Cả</a>
+                <a href="user/categories.php" aria-expanded="false" data-toggle="collapse" class="btn text-primary">Xem Tất Cả</a>
             </p>
         </section>
         <!-- Tour Menu Section Ends Here -->

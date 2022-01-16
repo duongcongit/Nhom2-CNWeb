@@ -1,4 +1,12 @@
+<!-- Tìm kiếm tour cỏ bản -->
 <?php include('../constants.php'); ?>
+<?php
+    // Trước khi cho người dùng xâm nhập vào bên trong
+    // Phải kiểm tra THẺ LÀM VIỆC
+    if(!isset($_SESSION['loginAccount'])){
+        header("location:".SITEURL);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
